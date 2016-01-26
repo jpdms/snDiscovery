@@ -1,0 +1,40 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<div class="header" data-role="header" data-id="main-header" data-theme="b"
+                                data-position="fixed" data-fullscreen="true">
+    <h1>Tutoriel</h1>
+    <a href="#panelTutos" 
+       class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bullets ui-btn-right">
+    </a>
+    <!-- un include dans un include : on ne peut pas utiliser @include -->
+    <div class="gradeUser">
+    <%
+        com.metier.DiscoSession maSession = (com.metier.DiscoSession)session.getAttribute("maSession");
+        if (maSession != null) {
+            com.persistence.User user = maSession.getUser();
+            out.print(" " + user.getPseudo());
+            for (int nb = 1; nb <= user.getGrade(); nb++) {
+                out.print(" <img src='images/star.gif'/>");
+            }
+        }
+    %>
+    </div>
+</div>
+
+<!-- panel de galaxies -->
+<div id="panelTutos" data-role="panel" data-position="right" class="ui-alt-icon"
+               data-position-fixed="true" data-display="push" data-theme="a">
+    <ul data-role="listview" data-icon="false">
+        <li data-role="list-divider">Aller à :</li>
+        <li><a href="tuto1.jsp">Tuto 1</a></li>
+        <li><a href="tuto2.jsp">Tuto 2</a></li>
+        <li><a href="tuto3.jsp">Tuto 3</a></li>
+        <li><a href="tuto4.jsp">Tuto 4</a></li>
+        <li><a href="tuto5.jsp">Tuto 5</a></li>
+        <li><a href="tuto6.jsp">Tuto 6</a></li>
+        <li><a href="introtest.jsp">Intro Evaluation</a></li>
+        <li><a href="evaluation.jsp">Evaluation</a></li>
+        <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+    </ul>
+</div>
