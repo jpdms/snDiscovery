@@ -1,0 +1,610 @@
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="report.css" type="text/css"/>
+	<title>Diagramme de séquence - Parcourir les images</title>
+	<META name="Description" content="Permet à l'utilisateur de naviguer entre les différents images de la base de donnée, selon différents paramètres. Il peut donc choisir le télescope, le jour de la prise de photo, ainsi que traiter l'image et consulter les informations sur la galaxie concernée."/>
+	<script type="text/javascript" src="report.js"></script>
+	<script type="text/javascript" src="link_popup.js"></script>
+	<script type="text/javascript" src="tooltip.js"></script>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" onload="initPage();initDiagram();initGridDiagram();">
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_top">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_bottom">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_left">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_right">
+	</div>
+	<canvas width="100" style="position:absolute; z-index:2; visibility:hidden" id="spotlight_c" height="100">
+	</canvas>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesTop">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<a href="#top">
+						<img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>
+				</td>
+				<td>
+					<a href="javascript:clearSpotLightFromOpenSpecButton();">
+						<img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesRight">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<a href="#top">
+						<img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="javascript:clearSpotLightFromOpenSpecButton();">
+						<img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute;z-index:4;visibility:hidden" id="linkPopupMenuLayer">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="linkPopupMenuTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="referenceIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Ref.gif" style="border:none" onclick="movePopupPositionToReferenceIconPosition();resetPopupForReference();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="subdiagramIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Subdiagram.gif" style="border:none" onclick="movePopupPositionToSubdiagramIconPosition();resetPopupForSubdiagram();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="transitorIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Transitor.gif" style="border:none" onclick="movePopupPositionToTransitorIconPosition();resetPopupForTransitor();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="documentationIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Documentation.png" style="border:none" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="HeaderText">
+		discovery	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="HeaderLine1">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine2">
+			</td>
+		</tr>
+		<tr>
+			<td class="HeaderLine3">
+			</td>
+		</tr>
+	</table>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<p class="PageTitle">
+		<span id="PageTitleText">
+			Diagramme de séquence - Parcourir les images		</span>
+		<a onclick="javascript: showVpLink('discovery.vpp://diagram/gZFTUcKAUChCqAiP', 'Parcourir les images\ndiscovery.vpp://diagram/gZFTUcKAUChCqAiP', 'Parcourir les images', this); return false;" style="padding-left: 16px; font-size: 12px" href="#">
+			<img src="../images/icons/link.png" border="0"> Lien</a>
+	</p>
+	<div style="position: relative; padding-bottom: 20px;">
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: absolute; top: 0; left: 0; z-index: 20;">
+			<tr>
+				<td>
+<span class="TableContent">Allez vers:</span>					<select id="SelectShape" class="TableContent" onChange="scrollWin('diagram', this.value);hideLinkPopup();showSpotLight('diagram', this.value)">
+<option value="">Sélectionner un élément par modèle</option>
+<option value="shape|3.0|739.0|555.0|153.0|InteractionOperand_OWV4XcKAUChCKQyX.html|InteractionOperand_OWV4XcKAUChCKQyX.html|OWV4XcKAUChCKQyW" id="optionOWV4XcKAUChCKQyW">Operand3 : Interaction Operand</option>
+<option value="shape|3.0|939.0|555.0|103.0|InteractionOperand_PoiEXcKAUChCKQz3.html|InteractionOperand_PoiEXcKAUChCKQz3.html|3oiEXcKAUChCKQz1" id="option3oiEXcKAUChCKQz1">Operand3 : Interaction Operand</option>
+<option value="shape|2.0|639.0|552.0|61.0|InteractionOperand_0NfEXcKAUChCKQ2_.html|InteractionOperand_0NfEXcKAUChCKQ2_.html|0NfEXcKAUChCKQ29" id="option0NfEXcKAUChCKQ29">Operand8 : Interaction Operand</option>
+<option value="shape|389.0|462.0|8.0|52.0|Activation_qF0UXcKAUChCKQ6u.html|Activation_qF0UXcKAUChCKQ6u.html|uF0UXcKAUChCKQ6w" id="optionuF0UXcKAUChCKQ6w">Activation : Activation</option>
+<option value="shape|389.0|634.0|8.0|50.0|Activation_I4rEXcKAUChCKQ2m.html|Activation_I4rEXcKAUChCKQ2m.html|E4rEXcKAUChCKQ2o" id="optionE4rEXcKAUChCKQ2o">Activation : Activation</option>
+<option value="shape|2.0|622.0|552.0|78.0|CombinedFragment_y1fEXcKAUChCKQ26.html|CombinedFragment_y1fEXcKAUChCKQ26.html|y1fEXcKAUChCKQ25" id="optiony1fEXcKAUChCKQ25">Unnamed Combined Fragment : Combined Fragment</option>
+<option value="shape|389.0|972.0|8.0|50.0|Activation_BeiEXcKAUChCKQ0a.html|Activation_BeiEXcKAUChCKQ0a.html|7eiEXcKAUChCKQ0e" id="option7eiEXcKAUChCKQ0e">Activation : Activation</option>
+<option value="shape|3.0|922.0|555.0|120.0|CombinedFragment_hoiEXcKAUChCKQzy.html|CombinedFragment_hoiEXcKAUChCKQzy.html|BoiEXcKAUChCKQzw" id="optionBoiEXcKAUChCKQzw">Utilisateur connecté : Combined Fragment</option>
+<option value="shape|389.0|832.0|8.0|50.0|Activation_Q7_4XcKAUChCKQzQ.html|Activation_Q7_4XcKAUChCKQzQ.html|Y7_4XcKAUChCKQzS" id="optionY7_4XcKAUChCKQzS">Activation : Activation</option>
+<option value="shape|389.0|780.0|8.0|42.0|Activation_Td94XcKAUChCKQyw.html|Activation_Td94XcKAUChCKQyw.html|bd94XcKAUChCKQyy" id="optionbd94XcKAUChCKQyy">Activation : Activation</option>
+<option value="shape|3.0|722.0|555.0|170.0|CombinedFragment_mmV4XcKAUChCKQyT.html|CombinedFragment_mmV4XcKAUChCKQyT.html|GmV4XcKAUChCKQyS" id="optionGmV4XcKAUChCKQyS">Utilisateur connecté : Combined Fragment</option>
+<option value="shape|389.0|542.0|8.0|50.0|Activation_JJC4XcKAUChCKQxo.html|Activation_JJC4XcKAUChCKQxo.html|FJC4XcKAUChCKQxq" id="optionFJC4XcKAUChCKQxq">Activation : Activation</option>
+<option value="shape|389.0|92.0|8.0|12.0|Activation_y5_YXcKAUChCKQwx.html|Activation_y5_YXcKAUChCKQwx.html|G5_YXcKAUChCKQwz" id="optionG5_YXcKAUChCKQwz">Activation : Activation</option>
+<option value="shape|343.0|22.0|100.0|50.0|InteractionLifeLine_E1SYXcKAUChCKQwG.html|InteractionLifeLine_E1SYXcKAUChCKQwG.html|41SYXcKAUChCKQwF" id="option41SYXcKAUChCKQwF">disco : Lifeline</option>
+<option value="shape|13.0|22.0|60.0|35.0|InteractionActor_EucYXcKAUChCKQv_.html|InteractionActor_EucYXcKAUChCKQv_.html|4ucYXcKAUChCKQv." id="option4ucYXcKAUChCKQv.">Utilisateur : Actor</option>
+<option value="shape|163.0|2.0|140.0|40.0|NOTE_mG44EUqAUCgiZRKf.html|NOTE_mG44EUqAUCgiZRKf.html|mG44EUqAUCgiZRKe" id="optionmG44EUqAUCgiZRKe">Unnamed Note : Note</option>
+<option value="shape|223.0|272.0|340.0|70.0|DiagramOverview_hhd4EUqAUCgiZRLW.html|DiagramOverview_hhd4EUqAUCgiZRLW.html|5hd4EUqAUCgiZRLX" id="option5hd4EUqAUCgiZRLX">Historique d'une galaxie : Diagram Overview</option>
+<option value="shape|223.0|112.0|340.0|70.0|DiagramOverview_Mhb4EUqAUCgiZRLw.html|DiagramOverview_Mhb4EUqAUCgiZRLw.html|Shb4EUqAUCgiZRLx" id="optionShb4EUqAUCgiZRLx">Choisir un jour : Diagram Overview</option>
+<option value="shape|223.0|192.0|340.0|70.0|DiagramOverview__ZIEEUqAUCgiZRM2.html|DiagramOverview__ZIEEUqAUCgiZRM2.html|Y5IEEUqAUCgiZRM3" id="optionY5IEEUqAUCgiZRM3">Info sur la galaxie : Diagram Overview</option>
+<option value="shape|223.0|352.0|340.0|70.0|DiagramOverview_kTeEEUqAUCgiZRN5.html|DiagramOverview_kTeEEUqAUCgiZRN5.html|CTeEEUqAUCgiZRN6" id="optionCTeEEUqAUCgiZRN6">Offset image : Diagram Overview</option>
+</select>				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: relative; top: 24;">
+			<tr>
+				<td>
+					<img id="diagram" src="../images/Parcourir_les_images.png" usemap="#diagram_map" class="Image" width="567" height="1106"/>
+					<map name="diagram_map">
+<area imageId="diagram" coords="37.0, 85.0, 37.0, 99.0, 399.0, 99.0, 399.0, 85.0" coords2="37.0, 85.0, 37.0, 99.0, 399.0, 99.0, 399.0, 85.0" shape="poly" alt="afficher 1er image du jour  + image réf:Message" id="areadiagram_map_JZ_YXcKAUChCKQws" href="Message_RZ_YXcKAUChCKQwp.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 455.0, 37.0, 469.0, 399.0, 469.0, 399.0, 455.0" coords2="37.0, 455.0, 37.0, 469.0, 399.0, 469.0, 399.0, 455.0" shape="poly" alt="[img suivante existe] image suivante:Message" id="areadiagram_map_lkE4XcKAUChCKQxF" href="Message_5kE4XcKAUChCKQxC.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 495.0, 37.0, 509.0, 399.0, 509.0, 399.0, 495.0" coords2="37.0, 495.0, 37.0, 509.0, 399.0, 509.0, 399.0, 495.0" shape="poly" alt="afficher image suivante + image réf:Message" id="areadiagram_map_NV04XcKAUChCKQxY" href="Message_iZ04XcKAUChCKQxV.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 535.0, 37.0, 549.0, 399.0, 549.0, 399.0, 535.0" coords2="37.0, 535.0, 37.0, 549.0, 399.0, 549.0, 399.0, 535.0" shape="poly" alt="[img pcdt existe] image précédente:Message" id="areadiagram_map_AJC4XcKAUChCKQxj" href="Message_fxC4XcKAUChCKQxg.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 575.0, 37.0, 589.0, 399.0, 589.0, 399.0, 575.0" coords2="37.0, 575.0, 37.0, 589.0, 399.0, 589.0, 399.0, 575.0" shape="poly" alt="afficher image précédente + image ref:Message" id="areadiagram_map_Quy4XcKAUChCKQx0" href="Message_TWy4XcKAUChCKQxx.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 775.0, 37.0, 789.0, 399.0, 789.0, 399.0, 775.0" coords2="37.0, 775.0, 37.0, 789.0, 399.0, 789.0, 399.0, 775.0" shape="poly" alt="proposer comme candidate:Message" id="areadiagram_map_cd94XcKAUChCKQyr" href="Message_Md94XcKAUChCKQyo.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 805.0, 37.0, 819.0, 399.0, 819.0, 399.0, 805.0" coords2="37.0, 805.0, 37.0, 819.0, 399.0, 819.0, 399.0, 805.0" shape="poly" alt="dmd certitude (1 à 5):Message" id="areadiagram_map_RIb4XcKAUChCKQy." href="Message_BIb4XcKAUChCKQy7.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 835.0, 37.0, 849.0, 399.0, 849.0, 399.0, 835.0" coords2="37.0, 835.0, 37.0, 849.0, 399.0, 849.0, 399.0, 835.0" shape="poly" alt="certitude:Message" id="areadiagram_map_Gb_4XcKAUChCKQzL" href="Message_qb_4XcKAUChCKQzI.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 975.0, 37.0, 989.0, 399.0, 989.0, 399.0, 975.0" coords2="37.0, 975.0, 37.0, 989.0, 399.0, 989.0, 399.0, 975.0" shape="poly" alt="proposer nouvelle réf:Message" id="areadiagram_map_xYiEXcKAUChCKQ0F" href="Message_xYiEXcKAUChCKQ0H.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="37.0, 635.0, 37.0, 649.0, 399.0, 649.0, 399.0, 635.0" coords2="37.0, 635.0, 37.0, 649.0, 399.0, 649.0, 399.0, 635.0" shape="poly" alt="dmd blink:Message" id="areadiagram_map_OYrEXcKAUChCKQ2h" href="Message_WYrEXcKAUChCKQ2e.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="416.0, 642.0, 416.0, 645.0, 387.0, 645.0, 387.0, 659.0, 416.0, 659.0, 416.0, 665.0, 387.0, 665.0, 387.0, 679.0, 416.0, 679.0, 416.0, 682.0, 430.0, 682.0, 430.0, 679.0, 433.0, 679.0, 433.0, 665.0, 430.0, 665.0, 430.0, 659.0, 433.0, 659.0, 433.0, 645.0, 430.0, 645.0, 430.0, 642.0" coords2="416.0, 642.0, 416.0, 645.0, 387.0, 645.0, 387.0, 659.0, 416.0, 659.0, 416.0, 665.0, 387.0, 665.0, 387.0, 679.0, 416.0, 679.0, 416.0, 682.0, 430.0, 682.0, 430.0, 679.0, 433.0, 679.0, 433.0, 665.0, 430.0, 665.0, 430.0, 659.0, 433.0, 659.0, 433.0, 645.0, 430.0, 645.0, 430.0, 642.0" shape="poly" alt="afficher le blink:Message" id="areadiagram_map_KxHEXcKAUChCKQ2v" href="Message_SxHEXcKAUChCKQ2s.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="416.0, 842.0, 416.0, 845.0, 387.0, 845.0, 387.0, 859.0, 416.0, 859.0, 416.0, 865.0, 387.0, 865.0, 387.0, 879.0, 416.0, 879.0, 416.0, 882.0, 430.0, 882.0, 430.0, 879.0, 433.0, 879.0, 433.0, 865.0, 430.0, 865.0, 430.0, 859.0, 433.0, 859.0, 433.0, 845.0, 430.0, 845.0, 430.0, 842.0" coords2="416.0, 842.0, 416.0, 845.0, 387.0, 845.0, 387.0, 859.0, 416.0, 859.0, 416.0, 865.0, 387.0, 865.0, 387.0, 879.0, 416.0, 879.0, 416.0, 882.0, 430.0, 882.0, 430.0, 879.0, 433.0, 879.0, 433.0, 865.0, 430.0, 865.0, 430.0, 859.0, 433.0, 859.0, 433.0, 845.0, 430.0, 845.0, 430.0, 842.0" shape="poly" alt="informer l'expert:Message" id="areadiagram_map_lOGkXcKAUChCKQ43" href="Message_ZOGkXcKAUChCKQ40.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="416.0, 982.0, 416.0, 985.0, 387.0, 985.0, 387.0, 999.0, 416.0, 999.0, 416.0, 1005.0, 387.0, 1005.0, 387.0, 1019.0, 416.0, 1019.0, 416.0, 1022.0, 430.0, 1022.0, 430.0, 1019.0, 433.0, 1019.0, 433.0, 1005.0, 430.0, 1005.0, 430.0, 999.0, 433.0, 999.0, 433.0, 985.0, 430.0, 985.0, 430.0, 982.0" coords2="416.0, 982.0, 416.0, 985.0, 387.0, 985.0, 387.0, 999.0, 416.0, 999.0, 416.0, 1005.0, 387.0, 1005.0, 387.0, 1019.0, 416.0, 1019.0, 416.0, 1022.0, 430.0, 1022.0, 430.0, 1019.0, 433.0, 1019.0, 433.0, 1005.0, 430.0, 1005.0, 430.0, 999.0, 433.0, 999.0, 433.0, 985.0, 430.0, 985.0, 430.0, 982.0" shape="poly" alt="informer l'expert:Message" id="areadiagram_map_7dBkXcKAUChCKQ5R" href="Message_rdBkXcKAUChCKQ5O.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="216.0, 42.0, 216.0, 102.0, 230.0, 102.0, 230.0, 42.0" coords2="216.0, 42.0, 216.0, 102.0, 230.0, 102.0, 230.0, 42.0" shape="poly" alt=":Anchor" id="areadiagram_map_tG44EUqAUCgiZRKj" href="Anchor_FG44EUqAUCgiZRKi.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="41.0, 285.0, 41.0, 299.0, 223.0, 299.0, 223.0, 285.0" coords2="41.0, 285.0, 41.0, 299.0, 223.0, 299.0, 223.0, 285.0" shape="poly" alt=":Generic Connector" id="areadiagram_map_Scj4EUqAUCgiZRLk" href="GenericConnector_Ccj4EUqAUCgiZRLj.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="41.0, 125.0, 41.0, 139.0, 223.0, 139.0, 223.0, 125.0" coords2="41.0, 125.0, 41.0, 139.0, 223.0, 139.0, 223.0, 125.0" shape="poly" alt=":Generic Connector" id="areadiagram_map_WfP4EUqAUCgiZRMp" href="GenericConnector_mfP4EUqAUCgiZRMo.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="41.0, 205.0, 41.0, 219.0, 223.0, 219.0, 223.0, 205.0" coords2="41.0, 205.0, 41.0, 219.0, 223.0, 219.0, 223.0, 205.0" shape="poly" alt=":Generic Connector" id="areadiagram_map_JJ4EEUqAUCgiZRNK" href="GenericConnector_hJ4EEUqAUCgiZRNJ.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="41.0, 365.0, 41.0, 379.0, 223.0, 379.0, 223.0, 365.0" coords2="41.0, 365.0, 41.0, 379.0, 223.0, 379.0, 223.0, 365.0" shape="poly" alt=":Generic Connector" id="areadiagram_map_cxxEEUqAUCgiZROW" href="GenericConnector_sxxEEUqAUCgiZROV.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,352.0,563.0,372.0" coords2="223.0,352.0,563.0,372.0" shape="rect" alt="Offset image:Diagram Overview" id="areadiagram_map_CTeEEUqAUCgiZRN6header" href="DiagramOverview_kTeEEUqAUCgiZRN5.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,372.0,563.0,422.0" coords2="223.0,372.0,563.0,422.0" shape="rect" alt="Offset image:Diagram Overview" id="areadiagram_map_CTeEEUqAUCgiZRN6" href="InteractionDiagram_Ir6EEUqAUCgiZRNi.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,192.0,563.0,212.0" coords2="223.0,192.0,563.0,212.0" shape="rect" alt="Info sur la galaxie:Diagram Overview" id="areadiagram_map_Y5IEEUqAUCgiZRM3header" href="DiagramOverview__ZIEEUqAUCgiZRM2.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,212.0,563.0,262.0" coords2="223.0,212.0,563.0,262.0" shape="rect" alt="Info sur la galaxie:Diagram Overview" id="areadiagram_map_Y5IEEUqAUCgiZRM3" href="InteractionDiagram_GuGTUcKAUChCqAhn.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="3, 739, 558, 892" coords2="3, 739, 558, 892" shape="rect" alt="Operand3:Interaction Operand" id="areadiagram_map_OWV4XcKAUChCKQyW" href="InteractionOperand_OWV4XcKAUChCKQyX.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="3, 939, 558, 1042" coords2="3, 939, 558, 1042" shape="rect" alt="Operand3:Interaction Operand" id="areadiagram_map_3oiEXcKAUChCKQz1" href="InteractionOperand_PoiEXcKAUChCKQz3.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="2, 639, 554, 700" coords2="2, 639, 554, 700" shape="rect" alt="Operand8:Interaction Operand" id="areadiagram_map_0NfEXcKAUChCKQ29" href="InteractionOperand_0NfEXcKAUChCKQ2_.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,112.0,563.0,132.0" coords2="223.0,112.0,563.0,132.0" shape="rect" alt="Choisir un jour:Diagram Overview" id="areadiagram_map_Shb4EUqAUCgiZRLxheader" href="DiagramOverview_Mhb4EUqAUCgiZRLw.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,132.0,563.0,182.0" coords2="223.0,132.0,563.0,182.0" shape="rect" alt="Choisir un jour:Diagram Overview" id="areadiagram_map_Shb4EUqAUCgiZRLx" href="InteractionDiagram__aww7sKAUChCqAin.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,272.0,563.0,292.0" coords2="223.0,272.0,563.0,292.0" shape="rect" alt="Historique d'une galaxie:Diagram Overview" id="areadiagram_map_5hd4EUqAUCgiZRLXheader" href="DiagramOverview_hhd4EUqAUCgiZRLW.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="223.0,292.0,563.0,342.0" coords2="223.0,292.0,563.0,342.0" shape="rect" alt="Historique d'une galaxie:Diagram Overview" id="areadiagram_map_5hd4EUqAUCgiZRLX" href="InteractionDiagram_jI54EUqAUCgiZRLC.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" docContent="&amp;lt;head&amp;gt;
+    
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body style=&amp;quot;color:#000000;margin-left:0;font-weight:normal;font-size:11px;font-family:Dialog;margin-right:0;&amp;quot;&amp;gt;
+    &amp;lt;p style=&amp;quot;margin-top:0pt;margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;&amp;quot;&amp;gt;
+      image ref peut ne pas exister
+    &amp;lt;/p&amp;gt;
+  &amp;lt;/body&amp;gt;" coords="163, 2, 303, 42" coords2="163, 2, 303, 42" shape="rect" alt="image ref peut ne pas exister:Note" id="areadiagram_map_mG44EUqAUCgiZRKe" href="NOTE_mG44EUqAUCgiZRKf.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),showTooltip(this)" onmousedown="clearSpotLight();" onmouseout="hideTooltip()"/>
+<area imageId="diagram" coords="389, 462, 397, 514" coords2="389, 462, 397, 514" shape="rect" alt="Activation:Activation" id="areadiagram_map_uF0UXcKAUChCKQ6w" href="Activation_qF0UXcKAUChCKQ6u.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389, 634, 397, 684" coords2="389, 634, 397, 684" shape="rect" alt="Activation:Activation" id="areadiagram_map_E4rEXcKAUChCKQ2o" href="Activation_I4rEXcKAUChCKQ2m.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="2, 622, 554, 700" coords2="2, 622, 554, 700" shape="rect" alt=":Combined Fragment" id="areadiagram_map_y1fEXcKAUChCKQ25" href="CombinedFragment_y1fEXcKAUChCKQ26.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389, 972, 397, 1022" coords2="389, 972, 397, 1022" shape="rect" alt="Activation:Activation" id="areadiagram_map_7eiEXcKAUChCKQ0e" href="Activation_BeiEXcKAUChCKQ0a.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="3, 922, 558, 1042" coords2="3, 922, 558, 1042" shape="rect" alt="Utilisateur connecté:Combined Fragment" id="areadiagram_map_BoiEXcKAUChCKQzw" href="CombinedFragment_hoiEXcKAUChCKQzy.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389, 832, 397, 882" coords2="389, 832, 397, 882" shape="rect" alt="Activation:Activation" id="areadiagram_map_Y7_4XcKAUChCKQzS" href="Activation_Q7_4XcKAUChCKQzQ.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389, 780, 397, 822" coords2="389, 780, 397, 822" shape="rect" alt="Activation:Activation" id="areadiagram_map_bd94XcKAUChCKQyy" href="Activation_Td94XcKAUChCKQyw.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="3, 722, 558, 892" coords2="3, 722, 558, 892" shape="rect" alt="Utilisateur connecté:Combined Fragment" id="areadiagram_map_GmV4XcKAUChCKQyS" href="CombinedFragment_mmV4XcKAUChCKQyT.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389, 542, 397, 592" coords2="389, 542, 397, 592" shape="rect" alt="Activation:Activation" id="areadiagram_map_FJC4XcKAUChCKQxq" href="Activation_JJC4XcKAUChCKQxo.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="389, 92, 397, 104" coords2="389, 92, 397, 104" shape="rect" alt="Activation:Activation" id="areadiagram_map_G5_YXcKAUChCKQwz" href="Activation_y5_YXcKAUChCKQwx.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="343, 22, 443, 72" coords2="343, 22, 443, 72" shape="rect" alt="disco:Lifeline" id="areadiagram_map_41SYXcKAUChCKQwF" href="InteractionLifeLine_E1SYXcKAUChCKQwG.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="13, 22, 73, 57" coords2="13, 22, 73, 57" shape="rect" alt="Utilisateur:Actor" id="areadiagram_map_4ucYXcKAUChCKQv." href="InteractionActor_EucYXcKAUChCKQv_.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+</map>
+				</td>
+			</tr>
+		</table>
+		<p>
+		</p>
+	</div>
+	<p>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0">
+			<tr>
+				<td>
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="color:#000000;margin-left:0;font-weight:normal;font-size:11px;font-family:Courier New;margin-right:0;">
+    <p style="margin-top:0pt;margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;">
+      Permet &#224; l'utilisateur de naviguer entre les diff&#233;rents images de la 
+      base de donn&#233;e, selon diff&#233;rents param&#232;tres. Il peut donc choisir le 
+      t&#233;lescope, le jour de la prise de photo, ainsi que traiter l'image et 
+      consulter les informations sur la galaxie concern&#233;e.
+    </p>
+  </body></span>				</td>
+			</tr>
+		</table>
+	</p>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="Category">
+				Éléments de modèle			</td>
+		</tr>
+		<tr>
+			<td style="height: 5px">
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td colSpan="4" class="TableHeaderLine">
+			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine1">
+			</td>
+		</tr>
+		<tr class="TableHeader">
+			<td class="TableCellSpaceHolder10Px">
+			</td>
+			<td width="30%">
+<span class="TableHeaderText">Nom</span>			</td>
+			<td class="TableCellSpaceHolder20Px">
+			</td>
+			<td>
+<span class="TableHeaderText">Description</span>			</td>
+		</tr>
+		<tr>
+			<td colSpan="4" class="TableHeaderLine2">
+			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/InteractionOperand.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/InteractionOperand.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="InteractionOperand_OWV4XcKAUChCKQyX.html" class="ItemLink">Operand3 : Interaction Operand</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/InteractionOperand.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/InteractionOperand.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="InteractionOperand_PoiEXcKAUChCKQz3.html" class="ItemLink">Operand3 : Interaction Operand</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/InteractionOperand.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/InteractionOperand.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="InteractionOperand_0NfEXcKAUChCKQ2_.html" class="ItemLink">Operand8 : Interaction Operand</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Activation.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Activation.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Activation_qF0UXcKAUChCKQ6u.html" class="ItemLink">Activation : Activation</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Activation.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Activation.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Activation_I4rEXcKAUChCKQ2m.html" class="ItemLink">Activation : Activation</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/CombinedFragmentAlt.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/CombinedFragmentAlt.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="CombinedFragment_y1fEXcKAUChCKQ26.html" class="ItemLink">N/A : Combined Fragment</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Activation.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Activation.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Activation_BeiEXcKAUChCKQ0a.html" class="ItemLink">Activation : Activation</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/CombinedFragmentAlt.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/CombinedFragmentAlt.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="CombinedFragment_hoiEXcKAUChCKQzy.html" class="ItemLink">Utilisateur connecté : Combined Fragment</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Activation.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Activation.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Activation_Q7_4XcKAUChCKQzQ.html" class="ItemLink">Activation : Activation</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Activation.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Activation.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Activation_Td94XcKAUChCKQyw.html" class="ItemLink">Activation : Activation</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/CombinedFragmentAlt.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/CombinedFragmentAlt.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="CombinedFragment_mmV4XcKAUChCKQyT.html" class="ItemLink">Utilisateur connecté : Combined Fragment</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Activation.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Activation.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Activation_JJC4XcKAUChCKQxo.html" class="ItemLink">Activation : Activation</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Activation.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Activation.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="Activation_y5_YXcKAUChCKQwx.html" class="ItemLink">Activation : Activation</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/LifeLine.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/LifeLine.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="InteractionLifeLine_E1SYXcKAUChCKQwG.html" class="ItemLink">disco : Lifeline</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Actor.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Actor.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="InteractionActor_EucYXcKAUChCKQv_.html" class="ItemLink">Utilisateur : Actor</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/Note.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/Note.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="NOTE_mG44EUqAUCgiZRKf.html" class="ItemLink">N/A : Note</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"><head>
+    
+  </head>
+  <body style="color:#000000;margin-left:0;font-weight:normal;font-size:11px;font-family:Dialog;margin-right:0;">
+    <p style="margin-top:0pt;margin-left:0pt;margin-bottom:.0001pt;margin-right:0pt;">
+      image ref peut ne pas exister
+    </p>
+  </body></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/DiagramOverview.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/DiagramOverview.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="DiagramOverview_hhd4EUqAUCgiZRLW.html" class="ItemLink">Historique d'une galaxie : Aperçu des diagrammes</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/DiagramOverview.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/DiagramOverview.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="DiagramOverview_Mhb4EUqAUCgiZRLw.html" class="ItemLink">Choisir un jour : Aperçu des diagrammes</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow1">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/DiagramOverview.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/DiagramOverview.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="DiagramOverview__ZIEEUqAUCgiZRM2.html" class="ItemLink">Info sur la galaxie : Aperçu des diagrammes</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+		<tr class="TableRow2">
+			<td>
+			</td>
+			<td>
+				<span class="TableContent">
+					<div style="float: left; width: 18px !important;height: 18px !important;background-image:url(../images/icons/DiagramOverview.png) !important; background-image:url(''); filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/icons/DiagramOverview.png'); background-repeat: no-repeat;">
+					</div>
+					&nbsp; <a href="DiagramOverview_kTeEEUqAUCgiZRN5.html" class="ItemLink">Offset image : Aperçu des diagrammes</a>				</span>
+			</td>
+			<td>
+			</td>
+			<td style="padding: 5px 0">
+<span class="TableContent Documentation"></span>			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="TableCellSpaceHolder1PxTall">
+			</td>
+		</tr>
+		<tr>
+			<td class="TableFooter">
+			</td>
+		</tr>
+	</table>
+	<div style="height: 20px">
+	</div>
+	<table border="0" cellpadding="0" width="100%" cellspacing="0">
+		<tr>
+			<td class="FooterLine">
+			</td>
+		</tr>
+	</table>
+	<div class="HeaderText">
+		discovery	</div>
+</body>
+</html>
