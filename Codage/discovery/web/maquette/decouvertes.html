@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Images</title>   
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../js/jquery.mobile/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="../css/disco1.css">
+	<link rel="stylesheet" href="../css/themes/themeBlue.min.css">
+        <link rel="stylesheet" href="../css/themes/jquery.mobile.icons-1.4.5.min.css">
+        <script type="text/javascript" src="../js/jquery/jquery-1.11.2.min.js"></script>
+        <script src="../js/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="../js/disco1.js"></script>
+        <script type="text/javascript">
+            var imagesNoms = new Array(
+                    "F IC3900", "F IC739", "F IC779", "F IC831", "F IC832",
+                    "F IC835", "F MCG121524", "F MCG121525", "F MCG22849", "F MCG2303",
+                    "F MCG42887", "F MCG5245", "F MCG52966", "F MCG530104A",
+                    "F MCG530116", "F MCG53094", "F MCG53123", "F MCG5318", "F MCG667"
+                    );
+            var cheminCalern = "/jpeg/Tarot_Calern/20140319/";
+            var cheminChili = "/jpeg/Tarot_Chili/20140319/";
+            var cheminRef = "/jpeg/refgal/";
+        </script>
+        <script>
+            $(function () {
+                var canvas = document.getElementById("mon_canvas");
+                var context = canvas.getContext("2d");
+
+                canvas.width = 250;
+                canvas.height = 250;
+                img = new Image();
+                img.src = '/jpeg/Tarot_Calern/20140319/IC3900.jpg';
+                img.onload = function () {
+                    // (img, sx, sy, imgWidth, imgHeight, x, y, canvasWidth, canvasHeight)
+                    context.drawImage(img, 0, 0, 77, 77, 0, 0, canvas.width, canvas.height);
+                }
+            });
+        </script>
+    </head>
+
+    <div class="page  ui-page-theme-b" data-role="page" id="discopage">
+        <div class="header" data-role="header" data-id="main-header" data-theme="b"
+             data-position="fixed" data-fullscreen="true">
+            <h1>Découvrir</h1>
+            <a href="#panelCalendar" 
+               class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-calendar ui-btn-left">
+            </a>
+            <a href="#panelGalaxies" 
+               class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-star ui-btn-right">
+            </a>
+        </div>
+
+        <div role="main" class="ui-content ">
+            <div class="centrer">Découvrir</div><br/>
+            <div class="mesImages" align="center">
+                <img id='imgobs' src='/jpeg/Tarot_Calern/20140319/IC3900.jpg'/>
+                <img id='imgref' src='/jpeg/refgal/IC3900.jpg'/>
+            </div>
+            <table class="infosTable">
+                <td class="texteCentre" id="nomGalaxie">IC3900</td>
+                <td class="texteCentre" id="numImages" >(1/330)</td>
+                <td class="texteCentre" id="dateImages">19/03/2014</td>
+            </table>
+            <div align="center">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
+                           class="ui-state-disabled" data-mini="true"
+                           data-role="button">Précédent</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
+                           data-mini="true" data-role="button">Suivant</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-grid-b">
+                <div class="ui-block-a">
+                    <a href="#popupHisto" id="btnHisto" data-rel="popup" data-position-to="window" 
+                       class="ui-btn ui-corner-all ui-shadow" data-mini="true" data-transition="pop">Histo</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#popupInfos" id="btnInfos" data-rel="popup" data-position-to="window" 
+                       class="ui-btn ui-corner-all ui-shadow" data-mini="true" data-transition="pop">Infos</a>
+                </div>
+                <div class="ui-block-c">
+                    <a href="#popupBlink" id="btnBlink" data-rel="popup" data-position-to="window" 
+                       class="ui-btn ui-corner-all ui-shadow" data-mini="true" data-transition="pop">Blink</a>
+                </div>
+            </div>
+
+            <br>
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="text-align:center;">Découverte par : Pseudo
+                </div>            
+                <div class="ui-block-b" style="text-align:center;">Le : dd/mm/yyyy à hh:mm</div>
+            </div>
+
+            <br>
+            <div class="gradeUser">
+                Grade actuel:
+                <img src="../images/star.gif">
+                <img src="../images/star.gif">
+                <img src="../images/star.gif">
+            </div>
+
+            <br>
+            <div data-position="center">
+                <a href="#popupGrade" id="btnReference" data-rel="popup" data-position-to="window"
+                   data-role="button"  data-transition="pop" >Changer le grade</a>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">               
+                    <a data-position-to="window" data-role="button" 
+                       data-transition="pop" >Valider</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-rel="back" data-position-to="window" data-role="button" 
+                       data-transition="pop" >Refuser</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer" data-role="footer" data-theme="b"  data-id="main-footer" data-position="fixed">
+            <div data-role="navbar" data-grid="d">
+                <ul>
+                    <li><a href="home.html" id="home"  data-icon="search" data-transition="slide">Disco</a></li>
+                    <li><a href="disco.html" data-ajax="false" id="disco" data-icon="check" data-transition="slide">Référence</a></li>
+                    <li><a href="tuto1.html" id="cours" data-icon="user" data-transition="slide">Gestion</a></li>
+                    <li><a href="account.html" id="user"  data-icon="gear" data-transition="slide">Compte</a></li>
+                    <li><a href="actu.html" id="actu"  data-icon="comment" data-transition="slide">Actu</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- panel de calendar -->
+        <div id="panelCalendar" data-role="panel" data-position="left"  
+             data-position-fixed="true" data-display="push" data-theme="b">
+            <ul data-role="listview" data-icon="false">
+                <li data-role="list-divider">Choisir un jour :</li>
+                <li><a href='disco.html?date=20140319' data-ajax='false'>19/03/2014</a></li>
+                <li><a href='disco.html?date=20140318' data-ajax='false'>18/03/2014</a></li>
+                <li><a href='disco.html?date=20140317' data-ajax='false'>17/03/2014</a></li>
+                <li><a href='disco.html?date=20140316' data-ajax='false'>16/03/2014</a></li>
+                <li><a href='disco.html?date=20140315' data-ajax='false'>15/03/2014</a></li>
+                <li><a href='disco.html?date=20140314' data-ajax='false'>14/03/2014</a></li>
+                <li><a href='disco.html?date=20140313' data-ajax='false'>13/03/2014</a></li>
+                <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+            </ul>
+        </div>
+
+        <!-- panel de galaxies -->
+        <div id="panelGalaxies" data-role="panel" data-position="right"  
+             data-position-fixed="true" data-display="push" data-theme="b">
+            <ul data-role="listview" data-icon="false">
+                <li data-role="list-divider">Offset sur les images :</li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(1);">Première</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-200));">-200</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-100));">-100</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-50));">-50</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-10));">-10</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(10));">+10</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(50));">+50</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(100));">+100</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(200));">+200</a></li>
+                <li><a href="#" data-rel="close" onclick="nouvelleImage(330);">Dernière</a></li>
+                <li data-icon="delete">
+                    <a href="#" data-rel="close">Close</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- popup candidat -->
+        <div id="popupCandidat" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div id="divCandidat">
+                <h3 id="nomCandidat">Proposition de candidate</h3>
+                <p>Pointer l'endroit supposé de la supernova.</p>
+                <div>
+                    <canvas id="mon_canvas"></canvas>
+                </div>
+                <form id="formCandidat">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Choisir le degré de certitude :<br/>
+                            (1 : peu sûr, 5 : certain)
+                        </legend>
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="1" checked="checked" disabled="disabled">
+                        <label for="radio-choice-h-2a">1</label>
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="2" disabled="disabled">
+                        <label for="radio-choice-h-2b">2</label>
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="3" disabled="disabled">
+                        <label for="radio-choice-h-2c">3</label>
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2d" value="4" disabled="disabled">
+                        <label for="radio-choice-h-2d">4</label>
+                        <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2e" value="5" disabled="disabled">
+                        <label for="radio-choice-h-2e">5</label>
+                    </fieldset>
+                    <br/>
+                    <button class="ui-btn ui-corner-all">Confirmation</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- popup infos -->
+        <div id="popupInfos" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div class="mesPopups">
+                <h3    id="nomInfos">Nom </h3>
+                <label id="catInfos">Catégorie :</label>
+                <label id="textInfos">Informations :</label>
+                <label id="adrInfos">Ascension droite :</label>
+                <label id="decInfos">Déclinaison :</label>
+                <label id="distInfos">Distance :</label>
+                <label id="magInfos">Magnétude :</label>
+                <label id="magTelescope">Télescope :</label>
+            </div>
+        </div>
+
+        <!-- popup blink -->
+        <div id="popupBlink" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div class="mesPopups">
+                <h3 id="nomBlink"></h3>
+                <div><img id="imgBlink" src="../images/black.jpg"/></div>
+            </div>
+        </div>
+
+        <!-- popup Historique -->
+        <div id="popupHisto" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div>
+                <h3 id="nomHisto"></h3>
+                <div id="imgHisto">
+                    <div>
+                        <img id="imgHisto1" src="../images/black.jpg"/>
+                        <img id="imgHisto2" src="../images/black.jpg"/>
+                    </div>
+                    <div>
+                        <img id="imgHisto3" src="../images/black.jpg"/>
+                        <img id="imgHisto4" src="../images/black.jpg"/>
+                    </div>
+                    <div>
+                        <img id="imgHisto5" src="../images/black.jpg"/>
+                        <img id="imgHisto6" src="../images/black.jpg"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- popup Grade-->
+        <div id="popupGrade" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <h3 id="reference">Grade:</h3>            
+            <div style="text-align:center;">
+                <fieldset data-role="controlgroup" data-type="horizontal" data-inline="true">
+                    <a href="#btnMoins" id="btnMoins" data-icon="minus" data-rel="popup" data-position-to="window"
+                       data-role="button"  data-transition="pop" data-iconpos="notext" data-inline="true">moins</a>
+                    <input type="radio" name="radio-choice-h-3" id="radio-choice-h-2a" value="1" disabled="disabled" data-inline="true">
+                    <label for="radio-choice-h-2a" data-inline="true">1</label>
+                    <input type="radio" name="radio-choice-h-3" id="radio-choice-h-2b" value="2" disabled="disabled" data-inline="true">
+                    <label for="radio-choice-h-2b" data-inline="true">2</label>
+                    <input type="radio" name="radio-choice-h-3" id="radio-choice-h-2c" value="3" disabled="disabled" data-inline="true" checked>
+                    <label for="radio-choice-h-2c" data-inline="true">3</label>
+                    <input type="radio" name="radio-choice-h-3" id="radio-choice-h-2d" value="4" disabled="disabled" data-inline="true">
+                    <label for="radio-choice-h-2d" data-inline="true">4</label>
+                    <input type="radio" name="radio-choice-h-3" id="radio-choice-h-2e" value="5" disabled="disabled" data-inline="true">
+                    <label for="radio-choice-h-2e" data-inline="true">5</label>
+                    <a href="#btnPlus" id="btnPlus" data-icon="plus" data-rel="popup" data-position-to="window"
+                       data-role="button"  data-transition="pop" data-iconpos="notext" data-inline="true">plus</a>
+                </fieldset>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">               
+                    <a data-position-to="window" data-role="button" data-mini="true"
+                       data-transition="pop" >Confirmer</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" data-rel="back" data-position-to="window" data-role="button" data-mini="true"
+                       data-transition="pop" >Annuler</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

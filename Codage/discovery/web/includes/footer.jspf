@@ -1,0 +1,14 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<div class="footer" data-role="footer" data-theme="b"
+            data-id="main-footer" data-position="fixed" data-fullscreen="true">
+    <div data-role="navbar" data-grid="d">
+        <ul>
+            <li><a href="index.jsp" id="navbarhome"  data-icon="home">Accueil</a></li>
+            <li><a href="disco.jsp" id="navbardisco" data-icon="eye">Images</a></li>
+            <li><a href="tuto1.jsp" id="navbartuto1" data-icon="info">Tutoriel</a></li>
+            <li><a href="compte.jsp" id="navbarcompte" data-icon="gear">Compte</a></li>
+            <li><a href="actu.jsp" id="navbaractu"  data-icon="comment">Actu</a></li>
+        </ul>
+    </div>
+</div>

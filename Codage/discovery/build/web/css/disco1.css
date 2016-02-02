@@ -1,0 +1,187 @@
+/* 
+    Created on : 20 avr. 2014, 11:08:34
+    Author     : 
+*/
+
+* {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing: border-box;
+}
+
+table { 
+    margin : 0 auto 
+}
+
+.progressBar {
+    width: 200px;
+    height: 22px;
+    border: 1px solid #111;
+    border-radius: 4px;
+    background: #FFF;
+    overflow: hidden;		
+}
+
+.progressBar div {
+    height: 100%;
+    background-image: url(pbar-ani.gif);
+    border-right: 1px solid #AAA;
+}
+
+/* La page est plein écran et commence derrière le titre
+    et fini derrière la pied de page. On a mis un titre
+    à chaque début de page qui décale la page vers le bas.
+    Il faut donc mettre un padding en bas de page pour 
+    dégager le bas de page.
+ */
+.page {
+    margin: 0px 0px 0px 0px;
+    padding: 20px 10px 90px 10px;
+}
+
+.mesPopups {
+    padding:0px 20px 0px 20px;
+}
+
+#popupHisto {
+    padding:0px 5px 0px 5px;
+    width : 300px;
+}
+
+#imgHisto img {
+    width:  49%;
+    height: auto;
+    padding:0px 0px 0px 3px;
+}
+
+#imgBlink, #imgZoomLeft, #imgZoomRight, #mon_canvas {
+    width : 250px;
+    height: 250px;
+}
+
+#divCandidat {
+    text-align: center;
+    padding: 10px 30px 10px 30px;
+}
+
+.infosImages {
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+}
+ 
+.tutoImg {
+    margin : auto;
+    padding-left: 3%;
+}
+
+.tutoImg img {
+    width:  45%;
+    height: auto;
+    padding: 4px 0 4px 5%;
+}
+
+.tutoImg2 img {
+    width:  90%;
+    height: auto;
+    padding: 4px 0 4px 5%;
+}
+
+.tuto2Txt {
+    text-align: center;
+}
+
+.centrer {
+    text-align: center;
+}
+
+@media all and (orientation : landscape) {
+    
+    .footer, .header {
+        visibility:hidden;
+    }
+    
+    .mesImages {
+        width:  80%;
+        margin: auto;
+    }
+    
+    .mesImages img {
+        width:  40%;
+        height: auto;
+    }
+    
+    .infosTable {
+        width:  68%;
+    }
+    
+    .texteCentre {
+        text-align: center;
+        width:  30%;
+        height: auto;
+    }
+
+    .tuto1Img {
+        width:  40%;
+        margin: 10px 30% 4px 30%;
+        border-style:solid;
+        border-width:1px;  
+    }
+
+    .tuto2Img {
+        width:  100%;
+        margin: auto;
+        padding: 10px 30% 4px 30%;
+    }
+
+    .tuto3Img {
+        width:  100%;
+        margin: auto;
+        padding: 10px 10% 4px 10%;
+    }
+}
+
+@media all and (orientation : portrait) {
+    
+    .footer, .header {
+        visibility:visible;
+    }
+    
+    .mesImages {
+        width:  100%;
+        margin: auto;
+    }
+    
+    .mesImages img {
+        width:  45%;
+        height: auto;
+    }
+    
+    .infosTable {
+        width:  93%;
+    }
+    
+    .texteCentre {
+        text-align: center;
+        width:  30%;
+        height: auto;
+    }
+
+    .tuto1Img {
+        width:  70%;
+        margin: 10px 15% 4px 15%;
+        border-style:solid;
+        border-width:1px;   
+    }
+    
+    .tuto2Img {
+        width:  100%;
+        margin: auto;
+        padding: 10px 15% 4px 15%;
+    }
+
+    .tuto3Img {
+        width:  100%;
+        margin: auto;
+        padding: 10px 3% 4px 3%;
+    }
+}
