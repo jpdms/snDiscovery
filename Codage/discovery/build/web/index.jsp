@@ -43,7 +43,7 @@
             </li>
         </ol>
         <br/>
-        V2.01 - 20 Septembre 2015<br/>
+        V1.00 - 20 Septembre 2015<br/>
         (Développement : BTS SNIR Lycée V. Hugo Colomiers 31)
     </div>
     

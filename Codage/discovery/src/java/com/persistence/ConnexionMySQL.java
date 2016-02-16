@@ -19,7 +19,7 @@ public class ConnexionMySQL {
     private static String driver    = "com.mysql.jdbc.Driver";
     /** url : ConnexionMySQL URL */
     //private static String url       = "jdbc:mysql://localhost:3306/galaxia?useUnicode=true&characterEncoding=utf-8";
-    private static String url       = "jdbc:mysql://localhost:3306/galaxia";
+    private static String url       = "jdbc:mysql://localhost:3306/galaxia?zeroDateTimeBehavior=convertToNull";
 // ---------------------------------------------------------------------
     /** userName : anything */
     private static String userName  = "sndiscovery";
