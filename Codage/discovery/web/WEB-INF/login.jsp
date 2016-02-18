@@ -14,8 +14,7 @@
 
 <body>
 <div class="page" data-role="page" id="loginPage">
-    <div class="header" data-role="header" data-id="main-header" data-theme="b"
-                                  data-position="fixed" data-fullscreen="true">
+    <%@include file="../includes/div_header.jspf" %>
         <h1>Compte</h1>
         <%@include file="../includes/user.jspf" %>
     </div>
@@ -65,7 +64,7 @@
     </script>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Compte</div><br/><br/>
+        <br/><br/>
         <div>
             <%
                 String message = request.getParameter("message");

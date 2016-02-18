@@ -17,7 +17,7 @@
     <%@include file="includes/tutoheader.jspf" %>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Tutoriel</div><br/><br/>
+        <br/><br/>
         Autres causes d'artéfacts.<br/>
         <img class="tuto2Img" src="images/tuto16.jpg">
         <div class="tuto2Txt">Cosmique</div>

@@ -17,8 +17,7 @@
 
 <body>
 <div class="page" data-role="page" id="changerProfilPage">
-    <div class="header" data-role="header" data-id="main-header" data-theme="b"
-                                data-position="fixed" data-fullscreen="true">
+    <%@include file="../includes/div_header.jspf" %>
         <h1>Compte</h1>
         <%@include file="../includes/user.jspf" %>
     </div>
@@ -75,7 +74,7 @@
     </script>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Changement de Profil</div><br/><br/>
+        <br/><br/>
         <br/>
         <%
             maSession = (DiscoSession)session.getAttribute("maSession");

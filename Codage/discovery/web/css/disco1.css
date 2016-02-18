@@ -2,7 +2,9 @@
     Created on : 20 avr. 2014, 11:08:34
     Author     : 
 */
-
+.mini{
+    font-size: 10px;
+}
 * {
     box-sizing:border-box;
     -moz-box-sizing:border-box;

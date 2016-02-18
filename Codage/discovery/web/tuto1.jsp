@@ -17,7 +17,7 @@
     <%@include file="includes/tutoheader.jspf" %>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Tutoriel</div><br/><br/>
+        <br/><br/>
         Une supernova est un phénomène explosif violent dû à la mort d'une étoile.<br/>
         A nos yeux, une supernova apparaît comme une nouvelle étoile dont l'intensité 
         lumineuse s’accentue en quelques jours puis s’atténue jusqu’à disparaître.<br/>

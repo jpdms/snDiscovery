@@ -121,7 +121,7 @@
     <%@include file="includes/tutoheader.jspf" %>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Evaluation</div><br/><br/>
+        <br/><br/>
         
         <div data-demo-html="true">
             <div data-role="collapsibleset" data-theme="a"

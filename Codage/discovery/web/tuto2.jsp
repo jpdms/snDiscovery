@@ -17,7 +17,7 @@
     <%@include file="includes/tutoheader.jspf" %>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Tutoriel</div><br/><br/>
+        <br/><br/>
         Cette application vous présente les images acquises par les télescopes :<br/>
         Vous avez sur votre écran deux images : <br/>
         <div class="tutoImg">

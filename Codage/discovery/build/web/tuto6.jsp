@@ -17,7 +17,7 @@
     <%@include file="includes/tutoheader.jspf" %>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Tutoriel</div><br/><br/>
+        <br/><br/>
         Autres causes d'artéfacts. Comparaison avec une image de la veille.<br/>
         <img class="tuto3Img" src="images/tuto30.jpg">
         <div class="tuto2Txt">Cette trace est la somme des positions d'un astéroïde

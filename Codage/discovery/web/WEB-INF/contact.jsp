@@ -15,8 +15,7 @@
 
 <body>
 <div class="page" data-role="page" id="contactID" >
-    <div class="header" data-role="header" data-id="main-header" data-theme="b"
-                                  data-position="fixed" data-fullscreen="true">
+    <%@include file="../includes/div_header.jspf" %>
         <h1>Compte</h1>
         <%@include file="../includes/user.jspf" %>
     </div>
@@ -80,7 +79,7 @@
     </script>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Contact</div><br/><br/>
+        <br/><br/>
         <br/>
         <form id="formContact" method="post" onsubmit="infoPopUp();" action="discovery.jsp">
             <br/><br/>

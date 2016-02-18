@@ -22,7 +22,7 @@
     </div>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Actualités</div><br/><br/>
+        <br/><br/>
         <div data-role="collapsibleset" data-corners="false" data-theme="a" 
              data-content-theme="a" data-mini="true">
             <%

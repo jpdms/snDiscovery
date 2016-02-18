@@ -18,7 +18,7 @@
     <%@include file="includes/tutoheader.jspf" %>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Tutoriel</div><br/><br/>
+        <br/><br/>
         Ce test, s'il est réussi, va vous permettre de vous inscrire. 
         Ainsi, vous pourrez soumettre des images candidates à nos experts.<br/><br/>
         Mais vous devez faire moins de 3 fautes.<br/><br/>

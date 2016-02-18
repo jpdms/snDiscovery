@@ -14,14 +14,13 @@
 
 <body>
 <div class="page" data-role="page" id="homePage">
-    <div class="header" data-role="header" data-id="main-header" data-theme="b"
-                                data-position="fixed" data-fullscreen="true">
+    <%@include file="includes/div_header.jspf" %>
         <h1>Accueil</h1>
         <%@include file="includes/user.jspf" %>
     </div>
     
     <div role="main" class="ui-content">
-        <div class="centrer">Accueil</div><br/><br/>
+        <br/><br/>
         <h4>Cette application de science participative (crowdsourcing science) va  
             vous permettre de découvrir des supernovae.</h4>
         <div class="tutoImg">
@@ -43,8 +42,9 @@
             </li>
         </ol>
         <br/>
-        V1.00 - 20 Septembre 2015<br/>
-        (Développement : BTS SNIR Lycée V. Hugo Colomiers 31)
+        <center><p class="mini">V1.00 - 20 Septembre 2015<br/>
+                                V2.00 - 18 mai 2016<br/>
+                (Développement : BTS SNIR Lycée V. Hugo Colomiers 31)</p></center>
     </div>
     
     <%@include file="includes/footer.jspf" %>

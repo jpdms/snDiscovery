@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 
-<div class="footer" data-role="footer" data-theme="b"
+<div class="footer" data-role="footer" data-theme="b" data-tap-toggle="false"
             data-id="main-footer" data-position="fixed" data-fullscreen="true">
     <div data-role="navbar" data-grid="d">
         <ul>

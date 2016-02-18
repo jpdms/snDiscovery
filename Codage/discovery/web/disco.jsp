@@ -61,8 +61,7 @@
     %>
     </script>
     
-    <div class="header" data-role="header" data-id="main-header" data-theme="b"
-                                  data-position="fixed" data-fullscreen="true">
+    <%@include file="includes/div_header.jspf" %>
         <h1>Découvrir</h1>
         <a href="#panelCalendar" 
            class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-calendar ui-btn-left">
@@ -74,7 +73,7 @@
     </div>
     
     <div role="main" class="ui-content ">
-        <div class="centrer">Découvrir</div><br/><br/>
+        <br/><br/>
         <div class="mesImages" align="center">
             <%
                 /*
