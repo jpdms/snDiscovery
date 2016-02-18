@@ -10,7 +10,6 @@ public class User {
     private String    password;         
     private int       grade;            // son grade de 1 à 5
     private boolean   blocked;          // si on l'a interdit d'accès
-    private boolean   confirme;         // si false (attend la confirmation du mail
     private Timestamp registerDate;     // la date de son inscription
     private Timestamp lastVisitDate;    // la date de sa dernière visite
     private int       nbCandidates;     // le nb de dmd de candidates
@@ -35,14 +34,13 @@ public class User {
         
         String queryString =
          "insert into user (`pseudo`, `username`, `email`, `password`, `grade`,"
-          + " `blocked`, `confirme`, `registerDate`, `lastVisitDate`, `nbCandidates`, `nbConnexions`) values ("
+          + " `blocked`, `registerDate`, `lastVisitDate`, `nbCandidates`, `nbConnexions`) values ("
                 + Utils.toString(pseudo) + ", " 
                 + Utils.toString(username) + ", " 
                 + Utils.toString(email) + ", " 
                 + Utils.toString(password) + ", " 
                 + Utils.toString(user.getGrade()) + ", " 
                 + Utils.toString(user.isBlocked()) + ", " 
-                + Utils.toString(user.isConfirme()) + ", " 
                 + Utils.toString(user.getRegisterDate()) + ", " 
                 + Utils.toString(user.getLastVisitDate()) + ", " 
                 + Utils.toString(user.getNbCandidates()) + ", "  
@@ -65,8 +63,7 @@ public class User {
                 + " `email` =" + Utils.toString(email) + "," 
                 + " `password` =" + Utils.toString(password) + "," 
                 + " `grade` =" + Utils.toString(grade) + "," 
-                + " `blocked` =" + Utils.toString(blocked) + "," 
-                + " `confirme` =" + Utils.toString(confirme) + "," 
+                + " `blocked` =" + Utils.toString(blocked) + ","
                 + " `registerDate` =" + Utils.toString(registerDate) + "," 
                 + " `lastVisitDate` =" + Utils.toString(lastVisitDate)  + "," 
                 + " `nbCandidates` =" + Utils.toString(nbCandidates)  + "," 
@@ -110,13 +107,12 @@ public class User {
             String    lPassword = lResult.getString("password");
             int       lGrade = lResult.getInt("grade");
             boolean   lBlocked = lResult.getBoolean("blocked");
-            boolean   lConfirme = lResult.getBoolean("confirme");
             Timestamp lRegisterDate = lResult.getTimestamp("registerDate");
             Timestamp lLastVisitDate = lResult.getTimestamp("lastVisitDate");
             int       lNbCandidates = lResult.getInt("nbCandidates");
             int       lNbConnexions = lResult.getInt("nbConnexions");
             User      user = new User(lPseudo,lUsername,lEmail,lPassword,lGrade,
-                      lBlocked,lConfirme,lRegisterDate,lLastVisitDate,lNbCandidates,
+                      lBlocked,lRegisterDate,lLastVisitDate,lNbCandidates,
                       lNbConnexions);
             return user;
         }
@@ -225,15 +221,14 @@ public class User {
      * Cree et initialise completement User
      */
     private User(String pseudo, String username, String email, String password,
-            int grade, boolean blocked, boolean confirme, Timestamp registerDate, Timestamp lastVisitDate,
+            int grade, boolean blocked, Timestamp registerDate, Timestamp lastVisitDate,
             int nbCandidates, int nbConnexions) {
         this.pseudo = pseudo;
         this.username = username;
         this.email = email;
         this.password = password;
         this.grade = grade;
-        this.blocked = blocked;
-        this.confirme = confirme;
+        this.blocked = false;
         this.registerDate = (Timestamp)registerDate.clone();
         this.lastVisitDate = (Timestamp)lastVisitDate.clone();
         this.nbCandidates = nbCandidates;
@@ -252,7 +247,6 @@ public class User {
         this.password = password;
         this.grade = 1;
         this.blocked = false;
-        this.confirme = false;
         this.registerDate = currentTimestamp;
         this.lastVisitDate = (Timestamp)currentTimestamp.clone(); 
         this.nbCandidates = 0;
@@ -302,14 +296,6 @@ public class User {
 
     public void setBlocked(boolean blocked) throws Exception {
         this.blocked = blocked;
-    }
-    
-    public boolean isConfirme() {
-        return confirme;
-    }
-
-    public void setConfirme(boolean confirme) {
-        this.confirme = confirme;
     }
 
     public Timestamp getRegisterDate() {
