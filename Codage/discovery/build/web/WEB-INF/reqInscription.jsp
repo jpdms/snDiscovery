@@ -20,7 +20,13 @@
     String nom      = request.getParameter("inscriptionNom");
     String eMail    = request.getParameter("inscriptionEMail");
     String password = request.getParameter("inscriptionPassword");
-    
+    String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    String confirm = "";
+    for(int x=0;x<8;x++)
+    {
+       int i = (int)Math.floor(Math.random() * chars.length());
+       confirm += chars.charAt(i);
+    }  
     if (User.isPseudoUsed(con, pseudo)) {
         request.getRequestDispatcher("inscription.jsp?message=pbPseudo").forward(request, response);
     }
@@ -29,19 +35,20 @@
     }
     else {
         String cPassword = com.persistence.Utils.encryptPassword(password);
-        User user = User.create(con, pseudo, nom, eMail, cPassword);
+        User user = User.create(con, pseudo, nom, eMail, cPassword, confirm);
         if (user != null) {
             // lui envoyer le mail de confirmation
-            String contenu = "Bonjour,\n\n"
-                    + "nous somme heureux de vous acceuillir sur le site "
-                    + "de snDiscovery.\n"
-                    + "&pseudo=" + user.getPseudo()
-                    + "&code=" + user.getPassword()
-                    + "\n\nA bientôt à la découverte de Supernovae";
+            String contenu = "Bonjour Mme/Mr " + user.getUsername() + " ! \n\n"
+                    + "Votre inscription sur le site de découverte de supernovae est presque terminé !"
+                    + "\nVous devez valider votre compte en cliquant sur le lien ci-dessous : "
+                    + "http://localhost:8084/discovery/reqMailConfirme.jsp?pseudo=" + user.getPseudo() + "&key=" + confirm
+                    + "\nVotre pseudo est " + user.getPseudo()
+                    + "\nVotre mot de passe est " + password
+                    + "\n\nA bientôt à la découverte de Supernovae :)";
             String to = user.getEmail();
             boolean ok = SmtpSend.sendMessage("Demande d'inscription sur snDiscovery", contenu, to);  
             if (ok) {
-                request.getRequestDispatcher("msgCompte.jsp?msg=Vous etes inscrit. Merci.").forward(request, response);
+                request.getRequestDispatcher("msgCompte.jsp?msg=Vous etes inscrit. N'oubliez pas de valider votre e-mail ! Merci.").forward(request, response);
             }
             else {
                 request.getRequestDispatcher("msgCompte.jsp?msg=Problème d'inscription").forward(request, response);

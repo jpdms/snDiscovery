@@ -32,19 +32,23 @@
             else if (action.equals("reqLogin")) {
                 request.getRequestDispatcher("WEB-INF/reqLogin.jsp").forward(request, response);
             }
-            // pour l'instant accessibles par les non identifiés !!!
-            else if (action.equals("contact")) {
-                request.getRequestDispatcher("WEB-INF/contact.jsp").forward(request, response);
-            } 
-            // pour l'instant accessibles par les non identifiés !!!
-            else if (action.equals("reqContact")) {
-                request.getRequestDispatcher("WEB-INF/reqContact.jsp").forward(request, response);
-            } 
             else if (action.equals("inscription")) {
                 request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
             }
             else if (action.equals("reqInscription")) {
                 request.getRequestDispatcher("WEB-INF/reqInscription.jsp").forward(request, response);
+            }
+            else if (action.equals("MotDePassePerdu")) {
+                request.getRequestDispatcher("WEB-INF/motDePassePerdu.jsp").forward(request, response);
+            }
+            else if (action.equals("reqMotDePassePerdu")) {
+                request.getRequestDispatcher("WEB-INF/reqMdpPerdu.jsp").forward(request, response);
+            }
+            else if (action.equals("PseudoPerdu")) {
+                request.getRequestDispatcher("WEB-INF/pseudoPerdu.jsp").forward(request, response);
+            }
+            else if (action.equals("reqPseudoPerdu")) {
+                request.getRequestDispatcher("WEB-INF/reqPseudoPerdu.jsp").forward(request, response);
             }
             else if (action.equals("ajax_pseudo")) {
                 request.getRequestDispatcher("WEB-INF/ajax_pseudo.jsp").forward(request, response);
@@ -69,11 +73,9 @@
             else if (action.equals("infoUser")) {
                 request.getRequestDispatcher("WEB-INF/infoUser.jsp").forward(request, response);
             }
-            // pour l'instant accessibles par les non identifiés !!!
             else if (action.equals("contact")) {
                 request.getRequestDispatcher("WEB-INF/contact.jsp").forward(request, response);
             } 
-            // pour l'instant accessibles par les non identifiés !!!
             else if (action.equals("reqContact")) {
                 request.getRequestDispatcher("WEB-INF/reqContact.jsp").forward(request, response);
             } 

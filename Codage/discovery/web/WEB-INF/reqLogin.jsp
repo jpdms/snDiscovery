@@ -28,7 +28,10 @@
             if (user.isBlocked()) {
                 request.getRequestDispatcher("login.jsp?message=bloque").forward(request, response);
             }
-            else {
+            else if(!user.getMailConfirme().equals("ok")){
+                request.getRequestDispatcher("login.jsp?message=mailconfirme").forward(request, response);
+            }
+            else{
                 // création de la session user
                 DiscoSession demoSession = new DiscoSession(con, user);
                 session.setAttribute("maSession", demoSession);

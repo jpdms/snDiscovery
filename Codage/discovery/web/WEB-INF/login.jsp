@@ -76,6 +76,10 @@
                         out.print("Votre compte est bloqué.\n"
                                 + "Contactez l'administrateur");
                     }
+                    else if (message.equalsIgnoreCase("mailconfirme")) {
+                        out.print("Votre mail n'est pas encore confirmé.\n"
+                                + "<br/>" + "Vérifier votre boite mail !");
+                    }
                     else if (message.equalsIgnoreCase("pseudoPerduEMailInconnu")) {
                         out.print("Votre mail n'est pas connu.");
                     }
@@ -106,10 +110,14 @@
         </form>
         <br/><br/>
         <div>
-            <a href="discovery.jsp?action=contact" data-theme="a" 
-                    class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-                Contacter l'administrateur !
-            </a>
+        <a href="discovery.jsp?action=MotDePassePerdu" data-theme="a" 
+                class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+            J'ai oublier mon mot de passe !
+        </a><br/>
+        <a href="discovery.jsp?action=PseudoPerdu" data-theme="a" 
+                class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+            J'ai oublier mon pseudo !
+        </a>
         </div><br/>
         <div>
             <a href="tuto1.jsp" data-theme="a"

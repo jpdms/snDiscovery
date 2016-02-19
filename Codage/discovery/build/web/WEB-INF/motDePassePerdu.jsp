@@ -1,8 +1,3 @@
-<%-- 
-    Document   : site
-    Created on : 05 Mai 2014, 16:54:26
-    Author     : 
---%>
 <%@page import="com.metier.DiscoSession"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -16,7 +11,7 @@
 <body>
 <div class="page" data-role="page" id="infoPopUpMotDePassePerdu" >
     <div class="header" data-role="header" data-id="main-header" data-theme="b"
-                                  data-position="fixed" data-fullscreen="true">
+                                  data-tap-toggle="false" data-position="fixed" data-fullscreen="true">
         <h1>Mot de Passe Perdu</h1>
         <%@include file="../includes/user.jspf" %>
     </div>
@@ -58,11 +53,22 @@
         }
     </script>
     
-    <div role="main" class="ui-content">
-        <div class="centrer">Mot de Passe Perdu</div><br/><br/><br/>
+    <div role="main" class="ui-content"><br/><br/>
         <form id="formMotDePassePerdu" method="post" onsubmit="infoPopUpMotDePassePerdu();" action="discovery.jsp">
-            <br/><br/>Nous allons vous envoyer un nouveau mot de passe.<br/>
-                      Que vous pourrez changer par la suite.<br/><br/><br/>
+            <br/><br/>Nous allons vous envoyer un nouveau mot de passe généré par notre serveur.<br/>
+            <br/>Il va ressembler par exemple a ça : 
+            <% 
+                String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+                String pass = "";
+                for(int x=0;x<8;x++)
+                {
+                   int i = (int)Math.floor(Math.random() * chars.length());
+                   pass += chars.charAt(i);
+                }
+            %>
+            <strong><%= pass %></strong>
+            <br/><br />
+                      Nous vous invitons ensuite a le changer le plus rapidement possible.<br/><br/><br/>
             <div data-role="fieldcontain">
                 <label for="motDePassePerduPseudo" data-theme="d">Votre pseudo : </label>
                 <input type="text" name="motDePassePerduPseudo" id="motDePassePerduPseudo"
@@ -83,7 +89,7 @@
          class="ui-corner-all" data-corners="true" data-position-to="window" data-dismissible="false">
         <div class="mesPopups" align="center">
             <br/>
-            <h3 id="popupTextSendMotDePassePerdu">Attendez, je transmets votre adresse mail</h3>
+            <h3 id="popupTextSendMotDePassePerdu">Attendez, je transmets votre demande...</h3>
             <div class="progressBar"><div></div></div>
             <br/>
         </div>

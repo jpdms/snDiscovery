@@ -15,8 +15,7 @@
 
 <body>
 <div class="page" data-role="page" id="actuPage">
-    <div class="header" data-role="header" data-id="main-header" data-theme="b"
-                                data-position="fixed" data-fullscreen="true">
+    <%@include file="includes/div_header.jspf" %>
         <h1>Actualités</h1>
         <%@include file="includes/user.jspf" %>
     </div>

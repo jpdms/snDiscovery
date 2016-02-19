@@ -8,6 +8,7 @@ public class User {
     private String    username;
     private String    email;            // son mail (unique)
     private String    password;         
+    private String    mailconfirme;
     private int       grade;            // son grade de 1 à 5
     private boolean   blocked;          // si on l'a interdit d'accès
     private Timestamp registerDate;     // la date de son inscription
@@ -22,6 +23,7 @@ public class User {
      * @param username
      * @param email
      * @param password
+     * @param mailconfirme
      * @return 
      * @ return  un user si le pseudo est unique sinon null
      * @throws Exception    impossible d'accéder à la ConnexionMySQL
@@ -29,16 +31,17 @@ public class User {
      * 
      */
     static public User create(Connection con, String pseudo, String username, String email, 
-                                          String password)  throws Exception {
-        User user = new User(pseudo, username, email, password);
+                                          String password, String mailconfirme)  throws Exception {
+        User user = new User(pseudo, username, email, password, mailconfirme);
         
         String queryString =
-         "insert into user (`pseudo`, `username`, `email`, `password`, `grade`,"
+         "insert into user (`pseudo`, `username`, `email`, `password`,`mailconfirme` , `grade`,"
           + " `blocked`, `registerDate`, `lastVisitDate`, `nbCandidates`, `nbConnexions`) values ("
                 + Utils.toString(pseudo) + ", " 
                 + Utils.toString(username) + ", " 
                 + Utils.toString(email) + ", " 
                 + Utils.toString(password) + ", " 
+                + Utils.toString(mailconfirme) + ", "
                 + Utils.toString(user.getGrade()) + ", " 
                 + Utils.toString(user.isBlocked()) + ", " 
                 + Utils.toString(user.getRegisterDate()) + ", " 
@@ -62,6 +65,7 @@ public class User {
                 + " `username` =" + Utils.toString(username) + "," 
                 + " `email` =" + Utils.toString(email) + "," 
                 + " `password` =" + Utils.toString(password) + "," 
+                + " `mailconfirme` =" + Utils.toString(mailconfirme) + "," 
                 + " `grade` =" + Utils.toString(grade) + "," 
                 + " `blocked` =" + Utils.toString(blocked) + ","
                 + " `registerDate` =" + Utils.toString(registerDate) + "," 
@@ -105,13 +109,14 @@ public class User {
             String    lUsername = lResult.getString("username");
             String    lEmail = lResult.getString("email");
             String    lPassword = lResult.getString("password");
+            String    lMailConfirme = lResult.getString("mailconfirme");
             int       lGrade = lResult.getInt("grade");
             boolean   lBlocked = lResult.getBoolean("blocked");
             Timestamp lRegisterDate = lResult.getTimestamp("registerDate");
             Timestamp lLastVisitDate = lResult.getTimestamp("lastVisitDate");
             int       lNbCandidates = lResult.getInt("nbCandidates");
             int       lNbConnexions = lResult.getInt("nbConnexions");
-            User      user = new User(lPseudo,lUsername,lEmail,lPassword,lGrade,
+            User      user = new User(lPseudo,lUsername,lEmail,lPassword,lMailConfirme,lGrade,
                       lBlocked,lRegisterDate,lLastVisitDate,lNbCandidates,
                       lNbConnexions);
             return user;
@@ -220,13 +225,14 @@ public class User {
     /**
      * Cree et initialise completement User
      */
-    private User(String pseudo, String username, String email, String password,
+    private User(String pseudo, String username, String email, String password, String mailconfirme,
             int grade, boolean blocked, Timestamp registerDate, Timestamp lastVisitDate,
             int nbCandidates, int nbConnexions) {
         this.pseudo = pseudo;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.mailconfirme = mailconfirme;
         this.grade = grade;
         this.blocked = false;
         this.registerDate = (Timestamp)registerDate.clone();
@@ -238,13 +244,14 @@ public class User {
     /**
      * Cree un nouvel objet user
      */
-    private User(String pseudo, String username, String email, String password) {
+    private User(String pseudo, String username, String email, String password, String mailconfirme) {
         Timestamp currentTimestamp = 
             new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
         this.pseudo = pseudo;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.mailconfirme = mailconfirme;
         this.grade = 1;
         this.blocked = false;
         this.registerDate = currentTimestamp;
@@ -281,7 +288,14 @@ public class User {
     public void setPassword(String password) throws Exception {
         this.password = password;
     }
+    
+    public String getMailConfirme() {
+        return mailconfirme;
+    }
 
+    public void setMailConfirme(String mailconfirme) throws Exception {
+        this.mailconfirme = mailconfirme;
+    }
     public int getGrade() {
         return grade;
     }
@@ -352,6 +366,7 @@ public class User {
                 " username = " + Utils.toString(username) +
                 " email = " + Utils.toString(email) +
                 " password = " + Utils.toString(password) + 
+                " mailconfirme = " + Utils.toString(mailconfirme) + 
                 " grade = " + Utils.toString(grade) + 
                 " blocked = " + Utils.toString(blocked) + 
                 " registerDate = " + Utils.toString(registerDate) +
