@@ -17,8 +17,25 @@
     <%@include file="includes/div_header.jspf" %>
         <h1>Accueil</h1>
         <%@include file="includes/user.jspf" %>
+        <%
+           if(user != null){
+            if(maSession.isModeExpert()){
+                maSession.setModeExpert(false);
+                %>
+                <%
+           }}
+        %>
     </div>
-    
+        <%
+        if(maSession.getCssReload()){
+            maSession.setCssReload(false);
+        %>
+                    <script>
+                        window.location.reload();
+                    </script>
+        <%
+        }
+        %>            
     <div role="main" class="ui-content">
         <br/><br/>
         <h4>Cette application de science participative (crowdsourcing science) va  

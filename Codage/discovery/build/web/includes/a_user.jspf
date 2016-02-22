@@ -1,0 +1,13 @@
+<center><div data-theme="b">
+    <%
+        com.persistence.User user = null;
+       
+        if (maSession != null) {
+            user = maSession.getUser();
+            out.print(" " + user.getPseudo());
+            for (int nb = 1; nb <= user.getGrade(); nb++) {
+                out.print(" <img src='images/star.gif'>");
+            }
+        }
+    %>
+</div></center>

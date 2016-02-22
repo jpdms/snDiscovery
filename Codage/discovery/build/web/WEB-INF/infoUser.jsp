@@ -25,6 +25,28 @@
     <div role="main" id="mainInfoUser" class="ui-content">
         <br/><br/>
         <br/>
+                <div>
+            <%
+                if(maSession.getCssReload()){
+                    maSession.setCssReload(false);
+                    %>
+                    <script>
+                        window.location.reload();
+                    </script>
+                <%
+                }
+                String message = request.getParameter("message");
+                if (message != null) {
+                    if (message.equalsIgnoreCase("pbAdmin")) {
+                        out.print("Vous ne pouvez pas accéder au mode administrateur !");
+                    }
+                    if (message.equalsIgnoreCase("pbAdminMode")) {
+                        out.print("Vous n'êtes pas en mode administrateur ! Seules les personnes en mode administrateur peuvent accéder a cette page.");
+                    }
+                }
+            %>
+        </div>
+        <br/>
         <%
             maSession = (DiscoSession)session.getAttribute("maSession");
             user = maSession.getUser();
@@ -49,6 +71,16 @@
           class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Contacter l'administrateur !
         </a><br/>
+        <%
+        if(user.getGrade()==5){
+        %>
+                <a href="discovery.jsp?action=reqAdmin"
+                       class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                    Passer en mode administrateur !
+                </a><br/><br/>
+        <% 
+        }
+        %>
         <a href="discovery.jsp?action=deconnexion"
                class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Déconnexion

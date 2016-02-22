@@ -56,11 +56,23 @@
             else if (action.equals("ajax_motDePasse")) {
                 request.getRequestDispatcher("WEB-INF/ajax_motDePasse.jsp").forward(request, response);
             }
+            else if (action.equals("pbAdminMode")) {
+                request.getRequestDispatcher("WEB-INF/login.jsp?message=pbAdminMode").forward(request, response);
+            }
             else { 
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         }
         // user connecté
+        else if(maSession.isModeExpert()){
+            com.persistence.User user = maSession.getUser();
+            if (action.equals("reqNoAdmin")) {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+            else {
+                request.getRequestDispatcher("a_index.jsp").forward(request, response);
+            }
+        }
         else {
             com.persistence.User user = maSession.getUser();
             // Dmd de changement de profil
@@ -79,6 +91,13 @@
             else if (action.equals("reqContact")) {
                 request.getRequestDispatcher("WEB-INF/reqContact.jsp").forward(request, response);
             } 
+            else if (action.equals("reqAdmin")) {
+                maSession.setModeExpert(true);
+                request.getRequestDispatcher("a_index.jsp").forward(request, response);
+            }
+            else if (action.equals("pbAdminMode")) {
+                request.getRequestDispatcher("WEB-INF/infoUser.jsp?message=pbAdminMode").forward(request, response);
+            }
             else if (action.equals("deconnexion")) { 
                 session.invalidate();   // fermeture de la session en cours
                 request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);

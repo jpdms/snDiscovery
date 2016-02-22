@@ -14,6 +14,7 @@ public class DiscoSession {
     private User user;
     private Timestamp lastVisitDate;
     private boolean modeExpert;
+    private boolean cssreload;
     
     // empèche l'instanciation publique par défaut
     private DiscoSession() throws Exception { }
@@ -37,6 +38,7 @@ public class DiscoSession {
             // svgd ds la BD
             user.save(con);
             modeExpert = false;
+            cssreload = false;
         } catch (Exception ex) { }
     }
 
@@ -51,9 +53,16 @@ public class DiscoSession {
     public boolean isModeExpert() {
         return modeExpert;
     }
+    public boolean getCssReload() {
+        return cssreload;
+    }
     
     public void setModeExpert(boolean mode) {
         modeExpert = mode;
+    }
+    
+    public void setCssReload(boolean mode){
+        cssreload = mode; 
     }
 }
 
