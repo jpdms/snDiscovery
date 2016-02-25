@@ -27,6 +27,7 @@
         %>
     </div>
         <%
+        if(user != null){
         if(maSession.getCssReload()){
             maSession.setCssReload(false);
         %>
@@ -34,7 +35,7 @@
                         window.location.reload();
                     </script>
         <%
-        }
+        }}
         %>            
     <div role="main" class="ui-content">
         <br/><br/>

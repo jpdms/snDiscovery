@@ -45,25 +45,23 @@
         <%
             user = maSession.getUser();
         %>
-        
-        <label id="pseudoInfoUser">Pseudo : <%= user.getPseudo() %></label>
-        <label id="nomInfoUser">Nom : <%= user.getUsername() %></label>
-        <label id="emailInfoUser">EMail : <%= user.getEmail() %></label>
-        <label id="gradeInfoUser">Grade : <%= user.getGrade() %></label>
+        <h3>Informations sur votre compte :</h3>
+        <div style="margin-left:10%;">
+        <label id="pseudoInfoUser"><strong>Pseudo</strong> : <%= user.getPseudo() %></label>
+        <label id="nomInfoUser"><strong>Nom</strong> : <%= user.getUsername() %></label>
+        <label id="emailInfoUser"><strong>EMail</strong> : <%= user.getEmail() %></label>
+        <label id="gradeInfoUser"><strong>Grade</strong> : <%= user.getGrade() %></label>
         <br/>
-        <label id="registerDateInfoUser">Première Visite : <%= Utils.formatStampDate(user.getRegisterDate().toString()) %></label>
-        <label id="lastVisiteInfoUser">Dernière Visite : <%= Utils.formatStampDate(maSession.getLastVisitDate().toString()) %></label>
+        <label id="registerDateInfoUser"><strong>Première Visite</strong> : <%= Utils.formatStampDate(user.getRegisterDate().toString()) %></label>
+        <label id="lastVisiteInfoUser"><strong>Dernière Visite</strong> : <%= Utils.formatStampDate(maSession.getLastVisitDate().toString()) %></label>
         <br/>
-        <label id="nbConnexionsInfoUser">Nombre total de connexions : <%= user.getNbConnexions() %></label>
-        <label id="nbCandidatesInfoUser">Demande(s) de candidates : <%= user.getNbCandidates() %></label>
+        <label id="nbConnexionsInfoUser"><strong>Nombre total de connexions</strong> : <%= user.getNbConnexions() %></label>
+        <label id="nbCandidatesInfoUser"><strong>Demande(s) de candidates</strong> : <%= user.getNbCandidates() %></label>
         <br/>
+        </div>
         <a href="discovery.jsp?action=changerProfil"
                class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Modifier
-        </a><br/>
-        <a href="discovery.jsp?action=contact" data-theme="a" 
-          class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-            Blacklister un utilisateur
         </a><br/>
         <%
         if(user.getGrade()==5){
