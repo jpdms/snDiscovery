@@ -152,6 +152,10 @@
             </div>
             <br/>
             <label for="inscriptionAction" data-theme="a"></label>
+            <input name="path" type="hidden" id="path" value="" />
+            <script>
+            document.getElementById('path').value = window.location.host;
+            </script>
             <input name="action" id="inscriptionAction" type="hidden" value="reqInscription"/>
             <button type="submit" id="submitOK" name="submitOK" data-theme="a">OK</button>
         </form>

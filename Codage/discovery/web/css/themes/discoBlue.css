@@ -388,7 +388,7 @@ html .ui-body-b .ui-bar-inherit,
 html body .ui-group-theme-b .ui-bar-inherit {
 	background-color: #1b2831 /*{b-bar-background-color}*/;
 	border-color: #253844 /*{b-bar-border}*/;
-	color: #dee0e8 /*{b-bar-color}*/;
+	color: #FFFFFF /*{b-bar-color}*/;
 	text-shadow: 0 /*{b-bar-shadow-x}*/ 0px /*{b-bar-shadow-y}*/ 0 /*{b-bar-shadow-radius}*/ #dee0e8 /*{b-bar-shadow-color}*/;
 	font-weight: bold;
 }

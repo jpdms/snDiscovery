@@ -19,6 +19,7 @@
 http://themeroller.jquerymobile.com
 --%>
 <link rel="stylesheet" href="css/themes/discoBlue.css" />
+<link rel="stylesheet" href="css/themes/themeBlue.min.css" />
 <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
 <link rel="stylesheet" href="css/disco1.css">
 

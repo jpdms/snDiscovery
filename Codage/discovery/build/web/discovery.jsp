@@ -66,12 +66,7 @@
         // user connecté
         else if(maSession.isModeExpert()){
             com.persistence.User user = maSession.getUser();
-            if (action.equals("reqNoAdmin")) {
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-            else {
-                request.getRequestDispatcher("a_index.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("a_index.jsp").forward(request, response);
         }
         else {
             com.persistence.User user = maSession.getUser();

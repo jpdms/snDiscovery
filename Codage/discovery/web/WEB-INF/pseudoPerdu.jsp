@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Mot de Passe Perdu</title>
+    <title>Pseudo Perdu</title>
     <%@include file="../includes/head.jspf" %>
 </head>
 

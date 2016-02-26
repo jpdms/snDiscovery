@@ -27,7 +27,7 @@
         <%
         }
         if(!maSession.isModeExpert()){
-            request.getRequestDispatcher("discovery.jsp?action=pbAdminMode").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     %>
     </div>

@@ -18,24 +18,24 @@
         <h1>Accueil</h1>
         <%@include file="includes/user.jspf" %>
         <%
-           if(user != null){
+        if(user != null){
             if(maSession.isModeExpert()){
-                maSession.setModeExpert(false);
-                %>
-                <%
-           }}
+                 maSession.setModeExpert(false);
+            }
+        }
         %>
     </div>
         <%
         if(user != null){
-        if(maSession.getCssReload()){
-            maSession.setCssReload(false);
-        %>
+            if(maSession.getCssReload()){
+                maSession.setCssReload(false);
+                %>
                     <script>
                         window.location.reload();
                     </script>
-        <%
-        }}
+                <%
+            }
+        }
         %>            
     <div role="main" class="ui-content">
         <br/><br/>

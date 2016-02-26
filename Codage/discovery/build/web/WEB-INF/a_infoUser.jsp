@@ -66,7 +66,7 @@
         <%
         if(user.getGrade()==5){
         %>
-                <a href="discovery.jsp?action=reqNoAdmin"
+                <a href="index.jsp"
                        class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Sortir du mode administrateur !
                 </a><br/><br/>

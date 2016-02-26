@@ -66,25 +66,25 @@
         <a href="discovery.jsp?action=changerProfil"
                class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Modifier
-        </a><br/>
+        </a>
         <a href="discovery.jsp?action=contact" data-theme="a" 
           class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Contacter l'administrateur !
-        </a><br/>
+        </a>
         <%
         if(user.getGrade()==5){
         %>
                 <a href="discovery.jsp?action=reqAdmin"
                        class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Passer en mode administrateur !
-                </a><br/><br/>
+                </a>
         <% 
         }
         %>
         <a href="discovery.jsp?action=deconnexion"
                class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Déconnexion
-        </a><br/><br/>
+        </a>
     </div>
 
     <%@include file="../includes/footer.jspf" %>

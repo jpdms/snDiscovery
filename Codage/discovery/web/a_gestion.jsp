@@ -34,11 +34,12 @@
         </div>
         <br/>
         <div>
-            <div class="ui-block-a" style="margin-left:25%;">
                 <input type="search" name="search" placeholder="Pseudo.." id="search"><br/>
-            </div>
-            <center><div><input type="submit" data-inline="true" value="Rechercher"></div></center>
-        </div><br/>
+            <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                Rechercher
+            </a>
+        </div>
+               
         <h3>Informations sur le compte :</h3>
         <div style="margin-left:10%;">
         <%
@@ -63,7 +64,7 @@
                 <a href="#"
                        class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Modifier le grade de cette utilisateur.
-                </a><br/><br/>
+                </a>
     <%@include file="../includes/a_footer.jspf" %>
 </div>
 </body>
