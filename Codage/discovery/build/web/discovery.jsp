@@ -88,7 +88,7 @@
             } 
             else if (action.equals("reqAdmin")) {
                 maSession.setModeExpert(true);
-                request.getRequestDispatcher("a_index.jsp").forward(request, response);
+                request.getRequestDispatcher("a_compte.jsp").forward(request, response);
             }
             else if (action.equals("pbAdminMode")) {
                 request.getRequestDispatcher("WEB-INF/infoUser.jsp?message=pbAdminMode").forward(request, response);

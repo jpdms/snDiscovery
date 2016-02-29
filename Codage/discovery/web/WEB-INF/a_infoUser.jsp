@@ -20,7 +20,7 @@
     <%@include file="../includes/div_header.jspf" %>
         <h1>Compte</h1>
         <%@include file="../includes/a_user.jspf" %>
-            <%
+        <%
         if(!maSession.getCssReload()){
             maSession.setCssReload(true);
             %>
