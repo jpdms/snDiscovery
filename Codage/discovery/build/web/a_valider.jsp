@@ -13,7 +13,7 @@
 <html lang="fr">
 <head>
     <title>Images</title>
-    <%@include file="includes/head.jspf" %>
+    <%@include file="includes/a_head.jspf" %>
 </head>
 
 <body>
@@ -63,13 +63,7 @@
     
     <%@include file="includes/div_header.jspf" %>
         <h1>Découvrir</h1>
-        <a href="#panelCalendar" 
-           class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-calendar ui-btn-left">
-        </a>
-        <a href="#panelGalaxies" 
-           class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-navigation ui-btn-right">
-        </a>
-        <%@include file="includes/user.jspf" %>
+        <%@include file="includes/a_user.jspf" %>
     </div>
     
     <div role="main" class="ui-content ">
@@ -123,24 +117,38 @@
                 class="ui-btn ui-corner-all ui-shadow">Blink</a>
             </div>
         </div>
-        
-        <div class="ui-grid-b">
-            <div class="ui-block-a"></div>
-            <div class="ui-block-b">
-                <%
-                    if (user != null) {
-                        out.println("<a href='#popupCandidat' id='btnCandidat' "
-                                + "data-rel='popup' data-position-to='window' "
-                                + "class='ui-btn ui-corner-all ui-shadow' "
-                                + "data-transition='pop'>Disco</a>");
-                    }
-                %>
+         <div class="ui-grid-a">
+                <div class="ui-block-a" style="text-align:center;">Découverte par : User2
+                </div>            
+                <div class="ui-block-b" style="text-align:center;">Le : 29/02/2016 à 14:06</div>
             </div>
-            <div class="ui-block-c"></div>
-        </div>
+
+        <br><center>
+            <div class="gradeUser">
+                Grade actuel:
+                <img src="images/star.gif">
+                <img src="images/star.gif">
+                <img src="images/star.gif">
+            </div></center>
+
+            <br>
+            <div data-position="center">
+                <a href="#popupGrade" id="btnReference" data-rel="popup" data-position-to="window"
+                   data-role="button"  data-transition="pop" >Changer le grade</a>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">               
+                    <a data-position-to="window" data-role="button" 
+                       data-transition="pop" >Valider</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-position-to="window" data-role="button" 
+                       data-transition="pop" >Refuser</a>
+                </div>
+            </div>
     </div>
 
-    <%@include file="includes/footer.jspf" %>
+    <%@include file="includes/a_footer.jspf" %>
     
     <!-- panel de calendar -->
     <div id="panelCalendar" data-role="panel" data-position="left"  

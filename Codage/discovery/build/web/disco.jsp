@@ -99,12 +99,12 @@
         <div align="center">
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="top" 
+                    <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
                                     class="ui-state-disabled"
                                     data-role="button">Précédent</a>
                 </div>
                 <div class="ui-block-b">
-                    <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="top" 
+                    <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
                                 data-role="button">Suivant</a>
                 </div>
             </div>

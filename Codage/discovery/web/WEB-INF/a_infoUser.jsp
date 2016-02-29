@@ -20,6 +20,19 @@
     <%@include file="../includes/div_header.jspf" %>
         <h1>Compte</h1>
         <%@include file="../includes/a_user.jspf" %>
+            <%
+        if(!maSession.getCssReload()){
+            maSession.setCssReload(true);
+            %>
+            <script>
+                window.location.reload();
+            </script>
+        <%
+        }
+        if(!maSession.isModeExpert()){
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    %>
     </div>
     
     <div role="main" id="mainInfoUser" class="ui-content">
@@ -41,10 +54,10 @@
                 }
             %>
         </div>
-        <br/>
         <%
             user = maSession.getUser();
         %>
+        <h4>Bienvenue dans le mode administrateur.</h4>
         <h3>Informations sur votre compte :</h3>
         <div style="margin-left:10%;">
         <label id="pseudoInfoUser"><strong>Pseudo</strong> : <%= user.getPseudo() %></label>
