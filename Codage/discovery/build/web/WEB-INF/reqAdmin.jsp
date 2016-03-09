@@ -14,9 +14,10 @@
     DiscoSession maSession = (DiscoSession)session.getAttribute("maSession");
     User user = maSession.getUser();
     int grade = user.getGrade();
-    if (grade==5) {
+    if (user.getGrade()==5) {
             // création de la session admin
             maSession.setModeExpert(true);
-            request.getRequestDispatcher("a_index.jsp").forward(request, response);
+            request.getRequestDispatcher("a_compte.jsp").forward(request, response);
     }
+    else {request.getRequestDispatcher("../compte.jsp").forward(request, response);}
 %>

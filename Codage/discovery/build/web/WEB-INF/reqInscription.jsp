@@ -42,11 +42,10 @@
             <%
             // lui envoyer le mail de confirmation
             String contenu = "Bonjour Mme/Mr " + user.getUsername() + " ! \n\n"
-                    + "Votre inscription sur le site de découverte de supernovae est presque terminé !"
+                    + "Votre inscription sur le site de découverte de supernovae est presque terminée !"
                     + "\nVous devez valider votre compte en cliquant sur le lien ci-dessous : "
                     + "http://" + path + "/discovery/reqMailConfirme.jsp?pseudo=" + user.getPseudo() + "&key=" + confirm
                     + "\nVotre pseudo est " + user.getPseudo()
-                    + "\nVotre mot de passe est " + password
                     + "\n\nA bientôt à la découverte de Supernovae :)";
             String to = user.getEmail();
             boolean ok = SmtpSend.sendMessage("Demande d'inscription sur snDiscovery", contenu, to);  

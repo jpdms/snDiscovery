@@ -26,11 +26,11 @@
             request.getRequestDispatcher("mailConfirme.jsp?msg=Ce compte est maintenant confirmé !").forward(request, response); 
         }
         else{
-            request.getRequestDispatcher("mailConfirme.jsp?msg=La clé ne correspond pas à l'utilisateur, veuillez ressayer ou contacter l'administrateur.").forward(request, response); 
+            request.getRequestDispatcher("mailConfirme.jsp?msg=La confirmation a échoué, veuillez réessayer ou contacter l'administrateur.").forward(request, response); 
         }
     }
     else{
-         request.getRequestDispatcher("mailConfirme.jsp?msg=Ce compte est déjà confirmer").forward(request, response); 
+         request.getRequestDispatcher("mailConfirme.jsp?msg=Ce compte est déjà confirmé").forward(request, response); 
     }
     
 %>

@@ -37,7 +37,7 @@
                     + "Votre avez lancez une requête pour changer votre mot de passe."
                     + "\nVotre pseudo est " + u.getPseudo()
                     + "\nVotre nouveau mot de passe est : " + pass
-                    + " !\nN'oubliez pas de le changer !"
+                    + "\nN'oubliez pas de le changer !"
                     + "\nSi vous n'avez pas demander ce changement contactez un administrateur au plus vite !"
                     + "\n\nA bientôt à la découverte de Supernovae :)";
     // envoi du mail par gmail

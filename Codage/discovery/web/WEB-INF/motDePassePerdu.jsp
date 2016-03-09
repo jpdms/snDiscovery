@@ -55,19 +55,8 @@
     
     <div role="main" class="ui-content"><br/><br/>
         <form id="formMotDePassePerdu" method="post" onsubmit="infoPopUpMotDePassePerdu();" action="discovery.jsp">
-            <br/><br/>Nous allons vous envoyer un nouveau mot de passe généré par notre serveur.<br/>
-            <br/>Il va ressembler par exemple a ça : 
-            <% 
-                String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-                String pass = "";
-                for(int x=0;x<8;x++)
-                {
-                   int i = (int)Math.floor(Math.random() * chars.length());
-                   pass += chars.charAt(i);
-                }
-            %>
-            <strong><%= pass %></strong>
-            <br/><br />
+            <br/><br/>Nous allons vous envoyer un nouveau mot de passe.<br/>
+            <br/>
                       Nous vous invitons ensuite a le changer le plus rapidement possible.<br/><br/><br/>
             <div data-role="fieldcontain">
                 <label for="motDePassePerduPseudo" data-theme="d">Votre pseudo : </label>

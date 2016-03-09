@@ -27,10 +27,10 @@
     String pseudo = User.getPseudoByMail(con, mail);
     if(pseudo != null){
     User u = User.getByPseudo(con, pseudo);
-    String contenu = "Bonjour Mme/Mr " + u.getUsername() + " ! \n\n"
+    String contenu = "Bonjour " + u.getUsername() + ".\n\n"
                     + "Vous avez lancé une requête pour retrouver votre pseudo."
                     + "\nVotre pseudo est " + u.getPseudo()
-                    + " !\nN'oubliez pas de le noter quelque part !"
+                    + "\nN'oubliez pas de le noter quelque part."
                     + "\n\nÀ bientôt à la découverte de Supernovae :)";
     // envoi du mail par gmail
     boolean ok = SmtpSend.sendMessage("Votre pseudo", contenu, mail);
