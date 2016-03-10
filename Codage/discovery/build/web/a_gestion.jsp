@@ -18,7 +18,7 @@
 <body>
 <div class="page" data-role="page" id="infoUserPage">
     <%@include file="includes/div_header.jspf" %>
-        <h1>Compte</h1>
+        <h1>Gestion</h1>
         <%@include file="includes/a_user.jspf" %>
     </div>
     

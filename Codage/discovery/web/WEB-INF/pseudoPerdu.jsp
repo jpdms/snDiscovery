@@ -17,25 +17,23 @@
     </div>
     
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-    <script>
-        $.validator.addMethod("nomOnly", 
-            function(value, element) {
-                return !/[^a-zA-Z0-9àáâãäåçèéêëìíîïòóôõöùúûüýÿ_. ]/.test(value);
-            }, "Que des caractères alphanumériques accentués."
+    <script type="text/javascript">
+        $.validator.addMethod("textOnly", 
+            function(value, element) {  // un car n'est pas alphanumérique
+                return !/[^a-zA-Z0-9_.-@]/.test(value);
+            }, "Que des caractères alphanumériques."
         );
-
+        
         $(document).ready(function () {
             $('#formPseudoPerdu').validate({
             rules: {
-                PseudoPerduNom: {
-                    minlength: 4, maxlength: 20, nomOnly: true, required: true
+                MailPseudoPerdu: {
+                    textOnly: true, required: true
                 }
             },
             messages: {
-                PseudoPerduNom: {
-                    minlength: "Au moins 4 caractères",
-                    maxlength: "Au max 20 caractères",
-                    required:  "Entrez votre pseudo."
+                MailPseudoPerdu: {
+                    required:  "Entrez votre adresse e-mail."
                 }
             },
             errorPlacement: function (error, element) {
@@ -43,14 +41,6 @@
             }
         });
         });
-
-        function infoPopUpPseudoPerdu() {
-            if ($('#formPseudoPerdu').valid()) {
-                setTimeout(function () {
-                    $("#popupSendPseudoPerdu").popup("open");
-                }, 100);
-            }
-        }
     </script>
     
     <div role="main" class="ui-content"><br/><br/>
@@ -58,7 +48,7 @@
             <br/><br/>Nous allons vous envoyer votre pseudo par mail.<br/>
             <div data-role="fieldcontain">
                 <label for="PseudoPerdumail" data-theme="d">Votre mail : </label>
-                <input type="email" name="MailPseudoPerdu" id="motDePassePerduPseudo"
+                <input type="email" name="MailPseudoPerdu" id="MailPseudoPerdu"
                                     data-theme="d" placeholder="A compléter"/>  
                 <span></span>
             </div>

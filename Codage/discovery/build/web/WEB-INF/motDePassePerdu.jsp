@@ -23,26 +23,26 @@
                 return !/[^a-zA-Z0-9àáâãäåçèéêëìíîïòóôõöùúûüýÿ_. ]/.test(value);
             }, "Que des caractères alphanumériques accentués."
         );
-
-        $(document).ready(function () {
-            $('#formMotDePassePerdu').validate({
-            rules: {
-                MotDePassePerduNom: {
-                    minlength: 4, maxlength: 20, nomOnly: true, required: true
-                }
-            },
-            messages: {
-                MotDePassePerduNom: {
-                    minlength: "Au moins 4 caractères",
-                    maxlength: "Au max 20 caractères",
-                    required:  "Entrez votre pseudo."
-                }
-            },
-            errorPlacement: function (error, element) {
-                error.appendTo(element.parent().next());
-            }
-        });
-        });
+        
+		$(document).ready(function () {
+	        $('#formMotDePassePerdu').validate({
+	            rules: {
+	                MotDePassePerduPseudo: {
+	                    minlength: 4, maxlength: 20, nomOnly: true, required: true
+	                }
+	            },
+	            messages: {
+	                MotDePassePerduPseudo: {
+	                    minlength: "Au moins 4 caractères",
+	                    maxlength: "Au max 20 caractères",
+	                    required:  "Entrez votre pseudo."
+	                }
+	            },
+	            errorPlacement: function (error, element) {
+	                error.appendTo(element.parent().next());
+	            }
+	        });
+		});
 
         function infoPopUpMotDePassePerdu() {
             if ($('#formMotDePassePerdu').valid()) {

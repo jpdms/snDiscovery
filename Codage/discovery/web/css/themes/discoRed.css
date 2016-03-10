@@ -124,14 +124,14 @@ label.ui-btn {
 /* Shadow
 -----------------------------------------------------------------------------------------------------------*/
 .ui-shadow {
-	-webkit-box-shadow: 0 1px 0px /*{global-box-shadow-size}*/ rgba(26,38,45,0.4) /*{global-box-shadow-color}*/;
-	-moz-box-shadow: 0 1px 0px /*{global-box-shadow-size}*/ rgba(26,38,45,0.4) /*{global-box-shadow-color}*/;
-	box-shadow: 0 1px 0px /*{global-box-shadow-size}*/ rgba(26,38,45,0.4) /*{global-box-shadow-color}*/;
+	-webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
 }
 .ui-shadow-inset {
-	-webkit-box-shadow: inset 0 1px 0px /*{global-box-shadow-size}*/ rgba(26,38,45,0.4) /*{global-box-shadow-color}*/;
-	-moz-box-shadow: inset 0 1px 0px /*{global-box-shadow-size}*/ rgba(26,38,45,0.4) /*{global-box-shadow-color}*/;
-	box-shadow: inset 0 1px 0px /*{global-box-shadow-size}*/ rgba(26,38,45,0.4) /*{global-box-shadow-color}*/;
+	-webkit-box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	-moz-box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
 }
 .ui-overlay-shadow {
 	-webkit-box-shadow: 0 0 12px 		rgba(0,0,0,.6);
@@ -250,7 +250,7 @@ html .ui-bar-a .ui-body-inherit,
 html .ui-body-a .ui-body-inherit,
 html body .ui-group-theme-a .ui-body-inherit,
 html .ui-panel-page-container-a {
-	background-color: #f3f3f7 /*{a-body-background-color}*/;
+	background-color: #ffffff /*{a-body-background-color}*/;
 	border-color: #1b1f22 /*{a-body-border}*/;
 	color: #181a1b /*{a-body-color}*/;
 	text-shadow: 0 /*{a-body-shadow-x}*/ 0px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #181a1b /*{a-body-shadow-color}*/;
@@ -386,7 +386,7 @@ html head + body .ui-body-a.ui-focus {
 html .ui-bar-b .ui-bar-inherit,
 html .ui-body-b .ui-bar-inherit,
 html body .ui-group-theme-b .ui-bar-inherit {
-	background-color: #CA4454 /*{b-bar-background-color}*/;
+	background-color: #AD192B /*{b-bar-background-color}*/;
 	border-color: #253844 /*{b-bar-border}*/;
 	color: #FFFFFF /*{b-bar-color}*/;
 	text-shadow: 0 /*{b-bar-shadow-x}*/ 0px /*{b-bar-shadow-y}*/ 0 /*{b-bar-shadow-radius}*/ #dee0e8 /*{b-bar-shadow-color}*/;
@@ -400,7 +400,7 @@ html body .ui-group-theme-b .ui-bar-inherit {
 .ui-overlay-b,
 .ui-page-theme-b,
 .ui-page-theme-b .ui-panel-wrapper {
-	background-color: #061532 /*{b-page-background-color}*/;
+	background-color: #821111 /*{b-page-background-color}*/;
 	border-color: #061532 /*{b-page-border}*/;
 	color: #dee0e8 /*{b-page-color}*/;
 	text-shadow: 0 /*{b-page-shadow-x}*/ 0px /*{b-page-shadow-y}*/ 0 /*{b-page-shadow-radius}*/ #dee0e8 /*{b-page-shadow-color}*/;
@@ -459,7 +459,7 @@ html .ui-bar-b .ui-btn:visited,
 html .ui-body-b .ui-btn:visited,
 html body .ui-group-theme-b .ui-btn:visited,
 html head + body .ui-btn.ui-btn-b:visited {
-	background-color: #CA4454 /*{b-bup-background-color}*/;
+	background-color: #AD192B /*{b-bup-background-color}*/;
 	border-color: #000000 /*{b-bup-border}*/;
 	color: #f3f4f7 /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 0px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #f3f4f7 /*{b-bup-shadow-color}*/;

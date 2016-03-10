@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Titre de la page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+    <link rel="icon" href="../images/apple-touch-icon-57x57.png" />
+    <link rel="stylesheet" href="../js/jquery.mobile/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../css/themes/discoRed.css" />
+    <link rel="stylesheet" href="../css/themes/themeBlue.min.css" />
+    <link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../css/disco1.css">
+    <script type="text/javascript" src="../js/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div class="page" data-role="page" id="homePage">
+        <div class="header" data-role="header" data-id="main-header" data-tap-toggle="false" data-theme="b"
+                                data-position="fixed" data-fullscreen="true">
+        <h1>Valider</h1>
+        <center>
+            <div data-theme="b">
+                user 1 <img src='../images/star.gif'><img src='../images/star.gif'><img src='../images/star.gif'><img src='../images/star.gif'><img src='../images/star.gif'>
+            </div>
+        </center>
+    </div>        
+    <div role="main" class="ui-content">
+<br/><br/>
+        <div class="mesImages" align="center">
+            <br/>
+<a href="#popupZoomLeft" id="clicZoomLeft" data-rel="popup" aria-haspopup="true" aria-owns="popupZoomLeft" aria-expanded="false" class="ui-link">
+<img id="imgobs" alt="erreur:image absente" src="/jpeg/Tarot_Calern/20140319/IC3900.jpg"></a>
+<a href="#popupZoomRight" id="clicZoomRight" data-rel="popup" aria-haspopup="true" aria-owns="popupZoomRight" aria-expanded="false" class="ui-link">
+<img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/IC3900.jpg"></a>
+        </div>
+        <table class="infosTable">
+            <td class="texteCentre" id="dateImages">19/03/2014</td>
+            <td class="texteCentre" id="numImages" >(1/330)</td>
+            <td class="texteCentre" id="nomGalaxie">IC3900</td>
+        </table>
+        <div align="center">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
+                                    class="ui-state-disabled"
+                                    data-role="button">Précédent</a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
+                                data-role="button">Suivant</a>
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-b">
+            <div class="ui-block-a">
+                <a href="#" id="btnHisto" data-rel="popup" data-position-to="window" 
+                class="ui-btn ui-corner-all ui-shadow">Histo</a>
+            </div>
+            <div class="ui-block-b">
+                <a href="#" id="btnInfos" data-rel="popup" data-position-to="window" 
+                class="ui-btn ui-corner-all ui-shadow">Infos</a>
+            </div>
+            <div class="ui-block-c">
+                <a href="#" id="btnBlink" data-rel="popup" data-position-to="window" 
+                class="ui-btn ui-corner-all ui-shadow">Blink</a>
+            </div>
+        </div>
+         <div class="ui-grid-a">
+                <div class="ui-block-a" style="text-align:center;">Découverte par : User2
+                </div>            
+                <div class="ui-block-b" style="text-align:center;">Le : 29/02/2016 à 14:06</div>
+            </div>
+
+        <br><center>
+            <div class="gradeUser">
+                Grade actuel:
+                <img src="../images/star.gif">
+                <img src="../images/star.gif">
+                <img src="../images/star.gif">
+            </div></center>
+
+            <br>
+            <div data-position="center">
+                <a href="#" id="btnReference" data-rel="popup" data-position-to="window"
+                   data-role="button"  data-transition="pop" >Changer le grade</a>
+            </div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">               
+                    <a data-position-to="window" data-role="button" 
+                       data-transition="pop" >Valider</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-position-to="window" data-role="button" 
+                       data-transition="pop" >Refuser</a>
+                </div>
+            </div>
+    </div>
+    
+    <div class="footer" data-role="footer" data-theme="b" data-tap-toggle="false"
+            data-id="main-footer" data-position="fixed" data-fullscreen="true">
+    <div data-role="navbar" data-grid="d">
+        <ul>
+            <li><a href="#" id="navbarhome"  data-icon="home">Accueil</a></li>
+            <li><a href="#" id="navbardisco" data-icon="eye">Images</a></li>
+            <li><a href="#" id="navbartuto1" data-icon="info">Tutoriel</a></li>
+            <li><a href="#" id="navbarcompte" data-icon="user">Compte</a></li>
+            <li><a href="#" id="navbaractu"  data-icon="comment">Actu</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>

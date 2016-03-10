@@ -62,7 +62,7 @@
     </script>
     
     <%@include file="includes/div_header.jspf" %>
-        <h1>Découvrir</h1>
+        <h1>Valider</h1>
         <%@include file="includes/a_user.jspf" %>
     </div>
     
