@@ -24,6 +24,9 @@
     }
     // retourne par Ajax les infos du mail à envoyer
     String nom   = request.getParameter("motDePassePerduPseudo");
+    if(!User.isPseudoUsed(con, nom)){
+        request.getRequestDispatcher("msgCompte.jsp?msg=Le pseudo n'existe pas.").forward(request, response);
+    }
     User u = User.getByPseudo(con, nom);
     String email = u.getEmail();
     String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";

@@ -98,9 +98,11 @@ table {
 
 @media all and (orientation : landscape) {
     
-    .footer, .header {
+   /* 
+   .footer, .header {
         visibility:hidden;
     }
+    */
     
     .mesImages {
         width:  80%;

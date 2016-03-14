@@ -4,8 +4,8 @@
             data-id="main-footer" data-position="fixed" data-fullscreen="true">
     <div data-role="navbar" data-grid="d">
         <ul>
-            <li><a href="a_valider.jsp" id="navbarhome"  data-icon="search">Valider</a></li>
-            <li><a href="a_reference.jsp" id="navbardisco" data-icon="check">Référence</a></li>
+            <li><a href="a_reference.jsp" id="navbardisco" data-icon="camera">Référence</a></li>
+            <li><a href="a_valider.jsp" id="navbarhome"  data-icon="check">Valider</a></li>
             <li><a href="a_gestion.jsp" id="navbartuto1" data-icon="edit">Gestion</a></li>
             <li><a href="a_compte.jsp" id="navbarcompte" data-icon="user">Compte</a></li>
             <li><a href="a_actu.jsp" id="navbaractu"  data-icon="comment">Actu</a></li>

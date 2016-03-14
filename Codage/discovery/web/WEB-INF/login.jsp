@@ -115,11 +115,11 @@
         <div>
         <a href="discovery.jsp?action=MotDePassePerdu" data-theme="a" 
                 class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-            J'ai oublier mon mot de passe !
+            J'ai oublié mon mot de passe !
         </a><br/>
         <a href="discovery.jsp?action=PseudoPerdu" data-theme="a" 
                 class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-            J'ai oublier mon pseudo !
+            J'ai oublié mon pseudo !
         </a>
         </div><br/>
         <div>

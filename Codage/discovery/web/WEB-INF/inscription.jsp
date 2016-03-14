@@ -38,7 +38,7 @@
             $('#formInscription').validate({
             rules: {
                 inscriptionPseudo: {
-                    minlength: 4, maxlength: 20, nomOnly: true, required: true
+                    minlength: 4, maxlength: 20, required: true
                 },
                 inscriptionNom: {
                     minlength: 4, maxlength: 30, nomOnly: true, required: true

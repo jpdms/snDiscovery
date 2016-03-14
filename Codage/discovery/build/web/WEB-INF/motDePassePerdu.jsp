@@ -18,21 +18,21 @@
     
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script>
-        $.validator.addMethod("nomOnly", 
-            function(value, element) {
-                return !/[^a-zA-Z0-9àáâãäåçèéêëìíîïòóôõöùúûüýÿ_. ]/.test(value);
-            }, "Que des caractères alphanumériques accentués."
+        $.validator.addMethod("textOnly", 
+            function(value, element) {  // un car n'est pas alphanumérique
+                return !/[^a-zA-Z0-9]/.test(value);
+            }, "Que des caractères alphanumériques."
         );
         
 		$(document).ready(function () {
 	        $('#formMotDePassePerdu').validate({
 	            rules: {
-	                MotDePassePerduPseudo: {
-	                    minlength: 4, maxlength: 20, nomOnly: true, required: true
+	                motDePassePerduPseudo: {
+	                    minlength: 4, maxlength: 20, textOnly: true, required: true
 	                }
 	            },
 	            messages: {
-	                MotDePassePerduPseudo: {
+	                motDePassePerduPseudo: {
 	                    minlength: "Au moins 4 caractères",
 	                    maxlength: "Au max 20 caractères",
 	                    required:  "Entrez votre pseudo."

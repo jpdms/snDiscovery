@@ -59,6 +59,10 @@
         </div>
                 <a href="#"
                        class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                    Consulter l'historique.
+                </a>
+                <a href="#"
+                       class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Bloquer cette utilisateur.
                 </a>
                 <a href="#"

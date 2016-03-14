@@ -136,6 +136,10 @@
                 <a href="#popupGrade" id="btnReference" data-rel="popup" data-position-to="window"
                    data-role="button"  data-transition="pop" >Changer le grade</a>
             </div>
+            <div data-position="center">
+                <a href="#popupGrade" id="btnReference" data-rel="popup" data-position-to="window"
+                   data-role="button"  data-transition="pop" >Envoyer un mail</a>
+            </div>
             <div class="ui-grid-a">
                 <div class="ui-block-a">               
                     <a data-position-to="window" data-role="button" 

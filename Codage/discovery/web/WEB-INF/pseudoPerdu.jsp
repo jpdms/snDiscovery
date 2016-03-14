@@ -18,22 +18,20 @@
     
     <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <script type="text/javascript">
-        $.validator.addMethod("textOnly", 
-            function(value, element) {  // un car n'est pas alphanumérique
-                return !/[^a-zA-Z0-9_.-@]/.test(value);
-            }, "Que des caractères alphanumériques."
-        );
-        
+        $.validator.methods.email = function( value, element ) {
+            return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
+        }
         $(document).ready(function () {
             $('#formPseudoPerdu').validate({
             rules: {
                 MailPseudoPerdu: {
-                    textOnly: true, required: true
+                    email: true, required: true
                 }
             },
             messages: {
                 MailPseudoPerdu: {
-                    required:  "Entrez votre adresse e-mail."
+                    required:  "Entrez votre adresse e-mail.",
+                    email : "Votre e-mail n'est pas correcte."
                 }
             },
             errorPlacement: function (error, element) {

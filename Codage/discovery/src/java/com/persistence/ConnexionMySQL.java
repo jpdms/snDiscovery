@@ -19,12 +19,12 @@ public class ConnexionMySQL {
     private static String driver    = "com.mysql.jdbc.Driver";
     /** url : ConnexionMySQL URL */
     //private static String url       = "jdbc:mysql://localhost:3306/galaxia?useUnicode=true&characterEncoding=utf-8";
-    private static String url       = "jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull";
+    private static String url       = "jdbc:mysql://localhost:3306/galaxia?zeroDateTimeBehavior=convertToNull";
 // ---------------------------------------------------------------------
     /** userName : sndiscovery */
-    private static String userName  = "root";
+    private static String userName  = "sndiscovery";
     /** password : discoNovae31 */
-    private static String password  = "";
+    private static String password  = "discoNovae31";
     /** destination connection on the database */
     private static Connection conn  = null;
     
