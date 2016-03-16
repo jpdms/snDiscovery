@@ -67,7 +67,7 @@
     </div>
     
     <div role="main" class="ui-content ">
-        <br/><br/>
+        <br/><br/><br/>
         <div class="mesImages" align="center">
             <%
                 /*
@@ -137,13 +137,13 @@
                    data-role="button"  data-transition="pop" >Changer le grade</a>
             </div>
             <div data-position="center">
-                <a href="#popupGrade" id="btnReference" data-rel="popup" data-position-to="window"
+                <a href="#popupMail" id="btnReference" data-rel="popup" data-position-to="window"
                    data-role="button"  data-transition="pop" >Envoyer un mail</a>
             </div>
             <div class="ui-grid-a">
                 <div class="ui-block-a">               
-                    <a data-position-to="window" data-role="button" 
-                       data-transition="pop" >Valider</a>
+                    <a href="#popupValider" data-rel="popup" data-position-to="window"
+                   data-role="button"  data-transition="pop">Valider</a>
                 </div>
                 <div class="ui-block-b">
                     <a data-position-to="window" data-role="button" 
@@ -153,87 +153,7 @@
     </div>
 
     <%@include file="includes/a_footer.jspf" %>
-    
-    <!-- panel de calendar -->
-    <div id="panelCalendar" data-role="panel" data-position="left"  
-             data-position-fixed="true" data-display="push" data-theme="a">
-        <ul data-role="listview" data-icon="false" class="ui-alt-icon">
-            <li data-role="list-divider">Choisir un jour :</li>
-            <%
-                ArrayList<String> dates = Image.getDerniersJours(con);
-                for (String date : dates) {
-                    out.println("<li><a href='#' onclick='nouvelleDate(" + date + ");'>" 
-                                   + Utils.formatDate(date) + "</a></li>");
-                    // out.println("<li><a href='disco.jsp?date=" + date + "'>" 
-                       //             + Utils.formatDate(date) + "</a></li>");
-                }
-            %>
-            <li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
-        </ul>
-    </div>
-    
-    <!-- panel de galaxies -->
-    <div id="panelGalaxies" data-role="panel" data-position="right"  
-             data-position-fixed="true" data-display="push" data-theme="a">
-        <ul data-role="listview" data-icon="false" class="ui-alt-icon">
-            <li data-role="list-divider">Offset sur les images :</li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(1);">Première</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-200));">-200</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-100));">-100</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-50));">-50</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(-10));">-10</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(10));">+10</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(50));">+50</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(100));">+100</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(offset(200));">+200</a></li>
-            <li><a href="#" data-rel="close" onclick="nouvelleImage(<%= images.size()%>);">Dernière</a></li>
-            <li data-icon="delete">
-                <a href="#" data-rel="close">Close</a>
-            </li>
-        </ul>
-    </div>
-    
-    <!-- popup candidat -->
-    <div id="popupCandidat" data-role="popup" data-theme="a" data-overlay-theme="b"
-         class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window">
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
-             ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-        <div id="divCandidat" class="ui-alt-icon">
-            <h3 id="nomCandidat">Proposition de candidat sur IC500</h3>
-            <h4>Pointez la supernova !!!</h4>
-            <canvas id="mon_canvas" width="250" height="250" ></canvas>
-            <form id="formCandidat">
-                <fieldset data-role="controlgroup" data-type="horizontal">
-                    <legend>Choisir le degré de certitude :<br/>
-                            (1 : peu sûr, 5 : certain)
-                    </legend>
-                    <input type="radio" name="rdoCertitude" id="radio-choice-h-2a" value="1" checked="checked">
-                    <label for="radio-choice-h-2a">1</label>
-                    <input type="radio" name="rdoCertitude" id="radio-choice-h-2b" value="2">
-                    <label for="radio-choice-h-2b">2</label>
-                    <input type="radio" name="rdoCertitude" id="radio-choice-h-2c" value="3">
-                    <label for="radio-choice-h-2c">3</label>
-                    <input type="radio" name="rdoCertitude" id="radio-choice-h-2d" value="4">
-                    <label for="radio-choice-h-2d">4</label>
-                    <input type="radio" name="rdoCertitude" id="radio-choice-h-2e" value="5">
-                    <label for="radio-choice-h-2e">5</label>
-                </fieldset>
-                <br/>
-                <button id="btnConfirmCandidat" class="ui-btn ui-corner-all">Confirmation</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- popup message en mode modal-->
-    <div id="popupSendMail" data-role="popup" data-theme="a" data-overlay-theme="b"
-         class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window" data-dismissible="false">
-        <div class="mesPopups" align="center">
-            <br/>
-            <h3 id="popupTextSendMail">Attendez, je transmets votre candidate !</h3>
-            <div class="progressBar"><div></div></div>
-            <br/>
-        </div>
-    </div>
+   
     
     <!-- popup infos -->
     <div id="popupInfos" data-role="popup" data-theme="a" data-overlay-theme="b"
@@ -312,6 +232,90 @@
             </div>
         </div>
     </div>
+     
+    <!-- popup grade -->
+        <div id="popupGrade" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <div class="mesPopups">
+                    <br/>
+                    <u><strong><center> Changement de grade </center> </strong></u>   
+                    <div>
+                        <form >
+                            <fieldset data-role="controlgroup" data-type="horizontal" style="position:relative; left:27%;">  
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+                                <label for="radio-choice-h-2a">1</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+                                <label for="radio-choice-h-2b">2</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+                                <label for="radio-choice-h-2c">3</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2d" value="other1">
+                                <label for="radio-choice-h-2d">4</label>
+                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2e" value="other2">
+                                <label for="radio-choice-h-2e">5</label>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- bouton valider et annuler dans le popup changer de grade-->
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <a href="#" id="btnValider" data-rel="back" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Valider</a>
+                        </div>
+                        <div class="ui-block-b">
+                            <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Annuler</a>
+                        </div>
+                </div>
+            </div>
+            </div>
+        <!-- popup email -->
+        <div id="popupMail" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div class="mesPopups"> 
+                <center><p><%@include file="includes/espace.jspf" %><br><strong>Envoyer un mail</strong></p></center>
+                <br/><strong> Objet: </strong>
+
+                <form><strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="Ajouter un objet"></textarea></form>
+
+                 <br>Contenu du mail : 
+                 <form><textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="Rédigez ici"></textarea></form>
+                 <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" id="btnEnvoyer" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Envoyer</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" id="btnAnnuler" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Annuler</a>
+                    </div>
+                 </div>
+            </div>
+        </div>
+                
+        <!-- popup valider -->
+        <div id="popupValider" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div class="mesPopups"> 
+                <center><p>Voulez vous valider cette supernova ? <br>N'oubliez pas de changer le grade de l'utilisateur qui a soumis cette decouverte et de lui envoyé un mail.<br/><strong>Cette action est irreversible</strong></p></center>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" id="btnOui" data-rel="true" data-position-to="window" 
+                           class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Oui</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
+                           class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Non</a>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        </div>
 </div>
 </body>
 </html>

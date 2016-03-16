@@ -58,6 +58,7 @@
             user = maSession.getUser();
         %>
         <h4>Bienvenue dans le mode administrateur.</h4>
+        <h1>Attention ceci est un bêta. <br/>Les fonctionnalités ne sont pas disponibles.</h1>
         <h3>Informations sur votre compte :</h3>
         <div style="margin-left:10%;">
         <label id="pseudoInfoUser"><strong>Pseudo</strong> : <%= user.getPseudo() %></label>

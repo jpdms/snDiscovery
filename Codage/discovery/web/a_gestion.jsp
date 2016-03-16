@@ -25,50 +25,99 @@
     <div role="main" id="mainInfoUser" class="ui-content">
         <br/><br/>
         <br/>
-                <div>
+        <div>
             <%
                 if(!maSession.isModeExpert()){
                     request.getRequestDispatcher("discovery.jsp?action=pbAdminMode").forward(request, response);
                 }
             %>
         </div>
+        <blockquote>
+            <input type="search" name="search" placeholder="Entrez un pseudo." id="search">
+        </blockquote>
+        <fieldset style="margin: auto; text-align: center;" data-role="controlgroup" data-type="horizontal" data-mini="true">
+            <label for="select-native-15">Select A</label>
+            <select name="select-native-15" id="select-native-15">
+                <option value="#"> = </option>
+                <option value="#"> < </option>
+                <option value="#"> <= </option>
+                <option value="#"> > </option>
+                <option value="#"> >= </option>
+            </select>
+            <label for="select-native-14">Select B</label>
+                <select name="select-native-14" id="select-native-14">
+                    <option value="#">Grade</option>
+                    <option value="#">1</option>
+                    <option value="#">2</option>
+                    <option value="#">3</option>
+                    <option value="#">4</option>
+                    <option value="#">5</option>
+                </select>
+            <button onclick="window.location.href='discovery.jsp?action=gestionrecherche'">Rechercher</button>
+        </fieldset>
         <br/>
-        <div>
-                <input type="search" name="search" placeholder="Pseudo.." id="search"><br/>
-            <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-                Rechercher
-            </a>
+        <!-- Ligne bordure-->
+        <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
+            <u><strong>Information: </strong></u>
+            <br/><br/>
+            Pseudo: User1 
+            <br/><br/> <!--aller à la ligne-->
+            Nom: Toto
+            <br/><br/>
+            Email: Toto@gmail.com
+            <br/><br/>
+            Grade: 5
+            <br/><br/>
+            Dernière visite: 15/02/2016
+            <br/><br/>
+            Nombre total de connexion: 35
+            <br/><br/>
+            Demande(s) de candidate(s): 9 
+            <br/><br/>     
         </div>
-               
-        <h3>Informations sur le compte :</h3>
-        <div style="margin-left:10%;">
-        <%
-            user = maSession.getUser();
-        %>
+       <!--- Ligne avec 2 boutons :-->
+        <br/>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a href="discovery.jsp?action=gestioncompte" class="ui-btn ui-corner-all ui-shadow">Modifier</a>
+            </div>   	 
+        <div class="ui-block-b">
+            <a href="#popupMail" id="btnReference" data-rel="popup" data-position-to="window"
+                   data-role="button"  data-transition="pop">Contacter</a>
+        </div>
+        <a href="discovery.jsp?action=gestionhistorique" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+        Afficher l'historique
+        </a>
+        <!-- popup email -->
+        <div id="popupMail" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <div class="mesPopups"> 
+                <center><p><%@include file="includes/espace.jspf" %><br><strong>Envoyer un mail</strong></p></center>
+                <br/><strong> Objet: </strong>
+
+                <form><strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="Ajouter un objet"></textarea></form>
+
+                 <br>Contenu du mail : 
+                 <form><textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="Rédigez ici"></textarea></form>
+                 <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" id="btnEnvoyer" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Envoyer</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" id="btnAnnuler" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Annuler</a>
+                    </div>
+                 </div>
+            </div>
+        </div>
+                
         
-        <label id="pseudoInfoUser"><strong>Pseudo</strong> : <%= user.getPseudo() %></label>
-        <label id="nomInfoUser"><strong>Nom</strong> : <%= user.getUsername() %></label>
-        <label id="emailInfoUser"><strong>EMail</strong> : <%= user.getEmail() %></label>
-        <label id="gradeInfoUser"><strong>Grade</strong> : <%= user.getGrade() %></label>
-        <br/>
-        <label id="lastVisiteInfoUser"><strong>Dernière Visite</strong> : <%= Utils.formatStampDate(maSession.getLastVisitDate().toString()) %></label>
-        <br/>
-        <label id="nbConnexionsInfoUser"><strong>Nombre total de connexions</strong> : <%= user.getNbConnexions() %></label>
-        <label id="nbCandidatesInfoUser"><strong>Demande(s) de candidates</strong> : <%= user.getNbCandidates() %></label>
-        <br/>
-        </div>
-                <a href="#"
-                       class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-                    Consulter l'historique.
-                </a>
-                <a href="#"
-                       class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-                    Bloquer cette utilisateur.
-                </a>
-                <a href="#"
-                       class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-                    Modifier le grade de cette utilisateur.
-                </a>
+        
+        
+    </div>
     <%@include file="../includes/a_footer.jspf" %>
 </div>
 </body>

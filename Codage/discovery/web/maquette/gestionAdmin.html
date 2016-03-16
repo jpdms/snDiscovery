@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Accueil</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+    <link rel="icon" href="../images/apple-touch-icon-57x57.png" />
+    <link rel="stylesheet" href="../js/jquery.mobile/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="../css/themes/discoRed.css" />
+    <link rel="stylesheet" href="../css/themes/themeBlue.min.css" />
+    <link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../css/disco1.css">
+    <script type="text/javascript" src="../js/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+<div class="page" data-role="page" id="homePage">
+        <div class="header" data-role="header" data-id="main-header" data-tap-toggle="false" data-theme="b"
+                                data-position="fixed" data-fullscreen="true">
+        <h1>Gestion</h1>
+        <center>
+            <div data-theme="b">
+                user 1 <img src='../images/star.gif'><img src='../images/star.gif'><img src='../images/star.gif'><img src='../images/star.gif'><img src='../images/star.gif'>
+            </div>
+        </center>
+    </div>        
+    <div role="main" class="ui-content">
+        <br/><br/> 
+        
+        
+        
+        
+        <blockquote>
+         <input type="search" name="search" placeholder="Entrez un pseudo." id="search">
+        </blockquote>
+        
+    
+    <fieldset style="margin: auto; text-align: center;" data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <label for="select-native-15">Select A</label>
+    <select name="select-native-15" id="select-native-15">
+        <option value="#"> = </option>
+        <option value="#"> < </option>
+        <option value="#"> <= </option>
+        <option value="#"> > </option>
+        <option value="#"> >= </option>
+       
+    </select>
+  <label for="select-native-14">Select B</label>
+    <select name="select-native-14" id="select-native-14">
+        <option value="#">Grade</option>
+        <option value="#">1</option>
+        <option value="#">2</option>
+        <option value="#">3</option>
+        <option value="#">4</option>
+        <option value="#">5</option>
+    </select>
+<button>Rechercher</button>
+    </fieldset><br>
+
+         
+
+        
+        
+        
+        
+
+
+        <!-- Ligne bordure-->
+       <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
+  
+       <u><strong>Information: </strong></u><br/><br/>
+       Pseudo: User1 
+       <br/><br/> <!--aller à la ligne-->
+       Nom: Toto
+       <br/><br/>
+       Email: Toto@gmail.com
+       <br/><br/>
+       Grade: 5
+       <br/><br/>
+       Dernière visite: 15/02/2016
+       <br/><br/>
+       Nombre total de connexion: 35
+       <br/><br/>
+       Demande(s) de candidate(s): 9 
+        <br/><br/>
+        
+       
+</div>
+        
+       <!--- Ligne avec 2 boutons :-->
+        <br/>
+        <div class="ui-grid-a">
+        <div class="ui-block-a">
+        <a href="#popupHisto" id="btnHisto" data-rel="popup" data-position-to="window" 
+        class="ui-btn ui-corner-all ui-shadow">Modifier</a>
+        </div> 
+            	 
+        <div class="ui-block-b">
+        <a href="#popupContacter" id="btnContact" data-role="button" data-rel="popup" data-position-to="window" 
+        data-transition="pop">Contacter</a>
+        </div>
+            
+        <a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+        Afficher l'historique
+         </a>
+            
+            
+            
+            
+        <!-- popup contacter -->
+        <div style="
+             width: 80%;
+             left : auto;
+             " id="popupContacter" data-role="popup" data-theme="a" data-overlay-theme="b"
+        class="ui-corner-all" data-corners="true" data-position-to="origin">
+        <!-- icone fermer -->
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+        ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                   
+        <!-- Fenêtre-->       
+        <div class="mesPopups">
+        <strong> Ojet: </strong>
+                        
+        <form><strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="Ajouter un objet"></textarea></form>
+                     
+         <br>Contenu du mail : 
+         <form><textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="Rédigez ici"></textarea></form>
+         <div class="ui-grid-a">
+         <div class="ui-block-a">
+         <a href="#" id="btnEnvoyer" data-rel="back" data-position-to="window" 
+         class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Envoyer</a>
+         </div>
+         <div class="ui-block-b">
+         <a href="#" id="btnAnnuler" data-rel="back" data-position-to="window" 
+         class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Annuler</a>
+         </div>
+         </div>
+         </div>
+         </div>
+        
+        
+        
+    </div>
+    
+    <div class="footer" data-role="footer" data-theme="b" data-tap-toggle="false"
+            data-id="main-footer" data-position="fixed" data-fullscreen="true">
+    <div data-role="navbar" data-grid="d">
+        <ul>
+            <li><a href="#" id="navbarhome"  data-icon="home">Valider</a></li>
+            <li><a href="#" id="navbardisco" data-icon="eye">Référence</a></li>
+            <li><a href="#" id="navbartuto1" data-icon="info">Gestion</a></li>
+            <li><a href="#" id="navbarcompte" data-icon="user">Compte</a></li>
+            <li><a href="#" id="navbaractu"  data-icon="comment">Actu</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+</body>
+</html>
