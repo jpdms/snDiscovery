@@ -40,9 +40,6 @@
                     if (message.equalsIgnoreCase("pbAdmin")) {
                         out.print("Vous ne pouvez pas accéder au mode administrateur !");
                     }
-                    if (message.equalsIgnoreCase("pbAdminMode")) {
-                        out.print("Vous n'êtes pas en mode administrateur ! Seules les personnes en mode administrateur peuvent accéder a cette page.");
-                    }
                 }
             %>
         </div>
@@ -74,10 +71,12 @@
         <%
         if(user.getGrade()==5){
         %>
+                <br/><br/>
                 <a href="discovery.jsp?action=reqAdmin"
                        class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Passer en mode administrateur !
                 </a>
+                <br/><br/>
         <% 
         }
         %>

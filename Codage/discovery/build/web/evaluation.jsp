@@ -13,111 +13,7 @@
 
 <body>
 <div class="page" data-role="page" id="evaluationPage">
-    <%-- le script pour s'exécuter doit être dans la page data-role --%>
-    <script>
-        var totalQCM = new Array();
-        var nbQuestions = 11;
-        
-        // A l'initialisation de la page
-        $(function() {
-            $("#btnResetQCM").bind("click", resetQCM);
-            $("#btnTestQCM").bind("click", testQCM);
-            $("#btnPopupInscription").bind("click", inscription);
-            $("#btnPopupDejaInscrit").bind("click", dejaInscrit);
-            $("#btnPopupQCMRate").bind("click", QCMNonReussi);
-            resetQCM();
-            $("input[type='radio']").bind( "change", function(event, ui) {
-                // valeur = "01 2"    
-                //           01 : num question (0 à n-1)
-                //            2 : num du choix
-                value = $(this).val();
-                question =  parseInt(value.substring(0,2));
-                choix =  parseInt(value.substring(3,4));
-                totalQCM[question - 1] = choix;
-                id = '#' + $(this).attr('name');
-                // le titre est gris si la question est traitée, noir sinon
-                if (choix > 0)
-                    $(id).css('color', 'lightgrey');
-                else 
-                    $(id).css('color', 'black');
-            });
-        });
 
-        // on reset toutes les forms
-        function resetQCM() {
-            for (i = 0; i < nbQuestions; i++) {
-                $('form')[i].reset();
-                totalQCM[i] = 0;
-                if (i+1 >= 10)                  // tous les titres sont noirs
-                    val = (i + 1).toString();
-                else
-                    val = "0" + (i + 1).toString();
-                id = '#rc' + val;
-                $(id).css('color', 'black');
-            }
-        }
- 
-        function testQCM() {
-            nbReponses = nbReponsesQCM();
-            if (nbReponses >= nbQuestions) {    // est ce fini ?
-                envoiQCM();
-            }
-            else {                              // popup d'avertissement
-                $('#popupPbQCM').popup( "open" );
-            }
-        }
-        
-        function nbReponsesQCM() {
-            var total = 0;
-            
-            for (i = 0; i < nbQuestions; i++) {
-                if (totalQCM[i] > 0)
-                    total++;
-            }
-            return total;
-        }
-        
-        function envoiQCM() {
-            var reponses = "";
-            for (i = 0; i < nbQuestions; i++) {
-                reponses += totalQCM[i] + "|";
-            }
-            $.ajax({
-                url  : 'discovery.jsp?action=ajax_QCM',
-                type : 'POST',
-                // On passe nos parametres par POST au script ajax_QCM.jsp
-                // pour transmettre les réponses au questionnaire 
-                data : 'reponses=' + reponses.toString(),
-                success: function(data) {
-                    if (data.indexOf("oui") !== -1) {
-                        $('#popupInscription').popup( "open" );
-                    }
-                    else if (data.indexOf("inscrit") !== -1) {
-                        $('#popupDejaInscrit').popup( "open" );
-                    }
-                    else {
-                        $('#popupQCMRate').popup( "open" );
-                    }
-                },
-                error : function(resultat, statut, erreur) {
-                    alert("Désolé, le serveur ne répond pas");
-                }
-            });
-        }
-        
-        function inscription() {
-            // sans ajax, inscription.jsp ne marche pas sans ajax.
-            window.location.href = "discovery.jsp?action=inscription";
-        }
-
-        function dejaInscrit() {
-            $.mobile.changePage("discovery.jsp?action=infoUser", { transition: "slide"} );
-        }
-        
-        function QCMNonReussi() {
-            $.mobile.changePage("tuto1.jsp", { transition: "slide"} );
-        }
-    </script>
     <%@include file="includes/tutoheader.jspf" %>
     
     <div role="main" class="ui-content">
@@ -331,6 +227,111 @@
                 </div>
             </div>
         </div>
+        <%-- le script pour s'exécuter doit être dans la page data-role --%>
+    <script>
+        var totalQCM = new Array();
+        var nbQuestions = 11;
+        
+        // A l'initialisation de la page
+        $(function() {
+            $("#btnResetQCM").bind("click", resetQCM);
+            $("#btnTestQCM").bind("click", testQCM);
+            $("#btnPopupInscription").bind("click", inscription);
+            $("#btnPopupDejaInscrit").bind("click", dejaInscrit);
+            $("#btnPopupQCMRate").bind("click", QCMNonReussi);
+            resetQCM();
+            $("input[type='radio']").bind( "change", function(event, ui) {
+                // valeur = "01 2"    
+                //           01 : num question (0 à n-1)
+                //            2 : num du choix
+                value = $(this).val();
+                question =  parseInt(value.substring(0,2));
+                choix =  parseInt(value.substring(3,4));
+                totalQCM[question - 1] = choix;
+                id = '#' + $(this).attr('name');
+                // le titre est gris si la question est traitée, noir sinon
+                if (choix > 0)
+                    $(id).css('color', 'lightgrey');
+                else 
+                    $(id).css('color', 'black');
+            });
+        });
+
+        // on reset toutes les forms
+        function resetQCM() {
+            for (i = 0; i < nbQuestions; i++) {
+                $('form')[i].reset();
+                totalQCM[i] = 0;
+                if (i+1 >= 10)                  // tous les titres sont noirs
+                    val = (i + 1).toString();
+                else
+                    val = "0" + (i + 1).toString();
+                id = '#rc' + val;
+                $(id).css('color', 'black');
+            }
+        }
+ 
+        function testQCM() {
+            nbReponses = nbReponsesQCM();
+            if (nbReponses >= nbQuestions) {    // est ce fini ?
+                envoiQCM();
+            }
+            else {                              // popup d'avertissement
+                $('#popupPbQCM').popup( "open" );
+            }
+        }
+        
+        function nbReponsesQCM() {
+            var total = 0;
+            
+            for (i = 0; i < nbQuestions; i++) {
+                if (totalQCM[i] > 0)
+                    total++;
+            }
+            return total;
+        }
+        
+        function envoiQCM() {
+            var reponses = "";
+            for (i = 0; i < nbQuestions; i++) {
+                reponses += totalQCM[i] + "|";
+            }
+            $.ajax({
+                url  : 'discovery.jsp?action=ajax_QCM',
+                type : 'POST',
+                // On passe nos parametres par POST au script ajax_QCM.jsp
+                // pour transmettre les réponses au questionnaire 
+                data : 'reponses=' + reponses.toString(),
+                success: function(data) {
+                    if (data.indexOf("oui") !== -1) {
+                        $('#popupInscription').popup( "open" );
+                    }
+                    else if (data.indexOf("inscrit") !== -1) {
+                        $('#popupDejaInscrit').popup( "open" );
+                    }
+                    else {
+                        $('#popupQCMRate').popup( "open" );
+                    }
+                },
+                error : function(resultat, statut, erreur) {
+                    alert("Désolé, le serveur ne répond pas");
+                }
+            });
+        }
+        
+        function inscription() {
+            // sans ajax, inscription.jsp ne marche pas sans ajax.
+            window.location.href = "discovery.jsp?action=inscription";
+        }
+
+        function dejaInscrit() {
+            $.mobile.changePage("discovery.jsp?action=infoUser", { transition: "slide"} );
+        }
+        
+        function QCMNonReussi() {
+            $.mobile.changePage("tuto1.jsp", { transition: "slide"} );
+        }
+    </script>
     </div>
 
     <%@include file="includes/footer.jspf" %>
@@ -380,5 +381,7 @@
         </div>
     </div>
 </div>
+    
 </body>
+
 </html>

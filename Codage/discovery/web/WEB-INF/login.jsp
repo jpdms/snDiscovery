@@ -86,9 +86,6 @@
                     else if (message.equalsIgnoreCase("motDePassePseudoInconnu")) {
                         out.print("Votre pseudo n'est pas connu.");
                     }
-                    else if (message.equalsIgnoreCase("pbAdminMode")) {
-                        out.print("Vous n'êtes pas en mode administrateur ! Seules les personnes en mode administrateur peuvent accéder a cette page.");
-                    }
                 }
             %>
         </div>

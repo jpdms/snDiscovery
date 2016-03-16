@@ -124,7 +124,7 @@
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
                ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div class="mesPopups"> 
-                <center><p>Voulez vous remplacer l'ancienne image de référence par celle proposée ? <br><strong>Cette action est irreversible</strong></p></center>
+                <center><p>Voulez-vous remplacer l'ancienne image de référence<br/> par celle proposée ? <br><strong>Cette action est irreversible</strong></p></center>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <a href="#" id="btnOui" data-rel="true" data-position-to="window" 

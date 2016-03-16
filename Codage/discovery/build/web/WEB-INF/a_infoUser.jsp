@@ -58,12 +58,13 @@
             user = maSession.getUser();
         %>
         <h4>Bienvenue dans le mode administrateur.</h4>
-        <h1>Attention ceci est un bêta. <br/>Les fonctionnalités ne sont pas disponibles.</h1>
+        <h1>Attention ceci est une bêta.</h1>
+        <h3>Aucune action ne modifie la base de donnée.</h3>
         <h3>Informations sur votre compte :</h3>
         <div style="margin-left:10%;">
         <label id="pseudoInfoUser"><strong>Pseudo</strong> : <%= user.getPseudo() %></label>
         <label id="nomInfoUser"><strong>Nom</strong> : <%= user.getUsername() %></label>
-        <label id="emailInfoUser"><strong>EMail</strong> : <%= user.getEmail() %></label>
+        <label id="emailInfoUser"><strong>Mail</strong> : <%= user.getEmail() %></label>
         <label id="gradeInfoUser"><strong>Grade</strong> : <%= user.getGrade() %></label>
         <br/>
         <label id="registerDateInfoUser"><strong>Première Visite</strong> : <%= Utils.formatStampDate(user.getRegisterDate().toString()) %></label>

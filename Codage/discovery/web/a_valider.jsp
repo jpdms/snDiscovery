@@ -118,14 +118,13 @@
             </div>
         </div>
          <div class="ui-grid-a">
-                <div class="ui-block-a" style="text-align:center;">Découverte par : User2
+                <div class="ui-block-a" style="text-align:center;">Proposé par : User2
                 </div>            
                 <div class="ui-block-b" style="text-align:center;">Le : 29/02/2016 à 14:06</div>
             </div>
 
         <br><center>
             <div class="gradeUser">
-                Grade actuel:
                 <img src="images/star.gif">
                 <img src="images/star.gif">
                 <img src="images/star.gif">
@@ -277,11 +276,11 @@
                ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div class="mesPopups"> 
                 <center><p><%@include file="includes/espace.jspf" %><br><strong>Envoyer un mail</strong></p></center>
-                <br/><strong> Objet: </strong>
+                <strong> Objet: </strong>
 
                 <form><strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="Ajouter un objet"></textarea></form>
 
-                 <br>Contenu du mail : 
+                 <br>Contenu : 
                  <form><textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="Rédigez ici"></textarea></form>
                  <div class="ui-grid-a">
                     <div class="ui-block-a">
@@ -302,7 +301,7 @@
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
                ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <div class="mesPopups"> 
-                <center><p>Voulez vous valider cette supernova ? <br>N'oubliez pas de changer le grade de l'utilisateur qui a soumis cette decouverte et de lui envoyé un mail.<br/><strong>Cette action est irreversible</strong></p></center>
+                <center><p>Voulez-vous valider cette supernova ? <br>N'oubliez pas de changer le grade de l'utilisateur qui a soumis cette decouverte et de lui envoyer un mail.<br/><strong>Cette action est irréversible</strong></p></center>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <a href="#" id="btnOui" data-rel="true" data-position-to="window" 

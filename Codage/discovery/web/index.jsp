@@ -45,6 +45,7 @@
             <img src="images/tuto01.jpg">
             <img src="images/tuto02.jpg">
         </div>
+        <br/>
         Si vous en trouvez une, votre nom accompagnera cette découverte !<br/><br/>
         Si vous êtes novice, nous vous proposons un tutoriel. 
         Car pour vous inscrire, vous devez passer un QCM.<br/><br/><br/>
@@ -60,9 +61,8 @@
             </li>
         </ol>
         <br/>
-        <center><p class="mini">V1.00 - 20 Septembre 2015<br/>
-                                V2.00 - 18 mai 2016<br/>
-                (Développement : BTS SNIR Lycée V. Hugo Colomiers 31)</p></center>
+        <center><br/><br/><br/><p class="mini">V2.00 - 16 mars 2016<br/>
+                Développement : BTS SNIR Lycée V. Hugo Colomiers 31</p></center>
     </div>
     
     <%@include file="includes/footer.jspf" %>
