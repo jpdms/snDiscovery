@@ -6,7 +6,7 @@
         <ul>
             <li><a href="a_reference.jsp" id="navbardisco" data-icon="star">Référence</a></li>
             <li><a href="a_valider.jsp" id="navbarhome"  data-icon="check">Valider</a></li>
-            <li><a href="#" id="navbartuto1" data-icon="edit">Gestion</a></li>
+            <li><a href="a_gestion.jsp" id="navbartuto1" data-icon="edit">Gestion</a></li>
             <li><a href="a_compte.jsp" id="navbarcompte" data-icon="user">Compte</a></li>
             <li><a href="a_actu.jsp" id="navbaractu"  data-icon="comment">Actu</a></li>
         </ul>

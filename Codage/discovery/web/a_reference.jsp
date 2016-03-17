@@ -122,7 +122,7 @@
         <div id="popupValider" data-role="popup" data-theme="a" data-overlay-theme="b"
              class="ui-corner-all" data-corners="true" data-position-to="origin">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
-               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
             <div class="mesPopups"> 
                 <center><p>Voulez-vous remplacer l'ancienne image de référence<br/> par celle proposée ? <br><strong>Cette action est irreversible</strong></p></center>
                 <div class="ui-grid-a">

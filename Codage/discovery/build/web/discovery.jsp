@@ -75,10 +75,6 @@
             {
                 request.getRequestDispatcher("WEB-INF/a_gestion_historique.jsp").forward(request, response);
             }
-            else if (action.equals("gestionrecherche"))
-            {
-                request.getRequestDispatcher("WEB-INF/a_gestion_recherche.jsp").forward(request, response);
-            }
             else{
                 request.getRequestDispatcher("a_compte.jsp").forward(request, response);
             }

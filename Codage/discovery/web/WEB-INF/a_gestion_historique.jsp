@@ -11,14 +11,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Infos</title>
+    <title>Historique</title>
     <%@include file="../includes/a_head.jspf"%>
 </head>
 
 <body>
 <div class="page" data-role="page" id="infoUserPage">
     <%@include file="../includes/div_header.jspf" %>
-        <h1>Compte</h1>
+        <h1>Historique</h1>
         <%@include file="../includes/a_user.jspf" %>
         <%
         if(!maSession.isModeExpert()){

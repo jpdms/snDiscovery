@@ -7,34 +7,30 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <title>Information</title>
-    <%@include file="includes/head.jspf" %>
-</head>
+    <head>
+        <title>Information</title>
+        <%@include file="includes/head.jspf" %>
+    </head>
 
-<body>
-<div class="page" data-role="page" id="homePage">
-    <%@include file="includes/div_header.jspf" %>
-        <h1>Compte</h1>
-        <%@include file="includes/user.jspf" %>
-    </div>
-    <div role="main" class="ui-content">
-        <br/><br/>
-        <br/><br/><br/><br/>
-        <div class="centrer"><h1><%= request.getParameter("msg") %></h1></div>
-        <br/><br/>
-        <a href="compte.jsp"
-                     class="ui-btn ui-shadow ui-corner-all ui-btn-a"> OK </a>
-        <br/>
-        <br/><br/>
-        <br/><br/>
-        <br/><br/>
-        <br/><br/>
-        <br/><br/>
-        <br/><br/>
-    </div>
-    
-    <%@include file="includes/footer.jspf" %>
-</div>
-</body>
+    <body>
+        <div class="page" data-role="page" id="homePage">
+            <%@include file="includes/div_header.jspf" %>
+            <h1>Compte</h1>
+            <%@include file="includes/user.jspf" %>
+        </div>
+        <div role="main" class="ui-content">
+            <br/><br/><br/><br/><br/><br/>
+            <div class="centrer">
+                <h1><%= request.getParameter("msg") %></h1>
+            </div>
+            <br/><br/>
+            <a href="compte.jsp"
+               class="ui-btn ui-shadow ui-corner-all ui-btn-a"> 
+                OK 
+            </a>
+            <br/><br/><br/>br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        </div>
+        <%@include file="includes/footer.jspf" %>
+        </div>
+    </body>
 </html>

@@ -81,7 +81,7 @@
         <%
         if(user.getGrade()==5){
         %>
-                <a href="index.jsp"
+                <a href="compte.jsp"
                        class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Sortir du mode administrateur !
                 </a><br/><br/>

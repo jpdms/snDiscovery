@@ -19,17 +19,21 @@
     String mailconfirme = request.getParameter("key");
     User u = User.getByPseudo(con, pseudo);
     String key = u.getMailConfirme();
-    if(!u.getMailConfirme().equals("ok")){
-        if(mailconfirme.equals(key)){
+    if(!u.getMailConfirme().equals("ok"))
+    {
+        if(mailconfirme.equals(key))
+        {
             u.setMailConfirme("ok");
             u.save(con);
             request.getRequestDispatcher("mailConfirme.jsp?msg=Ce compte est maintenant confirmé !").forward(request, response); 
         }
-        else{
+        else
+        {
             request.getRequestDispatcher("mailConfirme.jsp?msg=La confirmation a échoué, veuillez réessayer ou contacter l'administrateur.").forward(request, response); 
         }
     }
-    else{
+    else
+    {
          request.getRequestDispatcher("mailConfirme.jsp?msg=Ce compte est déjà confirmé").forward(request, response); 
     }
     

@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Infos</title>
+    <title>Gestion du compte : user1</title>
     <%@include file="../includes/a_head.jspf"%>
 </head>
 
@@ -33,30 +33,11 @@
         <%
             user = maSession.getUser();
         %>
-        <BLOCKQUOTE>
-            <input type="search" name="search" placeholder="Entrez un pseudo." id="search"><br/>
-        </BLOCKQUOTE>
-        <fieldset style="margin: auto; margin-top:-20px; text-align: center;" data-role="controlgroup" data-type="horizontal" data-mini="true">
-            <label for="select-native-15">Select A</label>
-            <select name="select-native-15" id="select-native-15">
-                <option value="#"> = </option>
-                <option value="#"> < </option>
-                <option value="#"> <= </option>
-                <option value="#"> > </option>
-                <option value="#"> >= </option>
-            </select>
-            <label for="select-native-14">Select B</label>
-                <select name="select-native-14" id="select-native-14">
-                    <option value="#">Grade</option>
-                    <option value="#">1</option>
-                    <option value="#">2</option>
-                    <option value="#">3</option>
-                    <option value="#">4</option>
-                    <option value="#">5</option>
-                </select>
-            <button onclick="window.location.href='discovery.jsp?action=gestionrecherche'">Rechercher</button>
-        </fieldset><br/>
-        <!-- Ligne bordure-->
+        <blockquote>
+            <input type="search" name="search" placeholder="Entrez un pseudo." id="search">
+        </blockquote>
+            <button onclick="window.location.href='a_gestion.jsp'">Rechercher</button>
+            <hr/><br/> 
         <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
             <u><strong>Information: </strong></u><br/><br/>
             Pseudo: User1 
@@ -86,10 +67,14 @@
                 <a href="#popupGrade" id="btnReference" data-rel="popup" data-position-to="window"
                    data-role="button"  data-transition="pop" >Changer de grade</a>
             </div>
+            <a href="#popupMail" id="btnReference" data-rel="popup" data-position-to="window"
+                   data-role="button"  data-transition="pop" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+            Contacter
+            </a>
             <a href="discovery.jsp?action=gestionhistorique" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Afficher l'historique
             </a>
-            <a href="a_gestion.jsp" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+            <a href="javascript:history.go(-1)" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                 Retour
             </a>   
         </div>
@@ -98,10 +83,10 @@
          class="ui-corner-all" data-corners="true" data-position-to="origin">
             <br/>
         <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
-        ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Fermer</a>
+        ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
             <div class="mesPopups">
                 <u><strong><center> Attention </center> </strong></u><br/>
-                Êtes vous de bloquer cette personne ? 
+                Êtes vous sur de bloquer cette personne ? 
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <a href="#" id="btnOui" data-rel="back" data-position-to="window" 
@@ -118,24 +103,14 @@
         <div id="popupGrade" data-role="popup" data-theme="a" data-overlay-theme="b"
              class="ui-corner-all" data-corners="true" data-position-to="origin">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
-               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
                 <div class="mesPopups">
+                    <%@include file="../includes/espace.jspf" %>
                     <br/>
                     <u><strong><center> Changement de grade </center> </strong></u>   
                     <div>
                         <form >
-                            <fieldset data-role="controlgroup" data-type="horizontal" style="position:relative; left:27%;">  
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
-                                <label for="radio-choice-h-2a">1</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
-                                <label for="radio-choice-h-2b">2</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
-                                <label for="radio-choice-h-2c">3</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2d" value="other1">
-                                <label for="radio-choice-h-2d">4</label>
-                                <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2e" value="other2">
-                                <label for="radio-choice-h-2e">5</label>
-                            </fieldset>
+                            <input type="range" name="slider-step" id="slider-step" value="5" min="1" max="5" step="1" data-highlight="true"  />
                         </form>
                     </div>
                     <!-- bouton valider et annuler dans le popup changer de grade-->
@@ -151,6 +126,31 @@
                 </div>
             </div>
             </div>
+            <!-- popup email -->
+        <div id="popupMail" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow
+               ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
+            <div class="mesPopups"> 
+                <center><p><%@include file="../includes/espace.jspf" %><br><strong>Envoyer un mail</strong></p></center>
+                <strong> Objet: </strong>
+
+                <form><strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="Ajouter un objet"></textarea></form>
+
+                 <br>Contenu: 
+                 <form><textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="Rédigez ici"></textarea></form>
+                 <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" id="btnEnvoyer" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Envoyer</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" id="btnAnnuler" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Annuler</a>
+                    </div>
+                 </div>
+            </div>
+        </div>
     </div>
     <%@include file="../includes/a_footer.jspf" %>
 </div>
