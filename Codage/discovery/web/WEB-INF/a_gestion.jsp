@@ -12,14 +12,14 @@
 <html lang="fr">
     <head>
         <title>Gestion</title>
-        <%@include file="includes/a_head.jspf"%>
+        <%@include file="../includes/a_head.jspf"%>
     </head>
 
     <body>
         <div class="page" data-role="page" id="infoUserPage">
-            <%@include file="includes/div_header.jspf" %>
+            <%@include file="../includes/div_header.jspf" %>
             <h1>Gestion</h1>
-            <%@include file="includes/a_user.jspf" %>
+            <%@include file="../includes/a_user.jspf" %>
         </div>
 
         <div role="main" id="mainInfoUser" class="ui-content">

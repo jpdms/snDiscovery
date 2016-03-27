@@ -74,7 +74,7 @@
         <label id="nbCandidatesInfoUser"><strong>Demande(s) de candidates</strong> : <%= user.getNbCandidates() %></label>
         <br/>
         </div>
-        <a href="discovery.jsp?action=changerProfil"
+        <a href="../discovery.jsp?action=changerProfil"
                class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Modifier
         </a><br/>

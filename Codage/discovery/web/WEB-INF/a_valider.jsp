@@ -13,82 +13,30 @@
 <html lang="fr">
     <head>
         <title>Images</title>
-        <%@include file="includes/a_head.jspf" %>
+        <%@include file="../includes/a_head.jspf" %>
     </head>
 
     <body>
         <div class="page" data-role="page" id="discoPage" data-theme="b">
-            <%-- le script pour s'exécuter doit être dans la page data-role --%>
-            <script type="text/javascript" src="js/disco.js"></script>
-            <script type="text/javascript">
-            <%
-                /*
-                    On peut appeller "disco.jsp" ou "disco.jsp?date=20140418".
-                    Si il n'y a pas de paramètre de date, c'est la date du dernier
-                    jour dans la BD.
-                */
-                String dateObservation = request.getParameter("date");
-                if (dateObservation == null) {
-                    dateObservation = Image.dernierJour(con);
-                }
-
-                /*  initialise le tableau des noms des images d'observation
-                    au format "F nom.jpg" ou "C nom.jpg" (pour France ou Chili) 
-                    de la date par défaut ou celle passée en paramètre.
-                 */
-
-                ArrayList<Image> images = Image.getImagesDuJour(con, dateObservation);
-                out.print("var imagesNoms = new Array(");
-                for (int i = 0; i < images.size(); i++) {
-                    Image img = images.get(i);
-                    if (img.getChemin().equals("Tarot_Calern"))
-                        out.print("'F " + img.getGalaxieNom() + "'");
-                    else 
-                        out.print("'C " + img.getGalaxieNom() + "'");
-                    if (i < images.size() - 1)
-                        out.print(",");
-                }
-                out.println(");");
-                // initialise le chemin d'accès aux images d'observation
-                out.print("var cheminCalern = ");
-                Image img = images.get(0);
-                out.println("'/jpeg/Tarot_Calern/" + img.getDate() + "/';");
-                out.print("var cheminChili = ");
-                out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
-                out.print("var cheminRef = '/jpeg/refgal/';");
-                out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
-                out.print("var dateCrt = " + img.getDate());
-            %>
-            </script>
-
-            <%@include file="includes/div_header.jspf" %>
+            <%@include file="../includes/div_header.jspf" %>
             <h1>Valider</h1>
-            <%@include file="includes/a_user.jspf" %>
+            <%@include file="../includes/a_user.jspf" %>
         </div>
 
         <div role="main" class="ui-content ">
             <br/><br/><br/>
             <div class="mesImages" align="center">
-                <%
-                    /*
-                        Les sources des deux images à afficher pour observation
-                    */
-                    Image img1 = Image.find(con, dateObservation, 1);
-                    out.println("<a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>");
-                    out.println("<img id='imgobs' alt='erreur:image absente' src='/jpeg/" 
-                            + img1.getChemin() + "/" 
-                            + img1.getDate() + "/" 
-                            + img1.getGalaxieNom() + ".jpg'/></a>");
-                    // je n'ai pas les images de reférence
-                    out.println("<a href='#popupZoomRight' id='clicZoomRight' data-rel='popup'>");
-                    out.println("<img id='imgref' alt='.... aucune référence ....' src='/jpeg/refgal/"
-                            + img1.getGalaxieNom() + ".jpg'/></a>");
-                %>
+                <a href="#popupZoomLeft" id="clicZoomLeft" data-rel="popup" class="ui-link">
+                    <img id="imgobs" alt="erreur:image absente" src="/jpeg/Tarot_Calern/20140319/IC3900.jpg">
+                </a>
+                <a href="#popupZoomRight" id="clicZoomRight" data-rel="popup" class="ui-link">
+                    <img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/IC3900.jpg">
+                </a>
             </div>
             <table class="infosTable">
-                <td class="texteCentre" id="dateImages"><%= Utils.formatDate(img.getDate())%></td>
-                <td class="texteCentre" id="numImages" >(1/<%= images.size()%>)</td>
-                <td class="texteCentre" id="nomGalaxie"><%= img.getGalaxieNom()%></td>
+                <td class="texteCentre" id="dateImages">12/03/2014</td>
+                <td class="texteCentre" id="numImages" >(1/20)</td>
+                <td class="texteCentre" id="nomGalaxie">IC3900</td>
             </table>
             <div align="center">
                 <div class="ui-grid-a">
@@ -158,17 +106,13 @@
                 </div>
             </div>
         </div>
-        <%@include file="includes/a_footer.jspf" %>
+        <%@include file="../includes/a_footer.jspf" %>
 
         <!-- POP UP-->
 
         <!-- popup infos -->
         <div id="popupInfos" data-role="popup" data-theme="a" data-overlay-theme="b"
              class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window">
-            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
-                 ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"">
-                Fermer
-            </a>
             <div class="mesPopups">
                 <h3 id="nomInfos">Nom:</h3>
                 <label id="catInfos">Catégorie:</label>
@@ -265,7 +209,7 @@
             </a>
             <div class="mesPopups"> 
                 <center>
-                    <%@include file="includes/espace.jspf" %>
+                    <%@include file="../includes/espace.jspf" %>
                     <p><br/>Voulez-vous valider cette supernova ?<br/><strong>Cette action est irréversible</strong></p>
                 </center>
                 <div>
@@ -315,7 +259,7 @@ Félicitation vous êtes le premier a trouver cette supernova.
                 Fermer
             </a>
             <div class="mesPopups">
-                <%@include file="includes/espace.jspf" %>
+                <%@include file="../includes/espace.jspf" %>
                 <center>
                     <p><br/>Voulez-vous refuser cette supernova ? <br/><strong>Cette action est irréversible</strong></p>
                 </center>

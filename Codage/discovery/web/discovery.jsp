@@ -66,8 +66,27 @@
         // user connecté
         else if(maSession.isModeExpert()){
             com.persistence.User user = maSession.getUser();
-            
-            if (action.equals("gestioncompte"))
+            if(action.equals("aRef"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_reference.jsp").forward(request, response);
+            }
+            else if(action.equals("aVal"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_valider.jsp").forward(request, response);
+            }
+            else if(action.equals("aGestion"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_gestion.jsp").forward(request, response);
+            }
+            else if(action.equals("aCompte"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_compte.jsp").forward(request, response);
+            }            
+            else if(action.equals("aActu"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_actu.jsp").forward(request, response);
+            }
+            else if (action.equals("gestioncompte"))
             {
                 request.getRequestDispatcher("WEB-INF/a_gestion_compte.jsp").forward(request, response);
             }
@@ -76,7 +95,7 @@
                 request.getRequestDispatcher("WEB-INF/a_gestion_historique.jsp").forward(request, response);
             }
             else{
-                request.getRequestDispatcher("a_compte.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/a_compte.jsp").forward(request, response);
             }
         }
         else {
@@ -100,7 +119,7 @@
             else if (action.equals("reqAdmin")) {
                 if (user.getGrade()==5) {
                     maSession.setModeExpert(true);
-                    request.getRequestDispatcher("a_compte.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/a_compte.jsp").forward(request, response);
                 }
                 else {request.getRequestDispatcher("compte.jsp").forward(request, response);}
             }

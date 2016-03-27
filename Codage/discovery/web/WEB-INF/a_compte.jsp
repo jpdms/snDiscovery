@@ -16,15 +16,15 @@
                 request.getRequestDispatcher("discovery.jsp?action=pbAdminMode").forward(request, response);
             } 
             else {
-                request.getRequestDispatcher("WEB-INF/a_infoUser.jsp").forward(request, response);
+                request.getRequestDispatcher("a_infoUser.jsp").forward(request, response);
             }
         }
         else {
-            request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
     else {
-        request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 %>
 

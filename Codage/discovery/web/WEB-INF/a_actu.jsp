@@ -10,14 +10,14 @@
 <html lang="fr">
     <head>
         <title>Actualités</title>
-        <%@include file="includes/a_head.jspf" %>
+        <%@include file="../includes/a_head.jspf" %>
     </head>
 
     <body>
         <div class="page" data-role="page" id="homePage">
-            <%@include file="includes/div_header.jspf" %>
+            <%@include file="../includes/div_header.jspf" %>
             <h1>Actualités</h1>
-            <%@include file="includes/a_user.jspf" %>
+            <%@include file="../includes/a_user.jspf" %>
         </div>
         <div role="main" class="ui-content">
             <br/><br/><br/>
@@ -170,7 +170,7 @@ Ce site propose la mise à disposition quotidiennement d'une banque d'images cen
                 </div>
             </div>
         </div>
-        <%@include file="includes/a_footer.jspf" %>
+        <%@include file="../includes/a_footer.jspf" %>
     </div>
     </body>
 </html>
