@@ -41,10 +41,10 @@
         <br/><br/>
         <h4>Cette application de science participative (crowdsourcing science) va  
             vous permettre de découvrir des supernovae.</h4>
-        <div class="tutoImg">
-            <img src="images/tuto01.jpg">
-            <img src="images/tuto02.jpg">
-        </div>
+        <center><div class="mesImages">
+            <img src="images/tuto01.jpg"/>
+            <img src="images/tuto02.jpg"/>
+            </div></center>
         <br/>
         Si vous en trouvez une, votre nom accompagnera cette découverte !<br/><br/>
         Si vous êtes novice, nous vous proposons un tutoriel. 
