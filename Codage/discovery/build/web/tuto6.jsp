@@ -18,7 +18,7 @@
     
     <div role="main" class="ui-content">
         <br/><br/>
-        Autres causes d'artéfacts. Comparaison avec une image de la veille.<br/>
+        <p>Autres causes d'artéfacts. Comparaison avec une image de la veille.</p>
         <img class="tuto3Img" src="images/tuto30.jpg">
         <div class="tuto2Txt">Cette trace est la somme des positions d'un astéroïde
                                                         de magnitude 16.5</div>

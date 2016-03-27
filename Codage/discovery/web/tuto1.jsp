@@ -18,7 +18,7 @@
     
     <div role="main" class="ui-content">
         <br/><br/>
-        Une supernova est un phénomène explosif violent dû à la mort d'une étoile.<br/>
+        <p>Une supernova est un phénomène explosif violent dû à la mort d'une étoile.<br/>
         A nos yeux, une supernova apparaît comme une nouvelle étoile dont l'intensité 
         lumineuse s’accentue en quelques jours puis s’atténue jusqu’à disparaître.<br/>
         Cette application propose les images de galaxies prises chaque nuit par 2 télescopes 
@@ -34,13 +34,13 @@
         Si c'est une supernova, vous avez gagné ! Elle sera signalée aux instances 
         internationales et si vous êtes le premier à l'avoir trouvée, vous serez 
         identifié comme le découvreur !<br/>
-        Vous pouvez statistiquement découvrir une supernova par mois.<br/><br/>
-        En fonction de la perspicacité de vos signalements, les experts feront
+        Vous pouvez statistiquement découvrir une supernova par mois.</p>
+        <p>En fonction de la perspicacité de vos signalements, les experts feront
         progresser votre grade afin d'accéder à de nouvelles fonctionnalités :-)
         et peut être devenir vous même un expert.<br/>
         Au cas où un utilisateur fournirait systématiquement des signalements farfelus
-        nous nous réservons le droit de bloquer son compte.
-        <p><a href="tuto2.jsp" class="ui-btn ui-shadow ui-corner-all">Page 2</a></p>
+        nous nous réservons le droit de bloquer son compte.</p>
+        <a href="tuto2.jsp" class="ui-btn ui-shadow ui-corner-all">Page 2</a>
     </div>
 
     <%@include file="includes/footer.jspf" %>

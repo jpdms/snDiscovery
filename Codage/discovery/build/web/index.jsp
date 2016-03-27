@@ -41,15 +41,17 @@
         <br/><br/>
         <h4>Cette application de science participative (crowdsourcing science) va  
             vous permettre de découvrir des supernovae.</h4>
-        <center><div class="mesImages">
+        <center><div class="mesImages" style="img{    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;}">
             <img src="images/tuto01.jpg"/>
             <img src="images/tuto02.jpg"/>
             </div></center>
         <br/>
-        Si vous en trouvez une, votre nom accompagnera cette découverte !<br/><br/>
-        Si vous êtes novice, nous vous proposons un tutoriel. 
-        Car pour vous inscrire, vous devez passer un QCM.<br/><br/><br/>
-        AIDE :<br/>
+        <p>Si vous en trouvez une, votre nom accompagnera cette découverte !</p>
+        <p>Si vous êtes novice, nous vous proposons un tutoriel. Car pour vous inscrire, vous devez passer un QCM.</p>
+        <br/>
+        <p>AIDE :</p>
         <ol>
             <li>En tournant votre téléphone à l'horizontale, l'observation des images sera plus facile.</li>
             <li>Pour cacher la barre de navigation du navigateur :<br/>
@@ -61,8 +63,10 @@
             </li>
         </ol>
         <br/>
-        <center><br/><br/><br/><p class="mini">V2.00 - 16 mars 2016<br/>
-                Développement : BTS SNIR Lycée V. Hugo Colomiers 31</p></center>
+        <center><br/><br/><br/>
+            <p class="mini">V2.00 - 16 mars 2016<br/>Développement : BTS SNIR Lycée V. Hugo Colomiers 31
+            </p>
+        </center>
     </div>
     
     <%@include file="includes/footer.jspf" %>

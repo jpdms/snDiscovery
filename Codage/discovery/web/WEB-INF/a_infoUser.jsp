@@ -3,6 +3,7 @@
     Created on : 28 mai 2014, 14:54:51
     Author     : jpdms
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.persistence.Utils"%>
 <%@page import="com.persistence.User"%>
 <%@page import="com.metier.DiscoSession"%>
@@ -61,18 +62,36 @@
         <h1>Attention ceci est une bêta.</h1>
         <h3>Aucune action ne modifie la base de donnée.</h3>
         <h3>Informations sur votre compte :</h3>
-        <div style="margin-left:10%;">
-        <label id="pseudoInfoUser"><strong>Pseudo</strong> : <%= user.getPseudo() %></label>
-        <label id="nomInfoUser"><strong>Nom</strong> : <%= user.getUsername() %></label>
-        <label id="emailInfoUser"><strong>Mail</strong> : <%= user.getEmail() %></label>
-        <label id="gradeInfoUser"><strong>Grade</strong> : <%= user.getGrade() %></label>
-        <br/>
-        <label id="registerDateInfoUser"><strong>Première Visite</strong> : <%= Utils.formatStampDate(user.getRegisterDate().toString()) %></label>
-        <label id="lastVisiteInfoUser"><strong>Dernière Visite</strong> : <%= Utils.formatStampDate(maSession.getLastVisitDate().toString()) %></label>
-        <br/>
-        <label id="nbConnexionsInfoUser"><strong>Nombre total de connexions</strong> : <%= user.getNbConnexions() %></label>
-        <label id="nbCandidatesInfoUser"><strong>Demande(s) de candidates</strong> : <%= user.getNbCandidates() %></label>
-        <br/>
+        <div>
+            <table style="margin-left:5%">
+                    <tr>
+                        <td><strong>Pseudo :</strong></td><td>&emsp;&emsp;<%= user.getPseudo() %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nom :</strong></td><td>&emsp;&emsp;<%= user.getUsername() %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>EMail :</strong></td><td>&emsp;&emsp;<%= user.getEmail() %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grade :</strong></td><td>&emsp;&emsp;<%= user.getGrade() %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Première Visite : </strong></td><td>&emsp;&emsp;<%=new SimpleDateFormat("EEEEEEEE dd MMMMMMMMM yyyy à HH:mm").format(user.getRegisterDate())%></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dernière Visite : </strong></td><td>&emsp;&emsp;<%=new SimpleDateFormat("EEEEEEEE dd MMMMMMMMM yyyy à HH:mm").format(maSession.getLastVisitDate())%></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nombre total de connexions :</strong></td><td>&emsp;&emsp;<%= user.getNbConnexions() %></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nombre de candidates : </strong></td><td>&emsp;&emsp;<%= user.getNbCandidates() %></td>
+                    </tr>                
+                    <tr>
+                        <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;0</td>
+                    </tr>
+            </table>
         </div>
         <a href="../discovery.jsp?action=changerProfil"
                class="ui-btn ui-shadow ui-corner-all ui-btn-a">

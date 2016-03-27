@@ -18,7 +18,7 @@
     
     <div role="main" class="ui-content">
         <br/><br/>
-        Différentes causes d'artéfacts. Il faut savoir les reconnaître.<br/>
+        <p>Différentes causes d'artéfacts. Il faut savoir les reconnaître.</p>
         <img class="tuto2Img" src="images/tuto03.jpg">
         <div class="tuto2Txt">Passage d'un satellite artificiel au cours de la pose.</div>
         <br/>

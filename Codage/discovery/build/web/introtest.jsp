@@ -19,11 +19,11 @@
     
     <div role="main" class="ui-content">
         <br/><br/>
-        Ce test, s'il est réussi, va vous permettre de vous inscrire. 
-        Ainsi, vous pourrez soumettre des images candidates à nos experts.<br/><br/>
-        Mais vous devez faire moins de 3 fautes.<br/><br/>
-        La durée du test n'est pas limitée.<br/><br/>
-        Commençons de suite !<br/><br/>
+        <p>Ce test, s'il est réussi, va vous permettre de vous inscrire. 
+        Ainsi, vous pourrez soumettre des images candidates à nos experts.</p>
+        <p>Mais vous devez faire moins de 3 fautes.</p>
+        <p>La durée du test n'est pas limitée.</p>
+        <p>Commençons de suite !</p>
         
         <p><a href="evaluation.jsp" class="ui-btn ui-shadow ui-corner-all">
             Le test

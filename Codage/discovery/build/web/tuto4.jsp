@@ -18,7 +18,7 @@
     
     <div role="main" class="ui-content">
         <br/><br/>
-        Autres causes d'artéfacts.<br/>
+        <p>Autres causes d'artéfacts.</p>
         <img class="tuto2Img" src="images/tuto09.jpg">
         <div class="tuto2Txt">Blooming et branche de diffraction d'une
                                                 étoile brillante proche</div>
