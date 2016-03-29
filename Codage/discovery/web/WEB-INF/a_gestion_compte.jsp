@@ -3,6 +3,7 @@
     Created on : 28 mai 2014, 14:54:51
     Author     : jpdms
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.persistence.Utils"%>
 <%@page import="com.persistence.User"%>
 <%@page import="com.metier.DiscoSession"%>
@@ -39,21 +40,40 @@
             <button onclick="window.location.href='a_gestion.jsp'">Rechercher</button>
             <hr/><br/> 
         <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
-            <u><strong>Information: </strong></u><br/><br/>
-            Pseudo: User1 
-            <br/><br/> <!--aller à la ligne-->
-            Nom: Toto
-            <br/><br/>
-            Email: Toto@gmail.com
-            <br/><br/>
-            Grade: 5
-            <br/><br/>
-            Dernière visite: 15/02/2016
-            <br/><br/>
-            Nombre total de connexion: 35
-            <br/><br/>
-            Demande(s) de candidate(s): 9 
-             <br/><br/>
+                <h3>Informations sur le compte :</h3>
+                <%
+                    String pUser = request.getParameter("pseudo");
+                    User userMod = User.getByPseudo(con, pUser);
+                %>
+                <table style="margin-left:5%">
+                        <tr>
+                            <td><strong>Pseudo :</strong></td><td>&emsp;&emsp;<%= userMod.getPseudo() %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nom :</strong></td><td>&emsp;&emsp;<%= userMod.getUsername() %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>EMail :</strong></td><td>&emsp;&emsp;<%= userMod.getEmail() %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Grade :</strong></td><td>&emsp;&emsp;<%= userMod.getGrade() %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Première Visite : </strong></td><td>&emsp;&emsp;<%=new SimpleDateFormat("EEEEEEEE dd MMMMMMMMM yyyy à HH:mm").format(userMod.getRegisterDate())%></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dernière Visite : </strong></td><td>&emsp;&emsp;<%=new SimpleDateFormat("EEEEEEEE dd MMMMMMMMM yyyy à HH:mm").format(userMod.getLastVisitDate())%></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombre total de connexions :</strong></td><td>&emsp;&emsp;<%= userMod.getNbConnexions() %></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombre de candidates : </strong></td><td>&emsp;&emsp;<%= userMod.getNbCandidates() %></td>
+                        </tr>                
+                        <tr>
+                            <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;0</td>
+                        </tr>
+                </table>
         </div>
         
         <!--- Ligne avec 2 boutons :-->

@@ -168,6 +168,27 @@ public class User {
             return null;
     }
     
+        /**
+     * retourne le premier pseudo qui commence par i, saved is true
+     * @param con
+     * @param  i       ce que contient la recherche
+     * @return String la liste des nom des personnes inscrites
+     * @throws java.lang.Exception
+     */
+    public static User findByPseudo(Connection con, int i, String j) throws Exception {
+        String queryString = "select pseudo from user where pseudo LIKE '%"+j+"%'order by pseudo";
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        if ((i > 0) && (lResult.absolute(i))) {
+            String pseudoFound = lResult.getString("pseudo");
+            return User.getByPseudo(con, pseudoFound);
+        }
+        else 
+            return null;
+    }
+    
     /**
      * Indique si le nom d'une personne existe déjà ou non ?
      * Pour unicité du nom
@@ -220,6 +241,23 @@ public class User {
             return (lResult.getInt("count"));
         else 
             return 0;
+    }
+    
+    /**
+     * Indique le nb de users dans la base de données
+     * @param con
+     * @return lenombre de users
+     * @throws java.lang.Exception
+     */
+    public static int sizeRecherche(Connection con, String recherche) throws Exception {
+        int size = User.size(con);
+        int sizeRecherche=0;
+        for(int i=1;i<size;i++){
+            if(User.findByPseudo(con, i, recherche)!=null){
+                sizeRecherche = sizeRecherche + 1;
+            }
+        }
+        return sizeRecherche;
     }
     
     /**

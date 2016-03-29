@@ -26,6 +26,15 @@ public final class Utils {
     private Utils() { }
     
     /*
+     * Eq. isset php
+     */
+    public static boolean isSet(Object object)
+    {
+        if (object == null) return false;
+        if (object instanceof String && ((String)object).trim().length() == 0) return false;
+        return true;
+    }
+    /*
      * encode un mot de passe, pas de décryptage possible
      * pour le comparer il faut encoder la proposition
     */

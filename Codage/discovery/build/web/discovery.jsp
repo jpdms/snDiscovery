@@ -77,7 +77,7 @@
             else if(action.equals("aGestion"))
             {
                 request.getRequestDispatcher("WEB-INF/a_gestion.jsp").forward(request, response);
-            }
+            }            
             else if(action.equals("aCompte"))
             {
                 request.getRequestDispatcher("WEB-INF/a_compte.jsp").forward(request, response);
@@ -89,6 +89,14 @@
             else if (action.equals("gestioncompte"))
             {
                 request.getRequestDispatcher("WEB-INF/a_gestion_compte.jsp").forward(request, response);
+            }
+            else if (action.equals("aGestionRecherche"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_gestion_recherche.jsp").forward(request, response);
+            }
+            else if (action.equals("aGestionRechercheFail"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_gestion.jsp?erreur=recherchefail").forward(request, response);
             }
             else if (action.equals("gestionhistorique"))
             {

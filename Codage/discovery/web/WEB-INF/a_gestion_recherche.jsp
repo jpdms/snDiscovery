@@ -32,27 +32,19 @@
                     }
                 %>
             </div>
-            <form id="formInscription" method="post" action="discovery.jsp">
-                <blockquote>
-                    <input type="search" name="recherche" placeholder="Entrez un pseudo." id="search">
-                    <%
-                        String erreur = request.getParameter("erreur");
-                        if(erreur=="recherchefail"){
-                            %>
-                            <p style="color:red;">Aucun utilisateur ne correspond a : <strong><%=request.getParameter("recherche")%></strong></p>
-                            <%
-                        }
-                    %>
-                </blockquote>
-                <input name="action" type="hidden" value="aGestionRecherche"/>
-                <button type="submit" name="submitOK" data-theme="a">Recherche</button>
-            </form>
+            <blockquote>
+                <input type="search" value="<%=request.getParameter("recherche")%>" name="search" placeholder="Entrez un pseudo." id="search">
+            </blockquote>
+            <button onclick="window.location.href='discovery.jsp?action=gestionrecherche'">
+                Rechercher
+            </button>
             <hr/><br/>    
             <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
                 <h3>Informations sur le compte :</h3>
                 <%
-                    int size = User.size(con);
+                    User uRecherche;
                     int nbrUser;
+                    int size = User.sizeRecherche(con, request.getParameter("recherche"));
                     String nUser = request.getParameter("nbrUser");
                     if(nUser==null){
                         nbrUser=1;
@@ -60,7 +52,17 @@
                     else{
                         nbrUser = Integer.parseInt(nUser);
                     }
-                    User uRecherche = User.find(con, nbrUser);
+                    if(request.getParameter("recherche")!=null){
+                        if(User.findByPseudo(con,nbrUser ,request.getParameter("recherche"))==null){%>
+                            Erreur de redirection
+                            Au pire on rempli le formulaire suivant avec la premiere entré de la base
+                            et en affichant un texte d'erreur.
+                        <%}
+                        uRecherche = User.findByPseudo(con,nbrUser ,request.getParameter("recherche"));
+                    }
+                    else{
+                        uRecherche = User.find(con, nbrUser);
+                    }
                 %>
                 <table style="margin-left:5%">
                         <tr>
@@ -100,7 +102,7 @@
                 <div class="ui-block-a">
                     <div class="ui-grid-a">
                         <div class="ui-block-a"></div>
-                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=1">|<<</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=1">|<<</a></div></div>
                     </div>
                 </div>
                 <div class="ui-block-b">
@@ -108,7 +110,7 @@
                     <div class="ui-block-a"><div style="height:60px"><a href="#"><<</a></div></div>
                     <%            
                     if(nbrUser>1){%>
-                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser-1%>"><</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser-1%>"><</a></div></div>
                     <%}
                     else{%>
                         <div class="ui-block-b"><div style="height:60px"><a href="#"><</a></div></div>
@@ -124,7 +126,7 @@
                 <div class="ui-grid-a">
                     <%            
                     if(nbrUser<size){%>
-                        <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser+1%>">></a></div></div>
+                        <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser+1%>">></a></div></div>
                     <%}
                     else{%>
                         <div class="ui-block-b"><div style="height:60px"><a href="#">></a></div></div>
@@ -135,11 +137,14 @@
                 </div>
                 <div class="ui-block-e">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=<%=size%>">>>|</a></div></div>
+                    <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=size%>">>>|</a></div></div>
                     <div class="ui-block-b"></div>
                 </div>
                 </div>
             </div>
+            <a href="discovery.jsp?action=aGestion" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                Retour
+            </a> 
         </div>
         <%@include file="../includes/a_footer.jspf" %>
         </div>
