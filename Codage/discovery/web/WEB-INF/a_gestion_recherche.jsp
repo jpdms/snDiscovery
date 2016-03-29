@@ -12,17 +12,44 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Gestion</title>
+        <title>Recherche : <%=request.getParameter("recherche")%></title>
         <%@include file="../includes/a_head.jspf"%>
     </head>
 
     <body>
         <div class="page" data-role="page" id="infoUserPage">
             <%@include file="../includes/div_header.jspf" %>
-            <h1>Gestion</h1>
+            <h1>Recherche : <%=request.getParameter("recherche")%></h1>
             <%@include file="../includes/a_user.jspf" %>
         </div>
+        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+        <script>
+            $.validator.addMethod("textOnly", 
+                function(value, element) {  // un car n'est pas alphanumérique
+                    return !/[^a-zA-Z0-9]/.test(value);
+                }, "Que des caractères alphanumériques."
+            );
 
+                    $(document).ready(function () {
+                    $('#formRecherches').validate({
+                        rules: {
+                            recherche: {
+                                minlength: 4, maxlength: 20, textOnly: true, required: true
+                            }
+                        },
+                        messages: {
+                            recherche: {
+                                minlength: "Au moins 4 caractères",
+                                maxlength: "Au max 20 caractères",
+                                required:  "Entrez votre pseudo."
+                            }
+                        },
+                        errorPlacement: function (error, element) {
+                            error.appendTo(element.parent().next());
+                        }
+                    });
+                    });
+        </script>
         <div role="main" id="mainInfoUser" class="ui-content">
             <br/><br/><br/>
             <div>
@@ -32,38 +59,43 @@
                     }
                 %>
             </div>
-            <blockquote>
-                <input type="search" value="<%=request.getParameter("recherche")%>" name="search" placeholder="Entrez un pseudo." id="search">
-            </blockquote>
-            <button onclick="window.location.href='discovery.jsp?action=gestionrecherche'">
-                Rechercher
-            </button>
-            <hr/><br/>    
-            <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
-                <h3>Informations sur le compte :</h3>
-                <%
-                    User uRecherche;
-                    int nbrUser;
-                    int size = User.sizeRecherche(con, request.getParameter("recherche"));
-                    String nUser = request.getParameter("nbrUser");
-                    if(nUser==null){
-                        nbrUser=1;
-                    }
+            <form id="formRecherches" method="post" action="discovery.jsp">
+                <blockquote>
+                    <input type="search" name="recherche" placeholder="Entrez un pseudo." value="<%=request.getParameter("recherche")%>" id="recherche">
+                    <span></span>
+                </blockquote>
+                <input name="action" type="hidden" value="aGestionRecherche"/>
+                <button type="submit" name="submitOK" data-theme="a">Recherche</button>
+            </form>
+            <hr/><br/>
+            <%
+                User uRecherche;
+                int nbrUser;
+                int size = User.sizeRecherche(con, request.getParameter("recherche"));
+                String nUser = request.getParameter("nbrUser");
+                if(nUser==null){
+                    nbrUser=1;
+                }
+                else{
+                    nbrUser = Integer.parseInt(nUser);
+                }
+                if(request.getParameter("recherche")!=null){
+                    if(User.findByPseudo(con,nbrUser ,request.getParameter("recherche"))==null){
+                        uRecherche = User.find(con, nbrUser);
+                        size = User.size(con);
+                        %>
+                        <p style="color:red;">Aucun utilisateur ne correspond a : <strong><%=request.getParameter("recherche")%></strong></p>
+                    <%}
                     else{
-                        nbrUser = Integer.parseInt(nUser);
-                    }
-                    if(request.getParameter("recherche")!=null){
-                        if(User.findByPseudo(con,nbrUser ,request.getParameter("recherche"))==null){%>
-                            Erreur de redirection
-                            Au pire on rempli le formulaire suivant avec la premiere entré de la base
-                            et en affichant un texte d'erreur.
-                        <%}
                         uRecherche = User.findByPseudo(con,nbrUser ,request.getParameter("recherche"));
                     }
-                    else{
-                        uRecherche = User.find(con, nbrUser);
-                    }
-                %>
+                }
+                else{
+                    uRecherche = User.find(con, nbrUser);
+                }
+            %>
+            <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
+                <h3>Informations sur le compte :</h3>
                 <table style="margin-left:5%">
                         <tr>
                             <td><strong>Pseudo :</strong></td><td>&emsp;&emsp;<%= uRecherche.getPseudo() %></td>

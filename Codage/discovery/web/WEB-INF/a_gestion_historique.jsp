@@ -33,6 +33,7 @@
         <%
             user = maSession.getUser();
         %>
+        <h1 style="color:red">Cette page n'est pas encore fonctionnelle, voici un exemple d'historique :</h1>
         <center><h2>Historique de : user 1</h2></center>
       <div class="table">
       <table data-role="table" class="ui-responsive ui-shadow">
