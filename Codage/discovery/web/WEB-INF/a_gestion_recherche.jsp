@@ -59,15 +59,6 @@
                     }
                 %>
             </div>
-            <form id="formRecherches" method="post" action="discovery.jsp">
-                <blockquote>
-                    <input type="search" name="recherche" placeholder="Entrez un pseudo." value="<%=request.getParameter("recherche")%>" id="recherche">
-                    <span></span>
-                </blockquote>
-                <input name="action" type="hidden" value="aGestionRecherche"/>
-                <button type="submit" name="submitOK" data-theme="a">Recherche</button>
-            </form>
-            <hr/><br/>
             <%
                 User uRecherche;
                 int nbrUser;
@@ -84,10 +75,14 @@
                         uRecherche = User.find(con, nbrUser);
                         size = User.size(con);
                         %>
-                        <p style="color:red;">Aucun utilisateur ne correspond a : <strong><%=request.getParameter("recherche")%></strong></p>
+                        <h3 style="color:red;">Aucun utilisateur ne correspond a : <strong><%=request.getParameter("recherche")%></strong></h3>
+                        <p>Liste des utilisateurs :</p>
                     <%}
                     else{
                         uRecherche = User.findByPseudo(con,nbrUser ,request.getParameter("recherche"));
+                        %>
+                        <p>Liste des utilisateurs similaires à <%=request.getParameter("recherche")%> :</p>
+                        <%
                     }
                 }
                 else{
@@ -130,22 +125,22 @@
                 Modifier
             </a>
             <hr/>
-            <div class="ui-grid-d" style="margin-left:15px; margin-right: -15px;">
+            <div class="ui-grid-d">
                 <div class="ui-block-a">
                     <div class="ui-grid-a">
                         <div class="ui-block-a"></div>
-                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=1">|<<</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=1">|<<</a></div></div>
                     </div>
                 </div>
                 <div class="ui-block-b">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a href="#"><<</a></div></div>
+                    <div class="ui-block-a"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#"><<</a></div></div>
                     <%            
                     if(nbrUser>1){%>
-                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser-1%>"><</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser-1%>"><</a></div></div>
                     <%}
                     else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a href="#"><</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#"><</a></div></div>
                     <%}
                     %>
                 </div>
@@ -158,25 +153,22 @@
                 <div class="ui-grid-a">
                     <%            
                     if(nbrUser<size){%>
-                        <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser+1%>">></a></div></div>
+                        <div class="ui-block-a"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser+1%>">></a></div></div>
                     <%}
                     else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a href="#">></a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#">></a></div></div>
                     <%}
                     %>
-                    <div class="ui-block-b"><div style="height:60px"><a href="#">>></a></div></div>
+                    <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#">>></a></div></div>
                 </div>
                 </div>
                 <div class="ui-block-e">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=size%>">>>|</a></div></div>
+                    <div class="ui-block-a"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=size%>">>>|</a></div></div>
                     <div class="ui-block-b"></div>
                 </div>
                 </div>
             </div>
-            <a href="discovery.jsp?action=aGestion" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-                Retour
-            </a> 
         </div>
         <%@include file="../includes/a_footer.jspf" %>
         </div>

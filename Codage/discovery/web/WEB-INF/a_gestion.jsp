@@ -34,12 +34,12 @@
                     $('#formRecherche').validate({
                         rules: {
                             recherche: {
-                                minlength: 4, maxlength: 20, textOnly: true, required: true
+                                minlength: 1, maxlength: 20, textOnly: true, required: true
                             }
                         },
                         messages: {
                             recherche: {
-                                minlength: "Au moins 4 caractères",
+                                minlength: "Au moins 1 caractères",
                                 maxlength: "Au max 20 caractères",
                                 required:  "Entrez votre pseudo."
                             }
@@ -116,22 +116,22 @@
                 Modifier
             </a>
             <hr/>
-            <div class="ui-grid-d" style="margin-left:15px; margin-right: -15px;">
+            <div class="ui-grid-d">
                 <div class="ui-block-a">
                     <div class="ui-grid-a">
                         <div class="ui-block-a"></div>
-                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=1">|<<</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=1">|<<</a></div></div>
                     </div>
                 </div>
                 <div class="ui-block-b">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a href="#"><<</a></div></div>
+                    <div class="ui-block-a"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#"><<</a></div></div>
                     <%            
                     if(nbrUser>1){%>
-                        <div class="ui-block-b"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser-1%>"><</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser-1%>"><</a></div></div>
                     <%}
                     else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a href="#"><</a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#"><</a></div></div>
                     <%}
                     %>
                 </div>
@@ -144,18 +144,18 @@
                 <div class="ui-grid-a">
                     <%            
                     if(nbrUser<size){%>
-                        <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser+1%>">></a></div></div>
+                        <div class="ui-block-a"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser+1%>">></a></div></div>
                     <%}
                     else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a href="#">></a></div></div>
+                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#">></a></div></div>
                     <%}
                     %>
-                    <div class="ui-block-b"><div style="height:60px"><a href="#">>></a></div></div>
+                    <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#">>></a></div></div>
                 </div>
                 </div>
                 <div class="ui-block-e">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a href="discovery.jsp?action=aGestion&nbrUser=<%=size%>">>>|</a></div></div>
+                    <div class="ui-block-a"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=size%>">>>|</a></div></div>
                     <div class="ui-block-b"></div>
                 </div>
                 </div>

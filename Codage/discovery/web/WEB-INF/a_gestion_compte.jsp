@@ -27,34 +27,6 @@
         }
         %>
 </div>
-        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <script>
-            $.validator.addMethod("textOnly", 
-                function(value, element) {  // un car n'est pas alphanumérique
-                    return !/[^a-zA-Z0-9]/.test(value);
-                }, "Que des caractères alphanumériques."
-            );
-
-                    $(document).ready(function () {
-                    $('#formRecherch').validate({
-                        rules: {
-                            recherche: {
-                                minlength: 4, maxlength: 20, textOnly: true, required: true
-                            }
-                        },
-                        messages: {
-                            recherche: {
-                                minlength: "Au moins 4 caractères",
-                                maxlength: "Au max 20 caractères",
-                                required:  "Entrez votre pseudo."
-                            }
-                        },
-                        errorPlacement: function (error, element) {
-                            error.appendTo(element.parent().next());
-                        }
-                    });
-                    });
-        </script>
         <div role="main" id="mainInfoUser" class="ui-content">
             <br/><br/><br/>
             <div>
@@ -64,15 +36,6 @@
                     }
                 %>
             </div>
-            <form id="formRecherch" method="post" action="discovery.jsp">
-                <blockquote>
-                    <input type="search" name="recherche" placeholder="Entrez un pseudo." value="<%=request.getParameter("pseudo")%>" id="recherche">
-                    <span></span>
-                </blockquote>
-                <input name="action" type="hidden" value="aGestionRecherche"/>
-                <button type="submit" name="submitOK" data-theme="a">Recherche</button>
-            </form>
-            <hr/><br/> 
         <div style="padding:8px; padding-left:6px; border:1px dotted; margin: 6px; ">
                 <h3>Informations sur le compte :</h3>
                 <%
@@ -128,9 +91,6 @@
             <a href="discovery.jsp?action=gestionhistorique" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Afficher l'historique
             </a>
-            <a href="discovery.jsp?action=aGestion" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-                Retour
-            </a>   
         </div>
         <!-- popup bloquer --> 
         <div id="popupBloquer" data-role="popup" data-theme="a" data-overlay-theme="b"

@@ -6,9 +6,12 @@
 
 package com.persistence;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.nio.file.*;
+import static javafx.scene.input.DataFormat.URL;
 
 /**
  *
@@ -104,6 +107,12 @@ public class Reference {
             return 0;
     }
     
+    public static boolean remplacer(String source, String destination) throws IOException {
+        Path psource = Paths.get(source);
+        Path pdestination = Paths.get(destination);
+        Files.copy(psource, pdestination, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
+        return true;
+    }
     /**
      * Cree et initialise completement Reference
      */
