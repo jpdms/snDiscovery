@@ -22,34 +22,6 @@
             <h1>Recherche : <%=request.getParameter("recherche")%></h1>
             <%@include file="../includes/a_user.jspf" %>
         </div>
-        <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-        <script>
-            $.validator.addMethod("textOnly", 
-                function(value, element) {  // un car n'est pas alphanumérique
-                    return !/[^a-zA-Z0-9]/.test(value);
-                }, "Que des caractères alphanumériques."
-            );
-
-                    $(document).ready(function () {
-                    $('#formRecherches').validate({
-                        rules: {
-                            recherche: {
-                                minlength: 4, maxlength: 20, textOnly: true, required: true
-                            }
-                        },
-                        messages: {
-                            recherche: {
-                                minlength: "Au moins 4 caractères",
-                                maxlength: "Au max 20 caractères",
-                                required:  "Entrez votre pseudo."
-                            }
-                        },
-                        errorPlacement: function (error, element) {
-                            error.appendTo(element.parent().next());
-                        }
-                    });
-                    });
-        </script>
         <div role="main" id="mainInfoUser" class="ui-content">
             <br/><br/><br/>
             <div>
@@ -81,7 +53,7 @@
                     else{
                         uRecherche = User.findByPseudo(con,nbrUser ,request.getParameter("recherche"));
                         %>
-                        <p>Liste des utilisateurs similaires à <%=request.getParameter("recherche")%> :</p>
+                        <p>Liste des utilisateurs similaires à <strong><%=request.getParameter("recherche")%></strong> :</p>
                         <%
                     }
                 }
@@ -129,18 +101,18 @@
                 <div class="ui-block-a">
                     <div class="ui-grid-a">
                         <div class="ui-block-a"></div>
-                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=1">|<<</a></div></div>
+                        <div class="ui-block-b"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=1">|<<</a></div>
                     </div>
                 </div>
                 <div class="ui-block-b">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#"><<</a></div></div>
+                    <div class="ui-block-a"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#"><<</a></div>
                     <%            
                     if(nbrUser>1){%>
-                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser-1%>"><</a></div></div>
+                        <div class="ui-block-b"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser-1%>"><</a></div>
                     <%}
                     else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#"><</a></div></div>
+                        <div class="ui-block-b"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#"><</a></div>
                     <%}
                     %>
                 </div>
@@ -153,18 +125,18 @@
                 <div class="ui-grid-a">
                     <%            
                     if(nbrUser<size){%>
-                        <div class="ui-block-a"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser+1%>">></a></div></div>
+                        <div class="ui-block-a"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=nbrUser+1%>">></a></div>
                     <%}
                     else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#">></a></div></div>
+                        <div class="ui-block-b"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#">></a></div>
                     <%}
                     %>
-                    <div class="ui-block-b"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#">>></a></div></div>
+                    <div class="ui-block-b"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="#">>></a></div>
                 </div>
                 </div>
                 <div class="ui-block-e">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=size%>">>>|</a></div></div>
+                    <div class="ui-block-a"><a data-transition="fade" class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestionRecherche&recherche=<%=request.getParameter("recherche")%>&nbrUser=<%=size%>">>>|</a></div>
                     <div class="ui-block-b"></div>
                 </div>
                 </div>

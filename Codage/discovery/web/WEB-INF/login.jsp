@@ -70,7 +70,7 @@
                 String message = request.getParameter("message");
                 if (message != null) {
                     if (message.equalsIgnoreCase("pbLogin")) {
-                        out.print("Vérifiez le nom et le mot de passe");
+                        out.print("Vérifiez le pseudo et le mot de passe");
                     }
                     else if (message.equalsIgnoreCase("bloque")) {
                         out.print("Votre compte est bloqué.\n"

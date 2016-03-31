@@ -102,6 +102,10 @@
             {
                 request.getRequestDispatcher("WEB-INF/a_gestion_historique.jsp").forward(request, response);
             }
+            else if (action.equals("blacklist"))
+            {
+                request.getRequestDispatcher("WEB-INF/blacklist.jsp").forward(request, response);
+            }
             else if (action.equals("decoadmin"))
             {
                 maSession.setModeExpert(false);

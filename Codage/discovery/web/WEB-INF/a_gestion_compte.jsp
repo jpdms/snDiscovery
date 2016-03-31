@@ -43,6 +43,15 @@
                     User userMod = User.getByPseudo(con, pUser);
                 %>
                 <table style="margin-left:5%">
+                        <%
+                        if(userMod.isBlocked()){
+                        %>
+                            <tr>
+                                <td><strong style="color:red">Cette utilisateur est blacklisté.</strong></td>
+                            </tr>
+                        <%
+                        }
+                        %>
                         <tr>
                             <td><strong>Pseudo :</strong></td><td>&emsp;&emsp;<%= userMod.getPseudo() %></td>
                         </tr>
@@ -76,10 +85,24 @@
         <!--- Ligne avec 2 boutons :-->
         <br/>
         <div class="ui-grid-a">
-            <div class="ui-block-a">
-                <a href="#popupBloquer" id="bloquer" data-rel="popup" data-position-to="window" 
-                class="ui-btn ui-corner-all ui-shadow">Bloquer</a>
-            </div> 
+            <%
+            if(userMod.isBlocked()){
+            %>
+                <div class="ui-block-a">
+                    <a href="#popupDebloquer" id="bloquer" data-rel="popup" data-position-to="window" 
+                    class="ui-btn ui-corner-all ui-shadow">Debloquer</a>
+                </div> 
+            <%
+            }
+            else{
+            %>
+                <div class="ui-block-a">
+                    <a href="#popupBloquer" id="bloquer" data-rel="popup" data-position-to="window" 
+                    class="ui-btn ui-corner-all ui-shadow">Bloquer</a>
+                </div> 
+            <%
+            }
+            %>
             <div class="ui-block-b">
                 <a href="#popupGrade" id="btnReference" data-rel="popup" data-position-to="window"
                    data-role="button"  data-transition="pop" >Changer de grade</a>
@@ -103,7 +126,28 @@
                 Êtes vous sur de bloquer cette personne ? 
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="#" id="btnOui" data-rel="back" data-position-to="window" 
+                        <a href="discovery.jsp?action=blacklist&pseudo=<%=userMod.getPseudo()%>&mod=true" id="btnOui" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Oui</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Non</a>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <!-- popup Debloquer --> 
+        <div id="popupDebloquer" data-role="popup" data-theme="a" data-overlay-theme="b"
+         class="ui-corner-all" data-corners="true" data-position-to="origin">
+            <br/>
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+        ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
+            <div class="mesPopups">
+                <u><strong><center> Attention </center> </strong></u><br/>
+                Êtes vous sur de debloquer cette personne ? 
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="disco" id="btnOui" data-rel="back" data-position-to="window" 
                         class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Oui</a>
                     </div>
                     <div class="ui-block-b">

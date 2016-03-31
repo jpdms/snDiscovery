@@ -120,42 +120,48 @@
                 <div class="ui-block-a">
                     <div class="ui-grid-a">
                         <div class="ui-block-a"></div>
-                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=1">|<<</a></div></div>
+                        <div class="ui-block-b"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=1">|<<</a></div>
                     </div>
                 </div>
                 <div class="ui-block-b">
-                <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#"><<</a></div></div>
-                    <%            
-                    if(nbrUser>1){%>
-                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser-1%>"><</a></div></div>
-                    <%}
-                    else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#"><</a></div></div>
-                    <%}
-                    %>
-                </div>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-b">
+                            <a class="ui-btn ui-corner-all ui-shadow" href="#"><<</a>
+                        </div>
+                        <%            
+                        if(nbrUser>1){%>
+                            <div class="ui-block-b">
+                                <a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser-1%>"><</a>
+                            </div>
+                        <%}
+                        else{%>
+                            <div class="ui-block-b">
+                                <a class="ui-btn ui-corner-all ui-shadow" href="#"><</a>
+                            </div>
+                        <%}
+                        %>
+                    </div>
                 </div>
                 <div class="ui-block-c">
                     <div class="ui-block-a"></div>
                     <div class="ui-block-b"></div>            
                 </div>
                 <div class="ui-block-d">
-                <div class="ui-grid-a">
-                    <%            
-                    if(nbrUser<size){%>
-                        <div class="ui-block-a"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser+1%>">></a></div></div>
-                    <%}
-                    else{%>
-                        <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#">></a></div></div>
-                    <%}
-                    %>
-                    <div class="ui-block-b"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="#">>></a></div></div>
-                </div>
+                    <div class="ui-grid-a">
+                        <%            
+                        if(nbrUser<size){%>
+                            <div class="ui-block-a"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=nbrUser+1%>">></a></div>
+                        <%}
+                        else{%>
+                            <div class="ui-block-b"><a class="ui-btn ui-corner-all ui-shadow" href="#">></a></div>
+                        <%}
+                        %>
+                        <div class="ui-block-b"><a class="ui-btn ui-corner-all ui-shadow" href="#">>></a></div>
+                    </div>
                 </div>
                 <div class="ui-block-e">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><div style="height:60px"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=size%>">>>|</a></div></div>
+                    <div class="ui-block-a"><a class="ui-btn ui-corner-all ui-shadow" href="discovery.jsp?action=aGestion&nbrUser=<%=size%>">>>|</a></div>
                     <div class="ui-block-b"></div>
                 </div>
                 </div>
