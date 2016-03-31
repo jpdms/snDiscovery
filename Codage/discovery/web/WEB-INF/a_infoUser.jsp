@@ -22,18 +22,10 @@
         <h1>Compte</h1>
         <%@include file="../includes/a_user.jspf" %>
         <%
-        if(!maSession.getCssReload()){
-            maSession.setCssReload(true);
-            %>
-            <script>
-                window.location.reload();
-            </script>
-        <%
-        }
-        if(!maSession.isModeExpert()){
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
-    %>
+            if(!maSession.isModeExpert()){
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        %>
     </div>
     
     <div role="main" id="mainInfoUser" class="ui-content">
@@ -93,15 +85,11 @@
                     </tr>
             </table>
         </div>
-        <a href="../discovery.jsp?action=changerProfil"
-               class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-            Modifier
-        </a><br/>
         <%
         if(user.getGrade()==5){
         %>
-                <a href="compte.jsp"
-                       class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                <a href="discovery.jsp?action=decoadmin"
+                       data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Sortir du mode administrateur !
                 </a><br/><br/>
         <% 

@@ -28,14 +28,6 @@
         <br/>
                 <div>
             <%
-                if(maSession.getCssReload()){
-                    maSession.setCssReload(false);
-                    %>
-                    <script>
-                        window.location.reload();
-                    </script>
-                <%
-                }
                 String message = request.getParameter("message");
                 if (message != null) {
                     if (message.equalsIgnoreCase("pbAdmin")) {
@@ -95,7 +87,7 @@
         %>
                 <br/><br/>
                 <a href="discovery.jsp?action=reqAdmin"
-                       class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                       data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                     Passer en mode administrateur !
                 </a>
                 <br/><br/>
