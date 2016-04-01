@@ -104,7 +104,11 @@
             }
             else if (action.equals("blacklist"))
             {
-                request.getRequestDispatcher("WEB-INF/blacklist.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/a_blacklist.jsp").forward(request, response);
+            }
+            else if (action.equals("changergrade"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_mod_grade.jsp").forward(request, response);
             }
             else if (action.equals("decoadmin"))
             {

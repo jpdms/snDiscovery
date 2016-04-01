@@ -167,15 +167,16 @@
                     <br/>
                     <u><strong><center> Changement de grade </center> </strong></u>   
                     <div>
-                        <form >
-                            <input type="range" name="slider-step" id="slider-step" value="5" min="1" max="5" step="1" data-highlight="true"  />
-                        </form>
+                        <form id="formGrade" method="post" action="discovery.jsp?action=changergrade">
+                            <input type="range" name="grade" id="grade" value="<%=userMod.getGrade()%>" min="1" max="5" step="1" data-highlight="true"  />
+                            <input name="pseudo" id="pseudo" type="hidden" value="<%=userMod.getPseudo()%>"/>
                     </div>
                     <!-- bouton valider et annuler dans le popup changer de grade-->
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
-                            <a href="#" id="btnValider" data-rel="back" data-position-to="window" 
-                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Valider</a>
+                            <a href="javascript:{}" onclick="document.getElementById('formGrade').submit();" id="btnValider" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow">Valider</a>
+                        </form>
                         </div>
                         <div class="ui-block-b">
                             <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
