@@ -31,10 +31,12 @@
     if(mod.equals("true")){
         user.setBlocked(true);
         user.save(con);
+        request.getRequestDispatcher("../discovery.jsp?action=msg&msg=L'utilisateur "+pseudo+" est maintenant bloqué.").forward(request, response);
     }
     else if(mod.equals("false")){
         user.setBlocked(false);
         user.save(con);
+        request.getRequestDispatcher("../discovery.jsp?action=msg&msg=L'utilisateur "+pseudo+" est maintenant débloqué.").forward(request, response);
     }
-    request.getRequestDispatcher("../discovery.jsp?action=gestioncompte&pseudo="+pseudo).forward(request, response);
+    
 %>

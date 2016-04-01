@@ -272,7 +272,7 @@ public class User {
         this.password = password;
         this.mailconfirme = mailconfirme;
         this.grade = grade;
-        this.blocked = false;
+        this.blocked = blocked;
         this.registerDate = (Timestamp)registerDate.clone();
         this.lastVisitDate = (Timestamp)lastVisitDate.clone();
         this.nbCandidates = nbCandidates;
@@ -291,7 +291,7 @@ public class User {
         this.password = password;
         this.mailconfirme = mailconfirme;
         this.grade = 1;
-        this.blocked = false;
+        this.blocked = blocked;
         this.registerDate = currentTimestamp;
         this.lastVisitDate = (Timestamp)currentTimestamp.clone(); 
         this.nbCandidates = 0;

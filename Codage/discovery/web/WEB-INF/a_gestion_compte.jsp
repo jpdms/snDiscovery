@@ -126,8 +126,8 @@
                 Êtes vous sur de bloquer cette personne ? 
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="discovery.jsp?action=blacklist&pseudo=<%=userMod.getPseudo()%>&mod=true" id="btnOui" data-rel="back" data-position-to="window" 
-                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Oui</a>
+                        <a href="discovery.jsp?action=blacklist&pseudo=<%=userMod.getPseudo()%>&mod=true" id="btnOui" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow">Oui</a>
                     </div>
                     <div class="ui-block-b">
                         <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
@@ -147,8 +147,8 @@
                 Êtes vous sur de debloquer cette personne ? 
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="disco" id="btnOui" data-rel="back" data-position-to="window" 
-                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Oui</a>
+                        <a href="discovery.jsp?action=blacklist&pseudo=<%=userMod.getPseudo()%>&mod=false" id="btnOui" data-position-to="window" 
+                        class="ui-btn ui-corner-all ui-shadow">Oui</a>
                     </div>
                     <div class="ui-block-b">
                         <a href="#" id="btnNon" data-rel="back" data-position-to="window" 

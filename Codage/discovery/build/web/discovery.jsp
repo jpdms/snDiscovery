@@ -111,6 +111,10 @@
                 maSession.setModeExpert(false);
                 request.getRequestDispatcher("compte.jsp").forward(request, response);
             }
+            else if (action.equals("msg"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_msg_block.jsp").forward(request, response);
+            }
             else{
                 request.getRequestDispatcher("WEB-INF/a_compte.jsp").forward(request, response);
             }
