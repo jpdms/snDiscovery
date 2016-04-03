@@ -86,6 +86,18 @@
             {
                 request.getRequestDispatcher("WEB-INF/a_actu.jsp").forward(request, response);
             }
+            else if(action.equals("addActu"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_add_actu.jsp").forward(request, response);
+            }
+            else if(action.equals("modActu"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_mod_actu.jsp").forward(request, response);
+            }
+            else if(action.equals("delActu"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_del_actu.jsp").forward(request, response);
+            }
             else if (action.equals("gestioncompte"))
             {
                 request.getRequestDispatcher("WEB-INF/a_gestion_compte.jsp").forward(request, response);

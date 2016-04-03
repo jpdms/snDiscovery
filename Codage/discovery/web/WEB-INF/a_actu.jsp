@@ -46,22 +46,18 @@
                         </a>
                     </div>
                     <div class="ui-block-b">
-                        <a href="#popupDeleteActu" id="btnReference" data-rel="popup" data-position-to="window"
-                       data-role="button"  data-transition="pop" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                        <form id="formDelActu" method="post" action="discovery.jsp?action=delActu">
+                            <input name="id" id="id" type="hidden" value="<%=actu.getId()%>"/>
+                        </form>    
+                        <a href="javascript:{}" onclick="document.getElementById('formDelActu').submit();" id="btnReference" data-position-to="window"
+                       data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                             Supprimer
                         </a>
                     </div>
                 </div>
-                <%
-                        out.print("<h4>");
-                        out.print(Utils.formatDate(actu.getDate()) + " - " + actu.getTitre());
-                        out.println("</h4>");
-                        out.print("<p>");
-                        out.print(actu.getContenu());
-                        out.println("</p>");
-                        out.println("</div>");
-                    }
-                %>
+                <h4><%=Utils.formatDate(actu.getDate()) + " - " + actu.getTitre()%></h4>
+                <p><%=actu.getContenu()%></p>
+                </div><%}%>
             </div>
         </div>
             <!-- popup Ajouter une actualité -->
@@ -76,20 +72,19 @@
                     <p><%@include file="../includes/espace.jspf" %><br><strong>Ajouter une actualité</strong></p>
                 </center>
                 <strong>Titre:</strong>
-                <form>
+                <form id="formAddActu" method="post" action="discovery.jsp?action=addActu">
+                            <input name="pseudo" id="pseudo" type="hidden" value="<%=user.getPseudo()%>"/>
                     <strong>
-                        <textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="Titre"></textarea>
-                </form>
+                        <textarea style="FONT-FAMILY: Verdana" rows=1 name="titre" placeholder="Titre"></textarea>
                  <br>Contenu: 
-                 <form>
-                     <textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="Rédigez ici"></textarea>
-                 </form>
+                     <textarea style="FONT-FAMILY: Verdana" rows=5 name="contenu" placeholder="Rédigez ici"></textarea>
                  <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="#" id="btnEnvoyer" data-rel="back" data-position-to="window" 
+                        <a href="javascript:{}" onclick="document.getElementById('formAddActu').submit();" id="btnEnvoyer" data-position-to="window" 
                         class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
                             Ajouter
                         </a>
+                </form>
                     </div>
                     <div class="ui-block-b">
                         <a href="#" id="btnAnnuler" data-rel="back" data-position-to="window" 
@@ -154,6 +149,9 @@ Ce site propose la mise à disposition quotidiennement d'une banque d'images cen
                 </center></strong></u>
                 <br/>
                 Êtes vous sur de supprimer cette actualité ? 
+                <form id="formDelActu" method="post" action="discovery.jsp?action=delActu">
+                            <input name="pseudo" id="pseudo" type="hidden" value=""/>
+                </form>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <a href="#" id="btnOui" data-rel="back" data-position-to="window" 

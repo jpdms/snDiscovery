@@ -42,6 +42,13 @@ public class Actu {
         lStat.executeUpdate(queryString, Statement.NO_GENERATED_KEYS);
         return actu;
     }
+
+    private Actu(int lId, String lDate, String lTitre, String lContenu) {
+        this.id = lId;
+        this.date = lDate;
+        this.titre = lTitre;
+        this.contenu = lContenu;
+    }
     
     /**
      * update de l'objet user dans la ConnexionMySQL
@@ -66,7 +73,7 @@ public class Actu {
      * @throws java.lang.Exception 
      */
     public boolean delete(Connection con) throws Exception {
-        String queryString = "delete from user where id='" + id + "'";
+        String queryString = "DELETE FROM `actu` WHERE `actu`.`id` = "+id+"";
         Statement lStat = con.createStatement();
         lStat.executeUpdate(queryString);
         return true;
@@ -87,10 +94,11 @@ public class Actu {
         ResultSet lResult = lStat.executeQuery(queryString);
         // y en a t'il au moins un ?
         if (lResult.next()) {
+            int       lId      = lResult.getInt("id");
             String    lDate    = lResult.getString("Date");
             String    lTitre   = lResult.getString("Titre");
             String    lContenu = lResult.getString("Contenu");
-            Actu actu = new Actu(lDate, lTitre, lContenu);
+            Actu actu = new Actu(lId, lDate, lTitre, lContenu);
             return actu;
         }
         else
