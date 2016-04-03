@@ -192,22 +192,24 @@
                ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
             <div class="mesPopups"> 
                 <center><p><%@include file="../includes/espace.jspf" %><br><strong>Envoyer un mail</strong></p></center>
-                <strong> Objet: </strong>
-
-                <form><strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="Ajouter un objet"></textarea></form>
-
-                 <br>Contenu: 
-                 <form><textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="Rédigez ici"></textarea></form>
-                 <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <a href="#" id="btnEnvoyer" data-rel="back" data-position-to="window" 
-                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Envoyer</a>
-                    </div>
-                    <div class="ui-block-b">
-                        <a href="#" id="btnAnnuler" data-rel="back" data-position-to="window" 
-                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Annuler</a>
-                    </div>
-                 </div>
+                <form id="formContact" method="post" action="discovery.jsp?action=gestioncontact">
+                    <input name="pseudo" id="pseudo" type="hidden" value="<%=userMod.getPseudo()%>"/>
+                    <strong> Objet:
+                    <textarea style="FONT-FAMILY: Verdana" rows=1 name="objet" placeholder="Ajouter un objet"></textarea>
+                     <br>
+                     Contenu: </strong>
+                     <textarea style="FONT-FAMILY: Verdana" rows=5 name="contenu" placeholder="Rédigez ici"></textarea>
+                     <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <a href="javascript:{}" onclick="document.getElementById('formContact').submit();" id="btnEnvoyer" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow">Envoyer</a>
+                        </div>
+                        <div class="ui-block-b">
+                            <a href="#" id="btnAnnuler" data-rel="back" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Annuler</a>
+                        </div>
+                     </div>
+                </form>
             </div>
         </div>
     </div>
