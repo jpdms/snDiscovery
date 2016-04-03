@@ -94,6 +94,10 @@
             {
                 request.getRequestDispatcher("WEB-INF/a_mod_actu.jsp").forward(request, response);
             }
+            else if(action.equals("reqModActu"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_req_mod_actu.jsp").forward(request, response);
+            }
             else if(action.equals("delActu"))
             {
                 request.getRequestDispatcher("WEB-INF/a_del_actu.jsp").forward(request, response);

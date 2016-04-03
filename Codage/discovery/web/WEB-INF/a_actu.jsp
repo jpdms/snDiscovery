@@ -40,8 +40,11 @@
                 %>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="#popupModActu" id="btnReference" data-rel="popup" data-position-to="window"
-                       data-role="button"  data-transition="pop" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                        <form id="formModActu<%=actu.getId()%>" method="post" action="discovery.jsp?action=modActu">
+                            <input name="id" id="id" type="hidden" value="<%=actu.getId()%>"/>
+                        </form>    
+                        <a href="javascript:{}" onclick="document.getElementById('formModActu'+<%=actu.getId()%>).submit();" id="btnReference" data-position-to="window"
+                       data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-a">
                             Modifier
                         </a>
                     </div>
@@ -133,39 +136,6 @@ Ce site propose la mise à disposition quotidiennement d'une banque d'images cen
                         </a>
                     </div>
                  </div>
-            </div>
-        </div>
-        <!-- popup Supprimer --> 
-        <div id="popupDeleteActu" data-role="popup" data-theme="a" data-overlay-theme="b"
-         class="ui-corner-all" data-corners="true" data-position-to="origin">
-            <br/>
-            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
-            ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">
-                Fermer
-            </a>
-            <div class="mesPopups">
-                <u><strong><center> 
-                    Attention 
-                </center></strong></u>
-                <br/>
-                Êtes vous sur de supprimer cette actualité ? 
-                <form id="formDelActu" method="post" action="discovery.jsp?action=delActu">
-                            <input name="pseudo" id="pseudo" type="hidden" value=""/>
-                </form>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <a href="#" id="btnOui" data-rel="back" data-position-to="window" 
-                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
-                            Oui
-                        </a>
-                    </div>
-                    <div class="ui-block-b">
-                        <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
-                        class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
-                            Non
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
         <%@include file="../includes/a_footer.jspf" %>

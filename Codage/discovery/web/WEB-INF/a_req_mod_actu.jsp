@@ -25,8 +25,18 @@
         request.getRequestDispatcher("discovery.jsp?action=pbAdminMode").forward(request, response);
     }
     int id = Integer.parseInt(request.getParameter("id"));
+    String titre = request.getParameter("titre");
+    String contenu = request.getParameter("contenu");
+    String as = new String ("'"); 
+    String das = new String("''"); 
+    titre = titre.replace(as, das);
+    contenu = contenu.replace(as, das);
+    String sContenu = new String(contenu.getBytes(), "utf8");
+    String sTitre = new String(titre.getBytes(), "utf8");
     Actu actu = Actu.getById(con, id);
-    
+    actu.setContenu(sContenu);
+    actu.setTitre(sTitre);
+    actu.save(con);
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -65,23 +75,10 @@ http://themeroller.jquerymobile.com
     <div role="main" class="ui-content">
         <br/><br/>
         <br/><br/><br/><br/>
-        <div class="centrer"><h3>Modifier l'actualité :</h3>
-        <strong>Titre:</strong>
-        <form id="formModActu" method="post" action="discovery.jsp?action=reqModActu">
-            <input name="id" id="id" type="hidden" value="<%=actu.getId()%>"/>
-            <textarea style="FONT-FAMILY: Verdana" rows=1 name="titre" placeholder="Titre"><%=actu.getTitre()%></textarea>
-         <br>
-         <strong>Contenu:</strong> 
-            <textarea style="FONT-FAMILY: Verdana" rows=5 name="contenu" placeholder="Rédigez ici"><%=actu.getContenu()%></textarea>
-            <p>La balise < br/ > permet le retour a la ligne.</p>
-            <a href="javascript:{}" onclick="document.getElementById('formModActu').submit();" id="btnEnvoyer" data-position-to="window" 
-                class="ui-btn ui-corner-all ui-shadow">
-                Modifier
-            </a>
-        </form>
-        </div>
-        
+        <div class="centrer"><h1>L'actualité a bien etait modifié.</h1></div>
         <br/><br/>
+        <a href="discovery.jsp?action=aActu" data-ajax="false"
+                     class="ui-btn ui-shadow ui-corner-all ui-btn-a"> OK </a>
         <br/>
         <br/><br/>
         <br/><br/>
