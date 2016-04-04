@@ -25,22 +25,8 @@
         request.getRequestDispatcher("discovery.jsp?action=pbAdminMode").forward(request, response);
     }
     int id = Integer.parseInt(request.getParameter("id"));
-    String titre = request.getParameter("titre");
-    String contenu = request.getParameter("contenu");
-    String as = new String ("'"); 
-    String das = new String("''"); 
-    titre = titre.replace(as, das);
-    contenu = contenu.replace(as, das);
-    as = ("\\"); 
-    das = ("\\\\");
-    titre = titre.replace(as, das);
-    contenu = contenu.replace(as, das);
-    String sContenu = new String(contenu.getBytes(), "utf8");
-    String sTitre = new String(titre.getBytes(), "utf8");
     Actu actu = Actu.getById(con, id);
-    actu.setContenu(sContenu);
-    actu.setTitre(sTitre);
-    actu.save(con);
+    actu.delete(con);
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -79,7 +65,7 @@ http://themeroller.jquerymobile.com
     <div role="main" class="ui-content">
         <br/><br/>
         <br/><br/><br/><br/>
-        <div class="centrer"><h1>L'actualité a bien etait modifié.</h1></div>
+        <div class="centrer"><h1>L'actualité a bien etait supprimé.</h1></div>
         <br/><br/>
         <a href="discovery.jsp?action=aActu" data-ajax="false"
                      class="ui-btn ui-shadow ui-corner-all ui-btn-a"> OK </a>

@@ -25,8 +25,6 @@
         request.getRequestDispatcher("discovery.jsp?action=pbAdminMode").forward(request, response);
     }
     int id = Integer.parseInt(request.getParameter("id"));
-    Actu actu = Actu.getById(con, id);
-    actu.delete(con);
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -65,11 +63,27 @@ http://themeroller.jquerymobile.com
     <div role="main" class="ui-content">
         <br/><br/>
         <br/><br/><br/><br/>
-        <div class="centrer"><h1>L'actualité a bien etait supprimé.</h1></div>
+        <div class="centrer"><h1>Voulez vous vraiment supprimer cette actualités ?</h1></div>
         <br/><br/>
-        <a href="discovery.jsp?action=aActu" data-ajax="false"
-                     class="ui-btn ui-shadow ui-corner-all ui-btn-a"> OK </a>
-        <br/>
+        
+        <div align="center">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                        <form id="formDelActu" method="post" action="discovery.jsp?action=reqDelActu">
+                            <input name="id" id="id" type="hidden" value="<%=id%>"/>
+                        </form>    
+                        <a href="javascript:{}" onclick="document.getElementById('formDelActu').submit();" id="btnReference" data-position-to="window"
+                       data-role="button"  class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                            Supprimer
+                        </a>
+                </div>
+                <div class="ui-block-b">
+                    <a href="discovery.jsp?action=aActu" data-ajax="false"
+                     class="ui-btn ui-shadow ui-corner-all ui-btn-a"> Non </a>
+                </div>
+            </div>
+        </div>
+                     <br/>
         <br/><br/>
         <br/><br/>
         <br/><br/>
