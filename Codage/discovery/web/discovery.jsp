@@ -182,6 +182,9 @@
             else if (action.equals("ajax_candidate")) {
                 request.getRequestDispatcher("WEB-INF/ajax_candidate.jsp").forward(request, response);
             }
+            else if (action.equals("ajax_lastImg")) {
+                request.getRequestDispatcher("WEB-INF/ajax_lastImg.jsp").forward(request, response);
+            }
             else { 
                 session.invalidate();   // fermeture de la session en cours
                 request.getRequestDispatcher("index.jsp").forward(request, response);

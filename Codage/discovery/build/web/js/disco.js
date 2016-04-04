@@ -185,6 +185,18 @@ function initCanvas() {
 function imageSuivante() {
     position = suivant();
     nouvelleImage(position);
+    var imgNom = imagesNoms[position-1];
+    var chemin = (imgNom.charAt(0) == 'F') ? cheminCalern : cheminChili;
+    var nom = imgNom.substring(2, imgNom.length);
+    chemin = chemin + nom + ".jpg";
+    $.ajax({
+        // transmettre les infos de la candidate
+        url  : 'discovery.jsp?action=ajax_lastImg',
+        type : 'POST',
+        data :    'pseudo=' + nom
+                + '&chemin=' + chemin,
+        dataType : 'html',
+    });
 }
 
 function imagePrecedente() {
