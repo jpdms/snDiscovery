@@ -60,6 +60,10 @@ public class Image {
             return null;
     }
     
+    public static Image getByChemin(Connection con){
+    return null;
+    }
+    
     /**
      * retourne l'élément i trié par nom de galaxie
      * @param con

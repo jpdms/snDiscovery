@@ -3,6 +3,8 @@
     Created on : 05 Mai 2014, 16:54:26
     Author     : 
 --%>
+<%@page import="java.io.File"%>
+<%@page import="java.net.URI"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Date"%>
@@ -18,6 +20,7 @@
 
 <body>
 <div class="page" data-role="page" id="discoPage" data-theme="b">
+    <%@include file="includes/user.jspf" %>
     <%-- le script pour s'exécuter doit être dans la page data-role --%>
     <script type="text/javascript" src="js/disco.js"></script>
     <script type="text/javascript">
@@ -36,28 +39,67 @@
             au format "F nom.jpg" ou "C nom.jpg" (pour France ou Chili) 
             de la date par défaut ou celle passée en paramètre.
          */
-    
-        ArrayList<Image> images = Image.getImagesDuJour(con, dateObservation);
-        out.print("var imagesNoms = new Array(");
-        for (int i = 0; i < images.size(); i++) {
-            Image img = images.get(i);
-            if (img.getChemin().equals("Tarot_Calern"))
-                out.print("'F " + img.getGalaxieNom() + "'");
-            else 
-                out.print("'C " + img.getGalaxieNom() + "'");
-            if (i < images.size() - 1)
-                out.print(",");
+        boolean imgExist = false;
+        if (user != null) {
+            String lastImg = user.getLastImg();
+            if(lastImg==null){}
+            else {
+                File f = new File(lastImg);
+                if(f.exists()){
+                    imgExist = true;
+                }
+                else{
+                    imgExist = false;
+                }
+            }
         }
-        out.println(");");
-        // initialise le chemin d'accès aux images d'observation
-        out.print("var cheminCalern = ");
-        Image img = images.get(0);
-        out.println("'/jpeg/Tarot_Calern/" + img.getDate() + "/';");
-        out.print("var cheminChili = ");
-        out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
-        out.print("var cheminRef = '/jpeg/refgal/';");
-        out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
-        out.print("var dateCrt = " + img.getDate());
+        if(imgExist){
+            /* Il reste a decouper le chemin en plusieur variable pour initialiser correctement le script */
+            ArrayList<Image> images = Image.getImagesDuJour(con, dateObservation);
+            out.print("var imagesNoms = new Array(");
+            for (int i = 0; i < images.size(); i++) {
+                Image img = images.get(i);
+                if (img.getChemin().equals("Tarot_Calern"))
+                    out.print("'F " + img.getGalaxieNom() + "'");
+                else 
+                    out.print("'C " + img.getGalaxieNom() + "'");
+                if (i < images.size() - 1)
+                    out.print(",");
+            }
+            out.println(");");
+            // initialise le chemin d'accès aux images d'observation
+            out.print("var cheminCalern = ");
+            Image img = images.get(0);
+            out.println("'/jpeg/Tarot_Calern/" + img.getDate() + "/';");
+            out.print("var cheminChili = ");
+            out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
+            out.print("var cheminRef = '/jpeg/refgal/';");
+            out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
+            out.print("var dateCrt = " + img.getDate());
+        }
+        else{
+            ArrayList<Image> images = Image.getImagesDuJour(con, dateObservation);
+            out.print("var imagesNoms = new Array(");
+            for (int i = 0; i < images.size(); i++) {
+                Image img = images.get(i);
+                if (img.getChemin().equals("Tarot_Calern"))
+                    out.print("'F " + img.getGalaxieNom() + "'");
+                else 
+                    out.print("'C " + img.getGalaxieNom() + "'");
+                if (i < images.size() - 1)
+                    out.print(",");
+            }
+            out.println(");");
+            // initialise le chemin d'accès aux images d'observation
+            out.print("var cheminCalern = ");
+            Image img = images.get(0);
+            out.println("'/jpeg/Tarot_Calern/" + img.getDate() + "/';");
+            out.print("var cheminChili = ");
+            out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
+            out.print("var cheminRef = '/jpeg/refgal/';");
+            out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
+            out.print("var dateCrt = " + img.getDate());
+        }
     %>
     </script>
     
@@ -69,27 +111,21 @@
         <a href="#panelGalaxies" 
            class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-navigation ui-btn-right">
         </a>
-        <%@include file="includes/user.jspf" %>
+        
     </div>
     
     <div role="main" class="ui-content ">
         <br/><br/>
         <div class="mesImages" align="center">
             <%
-                /*
-                    Les sources des deux images à afficher pour observation
-                */
                 Image img1 = Image.find(con, dateObservation, 1);
-                out.println("<a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>");
-                out.println("<img id='imgobs' alt='erreur:image absente' src='/jpeg/" 
-                        + img1.getChemin() + "/" 
-                        + img1.getDate() + "/" 
-                        + img1.getGalaxieNom() + ".jpg'/></a>");
-                // je n'ai pas les images de reférence
-                out.println("<a href='#popupZoomRight' id='clicZoomRight' data-rel='popup'>");
-                out.println("<img id='imgref' alt='.... aucune référence ....' src='/jpeg/refgal/"
-                        + img1.getGalaxieNom() + ".jpg'/></a>");
             %>
+            <a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>
+                <img id='imgobs' alt='erreur:image absente' src='/jpeg/<%=img1.getChemin()%>/<%=img1.getDate()%>/<%=img1.getGalaxieNom()%>.jpg'/>
+            </a>
+            <a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>
+                <img id='imgref' alt='.... aucune référence ....' src='/jpeg/refgal/<%=img1.getGalaxieNom()%>.jpg'/>
+            </a>
         </div>
         <table class="infosTable">
             <td class="texteCentre" id="dateImages"><%= Utils.formatDate(img.getDate())%></td>
