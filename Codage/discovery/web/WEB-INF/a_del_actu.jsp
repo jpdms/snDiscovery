@@ -63,7 +63,7 @@ http://themeroller.jquerymobile.com
     <div role="main" class="ui-content">
         <br/><br/>
         <br/><br/><br/><br/>
-        <div class="centrer"><h1>Voulez vous vraiment supprimer cette actualités ?</h1></div>
+        <div class="centrer"><h1>Voulez-vous vraiment supprimer cette actualité ?</h1></div>
         <br/><br/>
         
         <div align="center">

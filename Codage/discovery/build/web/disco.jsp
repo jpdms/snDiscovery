@@ -39,21 +39,6 @@
             au format "F nom.jpg" ou "C nom.jpg" (pour France ou Chili) 
             de la date par défaut ou celle passée en paramètre.
          */
-        boolean imgExist = false;
-        if (user != null) {
-            String lastImg = user.getLastImg();
-            if(lastImg==null){}
-            else {
-                File f = new File(lastImg);
-                if(f.exists()){
-                    imgExist = true;
-                }
-                else{
-                    imgExist = false;
-                }
-            }
-        }
-        if(imgExist){
             /* Il reste a decouper le chemin en plusieur variable pour initialiser correctement le script */
             ArrayList<Image> images = Image.getImagesDuJour(con, dateObservation);
             out.print("var imagesNoms = new Array(");
@@ -76,30 +61,6 @@
             out.print("var cheminRef = '/jpeg/refgal/';");
             out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
             out.print("var dateCrt = " + img.getDate());
-        }
-        else{
-            ArrayList<Image> images = Image.getImagesDuJour(con, dateObservation);
-            out.print("var imagesNoms = new Array(");
-            for (int i = 0; i < images.size(); i++) {
-                Image img = images.get(i);
-                if (img.getChemin().equals("Tarot_Calern"))
-                    out.print("'F " + img.getGalaxieNom() + "'");
-                else 
-                    out.print("'C " + img.getGalaxieNom() + "'");
-                if (i < images.size() - 1)
-                    out.print(",");
-            }
-            out.println(");");
-            // initialise le chemin d'accès aux images d'observation
-            out.print("var cheminCalern = ");
-            Image img = images.get(0);
-            out.println("'/jpeg/Tarot_Calern/" + img.getDate() + "/';");
-            out.print("var cheminChili = ");
-            out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
-            out.print("var cheminRef = '/jpeg/refgal/';");
-            out.println("'/jpeg/Tarot_Chili/" + img.getDate() + "/';");
-            out.print("var dateCrt = " + img.getDate());
-        }
     %>
     </script>
     

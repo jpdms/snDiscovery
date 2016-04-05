@@ -59,13 +59,13 @@
           <td>Référence</td>
           <td>19/03/2014</td>
           <td>IC739</td>
-          <td style="color:green">Refusé</td>
+          <td style="color:green">Validé</td>
         </tr>        <tr>
           <td>3</td>
           <td>Candidate</td>
           <td>19/03/2014</td>
           <td>IC779</td>
-          <td style="color:green">Refusé</td>
+          <td style="color:green">Validé</td>
         </tr>        <tr>
           <td>4</td>
           <td>Référence</td>

@@ -123,7 +123,7 @@
         ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
             <div class="mesPopups">
                 <u><strong><center> Attention </center> </strong></u><br/>
-                Êtes vous sur de bloquer cette personne ? 
+                Êtes-vous sûr de bloquer cette personne ? 
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <a href="discovery.jsp?action=blacklist&pseudo=<%=userMod.getPseudo()%>&mod=true" id="btnOui" data-position-to="window" 
@@ -144,7 +144,7 @@
         ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color:black;">Fermer</a>
             <div class="mesPopups">
                 <u><strong><center> Attention </center> </strong></u><br/>
-                Êtes vous sur de debloquer cette personne ? 
+                Êtes-vous sûr de débloquer cette personne ? 
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
                         <a href="discovery.jsp?action=blacklist&pseudo=<%=userMod.getPseudo()%>&mod=false" id="btnOui" data-position-to="window" 

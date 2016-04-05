@@ -25,7 +25,7 @@
         <br/>
         
         <img class="tuto3Img" src="images/tuto31.jpg">
-        <div class="tuto2Txt">Evénement cosmique très rare car ressemble à une vraie
+        <div class="tuto2Txt">Événement cosmique très rare, car ça ressemble à une vraie
             étoile. Cependant, on remarque que la forme n'est pas tout à fait celle 
                                               des autres étoiles du champ</div>
         <br/>

@@ -57,7 +57,7 @@
         <form id="formMotDePassePerdu" method="post" onsubmit="infoPopUpMotDePassePerdu();" action="discovery.jsp">
             <br/><br/>Nous allons vous envoyer un nouveau mot de passe.<br/>
             <br/>
-                      Nous vous invitons ensuite a le changer le plus rapidement possible.<br/><br/><br/>
+                      Nous vous invitons ensuite à le changer le plus rapidement possible.<br/><br/><br/>
             <div data-role="fieldcontain">
                 <label for="motDePassePerduPseudo" data-theme="d">Votre pseudo : </label>
                 <input type="text" name="motDePassePerduPseudo" id="motDePassePerduPseudo"

@@ -34,7 +34,7 @@
         <p>En général, l'image est centrée sur la galaxie observée.<br/>
         Dans cet exemple, l'image de gauche présente une supernova (nouvelle 
         étoile à droite du centre de la galaxie).<br/>
-        Avant de soumettre une image candidate, assurez vous bien que ce n'est pas
+        Avant de soumettre une image candidate, assurez-vous bien que ce n'est pas
         autre chose. Par observation des jours précédents, par exemple.<br/>
         A la prochaine page, nous allons vous montrer que ce n'est pas si simple 
         de faire un choix !</p>

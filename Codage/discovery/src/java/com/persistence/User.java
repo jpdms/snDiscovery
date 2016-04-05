@@ -11,7 +11,6 @@ public class User {
     private String    mailconfirme;
     private int       grade;            // son grade de 1 à 5
     private boolean   blocked;          // si on l'a interdit d'accès
-    private String    lastImg;
     private Timestamp registerDate;     // la date de son inscription
     private Timestamp lastVisitDate;    // la date de sa dernière visite
     private int       nbCandidates;     // le nb de dmd de candidates
@@ -69,7 +68,6 @@ public class User {
                 + " `mailconfirme` =" + Utils.toString(mailconfirme) + "," 
                 + " `grade` =" + Utils.toString(grade) + "," 
                 + " `blocked` =" + Utils.toString(blocked) + ","
-                + " `lastImg` =" + Utils.toString(lastImg) + ","
                 + " `registerDate` =" + Utils.toString(registerDate) + "," 
                 + " `lastVisitDate` =" + Utils.toString(lastVisitDate)  + "," 
                 + " `nbCandidates` =" + Utils.toString(nbCandidates)  + "," 
@@ -120,7 +118,7 @@ public class User {
             int       lNbCandidates = lResult.getInt("nbCandidates");
             int       lNbConnexions = lResult.getInt("nbConnexions");
             User      user = new User(lPseudo,lUsername,lEmail,lPassword,lMailConfirme,lGrade,
-                      lBlocked, lLastImg,lRegisterDate,lLastVisitDate,lNbCandidates,
+                      lBlocked, lRegisterDate,lLastVisitDate,lNbCandidates,
                       lNbConnexions);
             return user;
         }
@@ -266,7 +264,7 @@ public class User {
     /**
      * Cree et initialise completement User
      */
-    private User(String pseudo, String username, String email, String password, String mailconfirme, int grade, boolean blocked, String lLastImg, Timestamp registerDate, Timestamp lastVisitDate, int nbCandidates, int nbConnexions) {
+    private User(String pseudo, String username, String email, String password, String mailconfirme, int grade, boolean blocked, Timestamp registerDate, Timestamp lastVisitDate, int nbCandidates, int nbConnexions) {
         this.pseudo = pseudo;
         this.username = username;
         this.email = email;
@@ -351,13 +349,6 @@ public class User {
         this.blocked = blocked;
     }
     
-    public String getLastImg() {
-        return lastImg;
-    }
-
-    public void setLastImg(String lastImg) throws Exception {
-        this.lastImg = lastImg;
-    }
     public Timestamp getRegisterDate() {
         return (Timestamp)registerDate.clone();
     }

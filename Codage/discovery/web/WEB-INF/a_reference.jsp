@@ -33,7 +33,7 @@
                 <img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/IC3900.jpg">
             </a>
         </div>
-        <center><h3>Nouvelle image de référence proposé par : <strong>User2</strong></h3></center>
+        <center><h3>Nouvelle image de référence proposée par : <strong>User2</strong></h3></center>
             <table class="infosTable">
                 <td class="texteCentre" id="dateImages">12/03/2014</td>
                 <td class="texteCentre" id="numImages" >(1/20)</td>
