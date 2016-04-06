@@ -89,6 +89,7 @@
     </div>
         <br/><br/>
         <div class="mesImages" align="center">
+            <br/>
             <%       
                 boolean reprise = false;
                 Image img1 = null;
@@ -113,7 +114,7 @@
             <a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>
                 <img id='imgobs' alt='erreur:image absente' src='/jpeg/<%=img1.getChemin()%>/<%=img1.getDate()%>/<%=img1.getGalaxieNom()%>.jpg'/>
             </a>
-            <a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>
+            <a href='#popupZoomRight' id='clicZoomRight' data-rel='popup'>
                 <img id='imgref' alt='.... aucune référence ....' src='/jpeg/refgal/<%=img1.getGalaxieNom()%>.jpg'/>
             </a>
         </div>
@@ -185,6 +186,9 @@
     
 
     <%@include file="includes/footer.jspf" %>
+    <script type="text/javascript">
+        $("#navbardisco").attr('class', "ui-btn-active");
+    </script>
     
     <!-- panel de calendar -->
     <div id="panelCalendar" data-role="panel" data-position="left"  

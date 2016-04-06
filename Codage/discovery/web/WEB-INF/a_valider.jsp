@@ -3,6 +3,7 @@
     Created on : 05 Mai 2014, 16:54:26
     Author     : 
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Date"%>
@@ -24,19 +25,23 @@
         </div>
 
         <div role="main" class="ui-content ">
+            <%
+                Candidate can = Candidate.findAll(con, 1);
+                Image img = Image.getByCandidat(con, can.getChemin(), can.getNomImage());
+            %>
             <br/><br/><br/>
             <div class="mesImages" align="center">
                 <a href="#popupZoomLeft" id="clicZoomLeft" data-rel="popup" class="ui-link">
-                    <img id="imgobs" alt="erreur:image absente" src="/jpeg/Tarot_Calern/20140319/IC3900.jpg">
+                    <img id="imgobs" alt="erreur:image absente" src="<%=can.getChemin()+can.getNomImage()%>.jpg">
                 </a>
                 <a href="#popupZoomRight" id="clicZoomRight" data-rel="popup" class="ui-link">
-                    <img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/IC3900.jpg">
+                    <img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/<%=can.getNomImage()%>.jpg">
                 </a>
             </div>
             <table class="infosTable">
-                <td class="texteCentre" id="dateImages">12/03/2014</td>
-                <td class="texteCentre" id="numImages" >(1/20)</td>
-                <td class="texteCentre" id="nomGalaxie">IC3900</td>
+                <td class="texteCentre" id="dateImages"><%=can.getDateDisco()%></td>
+                <td class="texteCentre" id="numImages" >(1/<%=Candidate.size(con)%>)</td>
+                <td class="texteCentre" id="nomGalaxie"><%=can.getNomImage()%></td>
             </table>
             <div align="center">
                 <div class="ui-grid-a">
@@ -48,7 +53,7 @@
                     </div>
                     <div class="ui-block-b">
                         <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
-                                    data-role="button">
+                             class="ui-state-disabled" data-role="button">
                             Suivant
                         </a>
                     </div>
@@ -74,21 +79,30 @@
                     </a>
                 </div>
             </div>
-            <div class="ui-grid-a">
+            <div class="ui-grid-b">
                     <div class="ui-block-a" style="text-align:center;">
-                        Proposé par : User2
-                    </div>            
+                        Proposé par : <%=can.getUserPseudo()%>
+                    </div>
                     <div class="ui-block-b" style="text-align:center;">
-                        Le : 29/02/2016 à 14:06
+                    <%
+                        for (int nb = 1; nb <= user.getGrade(); nb++) {
+                        out.print(" <img src='images/star.gif'>");
+                        }
+                    %>
+                    </div>
+                    <div class="ui-block-c" style="text-align:center;">
+                        Le : <%
+                            SimpleDateFormat type = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            java.util.Date date = type.parse(can.getDateDecouverte());
+                            SimpleDateFormat convert = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                            String dateDisco = convert.format(date).toString();
+                        %>
+                        <%=dateDisco%>
                     </div>
             </div>
             <br/>
             <center>
-                <div class="gradeUser">
-                    <img src="images/star.gif">
-                    <img src="images/star.gif">
-                    <img src="images/star.gif">
-                </div>
+
             </center>
             <br/>
             <div class="ui-grid-a">
@@ -152,7 +166,7 @@
             <div class="mesPopups">
                 <h3 id="nomZoomLeft"></h3>
                 <div>
-                    <img id="imgZoomLeft" src="images/black.jpg"/>
+                    <img id="imgZoomLeft" src="<%=can.getChemin()+can.getNomImage()%>.jpg"/>
                 </div>
                 <br/>
             </div>
@@ -168,7 +182,7 @@
             <div class="mesPopups">
                 <h3 id="nomZoomRight"></h3>
                 <div>
-                    <img id="imgZoomRight" src="images/black.jpg"/>
+                    <img id="imgZoomRight" src="/jpeg/refgal/<%=can.getNomImage()%>.jpg"/>
                 </div>
                 <br/>
             </div>
