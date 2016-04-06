@@ -35,6 +35,10 @@
     das = ("\\\\");
     titre = titre.replace(as, das);
     contenu = contenu.replace(as, das);
+    as = ("\""); 
+    das = ("\"\"");
+    titre = titre.replace(as, das);
+    contenu = contenu.replace(as, das);
     String sContenu = new String(contenu.getBytes(), "utf8");
     String sTitre = new String(titre.getBytes(), "utf8");
     Actu actu = Actu.getById(con, id);
