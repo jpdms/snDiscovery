@@ -18,9 +18,12 @@
     <%@include file="includes/head.jspf" %>
 </head>
 
-<body>
+
 <div class="page" data-role="page" id="discoPage" data-theme="b">
-    <%@include file="includes/user.jspf" %>
+    <%
+        com.metier.DiscoSession maSession = (com.metier.DiscoSession)session.getAttribute("maSession");
+        com.persistence.User user = null;
+   %>
     <%-- le script pour s'exécuter doit être dans la page data-role --%>
     <script type="text/javascript" src="js/disco.js"></script>
     <script type="text/javascript">
@@ -63,9 +66,19 @@
             out.print("var dateCrt = " + img.getDate());
     %>
     </script>
-    
     <%@include file="includes/div_header.jspf" %>
         <h1>Découvrir</h1>
+        <center><div data-theme="b">
+        <%       
+            if (maSession != null) {
+                user = maSession.getUser();
+                out.print(" " + user.getPseudo());
+                for (int nb = 1; nb <= user.getGrade(); nb++) {
+                    out.print(" <img src='images/star.gif'>");
+                }
+            }
+        %>
+        </div></center>
         <a href="#panelCalendar" 
            class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-calendar ui-btn-left">
         </a>
@@ -74,12 +87,28 @@
         </a>
         
     </div>
-    
-    <div role="main" class="ui-content ">
         <br/><br/>
         <div class="mesImages" align="center">
+            <%       
+                boolean reprise = false;
+                Image img1 = null;
+                if(user==null){
+                    img1 = Image.find(con, dateObservation, 1);
+                }
+                else{
+                    if(user.getlastImg()=="0"){
+                        img1 = Image.find(con, dateObservation, 1);
+                    }
+                    else{
+                        img1 = Image.getByChemin(con, user.getlastImg(),user.getlastImgGalaxie(),user.getlastImgDate());
+                        reprise = true;
+                        %>
+                        <script>
+                            position = <%=user.getlastImgPos()%>                            
+                        </script>
             <%
-                Image img1 = Image.find(con, dateObservation, 1);
+                    }
+                }
             %>
             <a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>
                 <img id='imgobs' alt='erreur:image absente' src='/jpeg/<%=img1.getChemin()%>/<%=img1.getDate()%>/<%=img1.getGalaxieNom()%>.jpg'/>
@@ -89,16 +118,34 @@
             </a>
         </div>
         <table class="infosTable">
-            <td class="texteCentre" id="dateImages"><%= Utils.formatDate(img.getDate())%></td>
+            <td class="texteCentre" id="dateImages"><%= Utils.formatDate(img1.getDate())%></td>
+            <%
+            if(!reprise){
+            %>
             <td class="texteCentre" id="numImages" >(1/<%= images.size()%>)</td>
-            <td class="texteCentre" id="nomGalaxie"><%= img.getGalaxieNom()%></td>
+            <%
+            }
+            else{
+            %>
+            <td class="texteCentre" id="numImages" >(<%=user.getlastImgPos()%>/<%= images.size()%>)</td>
+            <%
+            }
+            %>
+            <td class="texteCentre" id="nomGalaxie"><%= img1.getGalaxieNom()%></td>
         </table>
         <div align="center">
             <div class="ui-grid-a">
                 <div class="ui-block-a">
+                    <%if(!reprise){%>
                     <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
                                     class="ui-state-disabled"
                                     data-role="button">Précédent</a>
+                    <%
+                    }
+                    else{%>
+                    <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
+                                    data-role="button">Précédent</a>
+                    <%}%>
                 </div>
                 <div class="ui-block-b">
                     <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
@@ -135,7 +182,7 @@
             </div>
             <div class="ui-block-c"></div>
         </div>
-    </div>
+    
 
     <%@include file="includes/footer.jspf" %>
     
@@ -298,5 +345,5 @@
         </div>
     </div>
 </div>
-</body>
+
 </html>

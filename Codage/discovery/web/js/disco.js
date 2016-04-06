@@ -86,30 +86,6 @@ function dmdPseudoPerdu() {
         }
     });
 }
-
-function dmdMotDePassePerdu() {
-    var motDePassePerduPseudo = $("#motDePassePerduPseudo").val();
-    
-    sendingMail = true;
-    $.ajax({
-        url  : 'discovery.jsp?action=motDePassePerduPseudo',
-        type : 'POST',
-        data : 'motDePassePerduPseudo=' + motDePassePerduPseudo,
-        dataType : 'html',
-        success: function(data) {
-            $('.progressBar').hide();
-            $('#popupSendMotDePasse').popup( "option", "dismissible", true );
-            // résout un bug de popup sans sortir de l'app
-            $(location).attr('href',"msgDisco.jsp?msg=" + data);
-        },
-        error : function(resultat, statut, erreur) {
-            $('.progressBar').hide();
-            $('#popupTextSendMotDePasse').text("Impossible de vous envoyer votre mot de passe !");
-            $('#popupSendMotDePasse').popup( "option", "dismissible", true );
-            return false;
-        }
-    });
-}
     
 // Appui sur le bouton de confirmation d'identification d'un candidat
 // il faut d'abord vérifié que le user a pointé l'endroit repéré
@@ -194,7 +170,8 @@ function imageSuivante() {
         url  : 'discovery.jsp?action=ajax_lastImg',
         type : 'POST',
         data :    'pseudo=' + nom
-                + '&chemin=' + chemin,
+                + '&chemin=' + chemin
+                + '&pos=' + position,
         dataType : 'html',
     });
 }
