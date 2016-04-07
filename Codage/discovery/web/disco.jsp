@@ -3,6 +3,11 @@
     Created on : 05 Mai 2014, 16:54:26
     Author     : 
 --%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.nio.file.Files"%>
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.nio.file.Path"%>
 <%@page import="java.io.File"%>
 <%@page import="java.net.URI"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -97,17 +102,23 @@
                     img1 = Image.find(con, dateObservation, 1);
                 }
                 else{
-                    if(user.getlastImg()=="0"){
+                    int test = user.getlastImgPos();
+                    if(test==0){
                         img1 = Image.find(con, dateObservation, 1);
                     }
                     else{
-                        img1 = Image.getByChemin(con, user.getlastImg(),user.getlastImgGalaxie(),user.getlastImgDate());
-                        reprise = true;
-                        %>
-                        <script>
-                            position = <%=user.getlastImgPos()%>                            
-                        </script>
+                        if(Image.existByDate(con, user.getlastImgDate())){
+                            img1 = Image.getByChemin(con, user.getlastImg(),user.getlastImgGalaxie(),user.getlastImgDate());
+                            reprise = true;
+                            %>
+                            <script>
+                                position = <%=user.getlastImgPos()%>                            
+                            </script>
             <%
+                        }
+                        else{
+                            img1 = Image.find(con, dateObservation, 1);   
+                        }
                     }
                 }
             %>

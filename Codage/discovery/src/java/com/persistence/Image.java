@@ -97,6 +97,15 @@ public class Image {
         }
     }
     
+    public static boolean existByDate(Connection con, String date) throws SQLException{
+        String queryString = "select `id` from image "
+            + "where `Date`='"+date+"'";      
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        return lResult.next();
+    }
     /**
      * retourne l'élément i trié par nom de galaxie
      * @param con
