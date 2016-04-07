@@ -3,6 +3,10 @@
     Created on : 05 Mai 2014, 16:54:26
     Author     : 
 --%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.io.File"%>
+<%@page import="java.io.File"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -29,10 +33,26 @@
                 Candidate can = Candidate.findAll(con, 1);
                 Image img = Image.getByCandidat(con, can.getChemin(), can.getNomImage());
             %>
+            <input type="hidden" id="cX" value="<%=can.getX()%>"/>
+            <input type="hidden" id="cY" value="<%=can.getY()%>"/>
             <br/><br/><br/>
             <div class="mesImages" align="center">
                 <a href="#popupZoomLeft" id="clicZoomLeft" data-rel="popup" class="ui-link">
-                    <img id="imgobs" alt="erreur:image absente" src="<%=can.getChemin()+can.getNomImage()%>.jpg">
+                    <canvas width="77" height="77" style="position:absolute;border:1px solid #000000; width: 31.7%;" id="CanvasObs" ></canvas>
+                    <script>
+                        var cX = document.getElementById("cX").value;
+                        var cY = document.getElementById("cY").value;
+                        var c = document.getElementById("CanvasObs");
+                        var ctx = c.getContext("2d");
+                        ctx.strokeStyle="LightCyan";
+                        ctx.rect(218, 218, 219, 219);
+                        ctx.stroke();
+                    </script>
+                    <img name="imgobs" id="imgobs" alt="erreur:image absente" src="<%=can.getChemin()+can.getNomImage()%>.jpg">
+                    <script>
+                        var cWidth = document.getElementById("imgobs").width;
+                        var cHeight = document.getElementById("imgobs").height;
+                    </script>
                 </a>
                 <a href="#popupZoomRight" id="clicZoomRight" data-rel="popup" class="ui-link">
                     <img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/<%=can.getNomImage()%>.jpg">
