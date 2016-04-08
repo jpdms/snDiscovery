@@ -24,8 +24,10 @@
             }
         }
         %>
+        
     </div>            
     <div role="main" class="ui-content">
+        
         <br/><br/>
         <h4>Cette application de science participative (crowdsourcing science) va  
             vous permettre de découvrir des supernovae.</h4>

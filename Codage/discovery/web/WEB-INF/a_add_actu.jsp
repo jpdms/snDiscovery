@@ -72,7 +72,7 @@ http://themeroller.jquerymobile.com
 
 <body>
 <div class="page" data-role="page" id="homePage">
-    <%@include file="../includes/div_header.jspf" %>
+    <%@include file="../includes/a_div_header.jspf" %>
         <h1>Actu</h1>
         <%@include file="../includes/a_user.jspf" %>
     </div>
