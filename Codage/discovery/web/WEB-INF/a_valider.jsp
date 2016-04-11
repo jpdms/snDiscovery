@@ -29,29 +29,23 @@
         </div>
 
         <div role="main" class="ui-content ">
+            <script type="text/javascript" src="js/a_disco.js"></script>
             <%
                 Candidate can = Candidate.findAll(con, 1);
-                Image img = Image.getByCandidat(con, can.getChemin(), can.getNomImage());
             %>
             <input type="hidden" id="cX" value="<%=can.getX()%>"/>
             <input type="hidden" id="cY" value="<%=can.getY()%>"/>
+            <input type="hidden" id="nomGal" value="<%=can.getNomImage()%>"/>
+            <% String tabTele[] = can.getChemin().split("/");%>
+            <input type="hidden" id="nomTele" value="<%=tabTele[2]%>"/>
             <br/><br/><br/>
             <div class="mesImages" align="center">
                 <a href="#popupZoomLeft" id="clicZoomLeft" data-rel="popup" class="ui-link">
-                    <canvas width="77" height="77" style="position:absolute;border:1px solid #000000; width: 31.7%;" id="CanvasObs" ></canvas>
-                    <script>
-                        var cX = document.getElementById("cX").value;
-                        var cY = document.getElementById("cY").value;
-                        var c = document.getElementById("CanvasObs");
-                        var ctx = c.getContext("2d");
-                        ctx.strokeStyle="LightCyan";
-                        ctx.rect(218, 218, 219, 219);
-                        ctx.stroke();
-                    </script>
+                    <canvas style="position:absolute;border:1px solid #000000;" id="CanvasObs" ></canvas>
                     <img name="imgobs" id="imgobs" alt="erreur:image absente" src="<%=can.getChemin()+can.getNomImage()%>.jpg">
                     <script>
-                        var cWidth = document.getElementById("imgobs").width;
-                        var cHeight = document.getElementById("imgobs").height;
+                        window.onload=initcanvas;
+                        window.onresize = resizecanvas;
                     </script>
                 </a>
                 <a href="#popupZoomRight" id="clicZoomRight" data-rel="popup" class="ui-link">
@@ -62,6 +56,9 @@
                 <td class="texteCentre" id="dateImages"><%=can.getDateDisco()%></td>
                 <td class="texteCentre" id="numImages" >(1/<%=Candidate.size(con)%>)</td>
                 <td class="texteCentre" id="nomGalaxie"><%=can.getNomImage()%></td>
+            </table>
+            <table class="infosTable">
+                <td class="texteCentre" id="certitude">Degré de certitude : <%=can.getCertitude()%>/5</td>
             </table>
             <div align="center">
                 <div class="ui-grid-a">
@@ -79,23 +76,17 @@
                     </div>
                 </div>
             </div>
-            <div class="ui-grid-b">
+            <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <a href="#popupHisto" id="btnHisto" data-rel="popup" data-position-to="window" 
+                    <a onclick="afficheHisto()" href="#popupHisto" id="btnHisto" data-rel="popup" data-position-to="window" 
                     class="ui-btn ui-corner-all ui-shadow">
                         Histo
                     </a>
                 </div>
                 <div class="ui-block-b">
-                    <a href="#popupInfos" id="btnInfos" data-rel="popup" data-position-to="window" 
+                    <a onclick="afficheInfos()" href="#popupInfos" id="btnInfos" data-rel="popup" data-position-to="window" 
                     class="ui-btn ui-corner-all ui-shadow">
                         Infos
-                    </a>
-                </div>
-                <div class="ui-block-c">
-                    <a href="#popupBlink" id="btnBlink" data-rel="popup" data-position-to="window" 
-                    class="ui-btn ui-corner-all ui-shadow">
-                        Blink
                     </a>
                 </div>
             </div>
@@ -176,39 +167,7 @@
             </div>
         </div>
 
-        <!-- popup ZoomLeft -->
-        <div id="popupZoomLeft" data-role="popup" data-theme="a" data-overlay-theme="b"
-               class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window">
-            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
-                 ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">
-                Fermer
-            </a>
-            <div class="mesPopups">
-                <h3 id="nomZoomLeft"></h3>
-                <div>
-                    <img id="imgZoomLeft" src="<%=can.getChemin()+can.getNomImage()%>.jpg"/>
-                </div>
-                <br/>
-            </div>
-        </div>
-
-        <!-- popup ZoomRight -->
-        <div id="popupZoomRight" data-role="popup" data-theme="a" data-overlay-theme="b"
-               class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window">
-            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
-                 ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">
-                Fermer
-            </a>
-            <div class="mesPopups">
-                <h3 id="nomZoomRight"></h3>
-                <div>
-                    <img id="imgZoomRight" src="/jpeg/refgal/<%=can.getNomImage()%>.jpg"/>
-                </div>
-                <br/>
-            </div>
-        </div>
-
-            <!-- popup Historique -->
+        <!-- popup Historique -->
         <div id="popupHisto" data-role="popup" data-theme="a"
                class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
@@ -219,16 +178,16 @@
                 <h3 id="nomHisto"></h3>
                 <div id="imgHisto">
                     <div>
-                        <img id="imgHisto1" src="../images/black.jpg"/>
-                        <img id="imgHisto2" src="../images/black.jpg"/>
+                        <img id="imgHisto1" src="images/black.jpg"/>
+                        <img id="imgHisto2" src="images/black.jpg"/>
                     </div>
                     <div>
-                        <img id="imgHisto3" src="../images/black.jpg"/>
-                        <img id="imgHisto4" src="../images/black.jpg"/>
+                        <img id="imgHisto3" src="images/black.jpg"/>
+                        <img id="imgHisto4" src="images/black.jpg"/>
                     </div>
                     <div>
-                        <img id="imgHisto5" src="../images/black.jpg"/>
-                        <img id="imgHisto6" src="../images/black.jpg"/>
+                        <img id="imgHisto5" src="images/black.jpg"/>
+                        <img id="imgHisto6" src="images/black.jpg"/>
                     </div>
                 </div>
             </div>
