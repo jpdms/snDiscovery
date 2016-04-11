@@ -32,6 +32,7 @@
             <script type="text/javascript" src="js/a_disco.js"></script>
             <%
                 Candidate can = Candidate.findAll(con, 1);
+                User userDisco = User.getByPseudo(con, can.getUserPseudo());
             %>
             <input type="hidden" id="cX" value="<%=can.getX()%>"/>
             <input type="hidden" id="cY" value="<%=can.getY()%>"/>
@@ -40,17 +41,13 @@
             <input type="hidden" id="nomTele" value="<%=tabTele[2]%>"/>
             <br/><br/><br/>
             <div class="mesImages" align="center">
-                <a href="#popupZoomLeft" id="clicZoomLeft" data-rel="popup" class="ui-link">
-                    <canvas style="position:absolute;border:1px solid #000000;" id="CanvasObs" ></canvas>
-                    <img name="imgobs" id="imgobs" alt="erreur:image absente" src="<%=can.getChemin()+can.getNomImage()%>.jpg">
-                    <script>
-                        window.onload=initcanvas;
-                        window.onresize = resizecanvas;
-                    </script>
-                </a>
-                <a href="#popupZoomRight" id="clicZoomRight" data-rel="popup" class="ui-link">
-                    <img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/<%=can.getNomImage()%>.jpg">
-                </a>
+                <canvas style="position:absolute;" id="CanvasObs" ></canvas>
+                <img name="imgobs" id="imgobs" alt="erreur:image absente" src="<%=can.getChemin()+can.getNomImage()%>.jpg">
+                <script>
+                    window.onload=initcanvas;
+                    window.onresize = resizecanvas;
+                </script>
+                <img id="imgref" alt=".... aucune référence ...." src="/jpeg/refgal/<%=can.getNomImage()%>.jpg">
             </div>
             <table class="infosTable">
                 <td class="texteCentre" id="dateImages"><%=can.getDateDisco()%></td>
@@ -205,35 +202,34 @@
                     <%@include file="../includes/espace.jspf" %>
                     <p><br/>Voulez-vous valider cette supernova ?<br/><strong>Cette action est irréversible</strong></p>
                 </center>
-                <div>
-                    Changer le grade de l'utilisateur
-                    <form >
-                        <input type="range" name="slider-step" id="slider-step" value="5" min="1" max="5" step="1" data-highlight="true"  />
-                    </form>
-                </div>
-                <br/>
-                Envoyer un mail à l'utilisateur
-                <br/><br/>
-                <strong>Objet:</strong>
-                <form>
-                    <strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="">
-Votre proposition du supernova a été validée !</textarea>
-                </form>
-                <br>
-                Contenu: 
-                <form>
-                    <textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="">Bonjour,
-
-Félicitation vous êtes le premier a trouver cette supernova.
-                    </textarea>
-                </form>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a">
-                        <a href="#" id="btnOui" data-rel="true" data-position-to="window" 
-                           class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
-                            Valider
-                        </a>
+                <form id="formValider" method="post" action="discovery.jsp?action=validerSupernova">
+                    <input type="hidden" name="userDisco" id="userDisco" value="<%=userDisco.getPseudo()%>"/>
+                    <input type="hidden" name="nomImage" id="nomImage" value="<%=can.getNomImage()%>"/>
+                    <input type="hidden" name="chemin" id="chemin" value="<%=can.getChemin()%>"/>
+                    <input type="hidden" name="x" id="x" value="<%=can.getX()%>"/>
+                    <input type="hidden" name="y" id="y" value="<%=can.getY()%>"/>
+                    <input type="hidden" name="dateDecouverte" id="dateDecouverte" value="<%=can.getDateDecouverte()%>"/>
+                    <div>
+                        Changer le grade de l'utilisateur
+                            <input type="range" name="grade" id="grade" value="<%=userDisco.getGrade()%>" min="1" max="5" step="1" data-highlight="true" />
                     </div>
+                    <br/>
+                    Envoyer un mail à l'utilisateur
+                    <br/><br/>
+                    <strong>Objet:</strong>
+                        <strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="objet" id="objet" placeholder="">
+    Votre proposition du supernova a été validée !</textarea>
+                    <br>
+                    <strong>Contenu:</strong>
+                        <textarea style="FONT-FAMILY: Verdana" rows=5 name="contenu" id="contenu" placeholder="">Bonjour,
+
+    Félicitation vous êtes le premier a trouver cette supernova.
+                        </textarea>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <button id="btnConfirmCandidat" class="ui-btn ui-corner-all">Confirmation</button>
+                   </div>
+                </form>         
                     <div class="ui-block-b">
                         <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
@@ -286,7 +282,17 @@ En effet...</textarea>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
+        <!-- popup message en mode modal-->
+        <div id="popupSendMail" data-role="popup" data-theme="a" data-overlay-theme="b"
+             class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window" data-dismissible="false">
+            <div class="mesPopups" align="center">
+                <br/>
+                <h3 id="popupTextSendMail">Attendez, je transmets votre candidate !</h3>
+                <div class="progressBar"><div></div></div>
+                <br/>
+            </div>
+        </div>
     </div>
     </div>
     </body>

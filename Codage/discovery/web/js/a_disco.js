@@ -1,15 +1,15 @@
-var timer;
-var x;
-var images = new Array();
-
-// --------------------- callback ----------------------- 
-$(function() {
-    $("#popupBlink").on("popupafteropen", startBlink);
+ $(function() {
+    $("#btnConfirmCandidat").on("click", confirmCandidat);
 });
 
-
-
-function resizecanvas(){ 
+function popupSendMail() {
+    if (sendingMail) {
+        sendingMail = false;
+        $('#popupSendMail').popup('open');
+    }
+}
+ 
+ function resizecanvas(){ 
     var cWidth = document.getElementById("imgobs").width
     var cHeight = document.getElementById("imgobs").height;
     $("#CanvasObs").attr('width',  cWidth); //max width
@@ -110,6 +110,29 @@ function afficheHisto() {
         },
         error : function(resultat, statut, erreur) {
             alert("Impossible de récupérer les infos");
+        }
+    });
+}
+
+
+function confirmCandidat() {
+    sendingMail = true;
+    $.ajax({
+        // transmettre les infos de la candidate
+        url  : 'discovery.jsp?action=validerSupernova',
+        type : 'POST',
+        dataType : 'html',
+        success: function(data) {
+            $('.progressBar').hide();
+            $('#popupSendMail').popup( "option", "dismissible", true );
+            // résout un bug de popup sans sortir de l'app
+            $(location).attr('href',"msgDisco.jsp?msg=" + data);
+        },
+        error : function(resultat, statut, erreur) {
+            $('.progressBar').hide();
+            $('#popupTextSendMail').text("Impossible de valider cette candidate !");
+            $('#popupSendMail').popup( "option", "dismissible", true );
+            return false;
         }
     });
 }
