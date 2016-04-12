@@ -74,6 +74,10 @@
             {
                 request.getRequestDispatcher("WEB-INF/a_valider.jsp").forward(request, response);
             }
+            else if(action.equals("aVal_null"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_valider_null.jsp").forward(request, response);
+            }
             else if(action.equals("validerSupernova"))
             {
                 request.getRequestDispatcher("WEB-INF/a_req_valider.jsp").forward(request, response);
@@ -81,6 +85,14 @@
             else if(action.equals("validerSupernova_confirme"))
             {
                 request.getRequestDispatcher("WEB-INF/a_req_valider_confirme.jsp").forward(request, response);
+            }
+            else if(action.equals("refuserSupernova"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_req_refuser.jsp").forward(request, response);
+            }
+            else if(action.equals("refuserSupernova_confirme"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_req_refuser_confirme.jsp").forward(request, response);
             }
             else if(action.equals("aGestion"))
             {

@@ -409,7 +409,18 @@ public class User {
     public void setNbCandidates(int nbCandidates) throws Exception {
         this.nbCandidates = nbCandidates;
     }
-
+    
+    public int getNbDecouverte(Connection con) throws SQLException {
+        String queryString = "select count(*) as count from decouverte WHERE userPseudo='"+this.pseudo+"'";
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        if (lResult.next())
+            return (lResult.getInt("count"));
+        else 
+            return 0;
+    }
     public int getNbConnexions() {
         return nbConnexions;
     }

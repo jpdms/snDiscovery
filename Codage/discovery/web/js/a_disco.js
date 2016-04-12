@@ -1,5 +1,6 @@
  $(function() {
     $("#btnConfirmCandidat").on("click", confirmCandidat);
+    $("#btnRefuserCandidat").on("click", refuserCandidat);
 });
 
 function popupSendMail() {
@@ -131,6 +132,28 @@ function confirmCandidat() {
         error : function(resultat, statut, erreur) {
             $('.progressBar').hide();
             $('#popupTextSendMail').text("Impossible de valider cette candidate !");
+            $('#popupSendMail').popup( "option", "dismissible", true );
+            return false;
+        }
+    });
+}
+
+function refuserCandidat() {
+    sendingMail = true;
+    $.ajax({
+        // transmettre les infos de la candidate
+        url  : 'discovery.jsp?action=refuserSupernova',
+        type : 'POST',
+        dataType : 'html',
+        success: function(data) {
+            $('.progressBar').hide();
+            $('#popupSendMail').popup( "option", "dismissible", true );
+            // résout un bug de popup sans sortir de l'app
+            $(location).attr('href',"msgDisco.jsp?msg=" + data);
+        },
+        error : function(resultat, statut, erreur) {
+            $('.progressBar').hide();
+            $('#popupTextSendMail').text("Impossible de refuser cette candidate !");
             $('#popupSendMail').popup( "option", "dismissible", true );
             return false;
         }

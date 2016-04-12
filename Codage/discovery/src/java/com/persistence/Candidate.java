@@ -288,24 +288,6 @@ public class Candidate {
         this.nomImage = nomImage;
         this.chemin = chemin;
     }
-    
-        static public Candidate decouverte(Connection con, String userPseudo, String nomImage, String chemin,
-         String dateDecouverte, int x, int y) throws Exception {
-        String queryString =
-         "insert into decouverte (`date`,`x`,`y`,`ra`,"
-            + " `userPseudo`, `nomImage`, `chemin`) "
-            + " values ("
-                + Utils.toString(dateDecouverte) + "," 
-                + Utils.toString(x) + "," 
-                + Utils.toString(y) + "," 
-                + Utils.toString(userPseudo) + "," 
-                + Utils.toString(nomImage) + ","
-                + Utils.toString(chemin) + ")";
-        Statement lStat = con.createStatement();
-        // System.out.println(queryString);
-        lStat.executeUpdate(queryString, Statement.NO_GENERATED_KEYS);
-        return null;
-    }
         
     // --------------------- les assesseurs ----------------------------
     public Timestamp getDate() {
@@ -355,6 +337,7 @@ public class Candidate {
     public void setDec(Double dec) {
         this.dec = dec;
     }
+   
 
     public String getUserPseudo() {
         return userPseudo;

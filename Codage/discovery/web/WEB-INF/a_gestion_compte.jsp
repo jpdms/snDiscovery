@@ -77,7 +77,7 @@
                             <td><strong>Nombre de candidates : </strong></td><td>&emsp;&emsp;<%= userMod.getNbCandidates() %></td>
                         </tr>                
                         <tr>
-                            <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;0</td>
+                            <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;<%= userMod.getNbDecouverte(con) %></td>
                         </tr>
                 </table>
         </div>

@@ -22,36 +22,31 @@
     String contenu     = request.getParameter("contenu");
     String nomImage     = request.getParameter("nomImage");
     String chemin     = request.getParameter("chemin");
-    String dateDecouverte     = request.getParameter("dateDecouverte");
     String certitude     = request.getParameter("certitude");
-    String x = request.getParameter("x");
-    String y = request.getParameter("y");
+    String dateDecouverte     = request.getParameter("dateDecouverte");
     User uMod = User.getByPseudo(con, pseudo);
+    // mod grade
     // lui envoyer le mail de confirmation
     String mail = contenu;
     String to = uMod.getEmail();
     boolean ok = SmtpSend.sendMessage(objet, mail, to);  
     if (ok) {
-        uMod.save(con); 
-        // ajout decouverte dans BDD
         String queryString =
-         "INSERT INTO `decouverte` (`userPseudo`, `nomImage`, `chemin`, `date`, `certitude`,`x`, `y`) "
+         "INSERT INTO `canrefuser` (`userPseudo`, `nomImage`, `chemin`, `date`, `certitude`) "
          + "VALUES ("+Utils.toString(pseudo)+","
                 + ""+Utils.toString(nomImage) +","
                 + ""+Utils.toString(chemin) +","
-                + ""+Utils.toString(dateDecouverte)+","
-                + ""+Utils.toString(certitude)+","
-                + ""+Utils.toString(x)+","
-                + ""+Utils.toString(y)+")";
+                + ""+Utils.toString(dateDecouverte) +","
+                + ""+Utils.toString(certitude)+")";
         Statement lStat = con.createStatement();
         lStat.executeUpdate(queryString, Statement.NO_GENERATED_KEYS);
         queryString = "DELETE FROM `candidate` WHERE `userPseudo` = '"+pseudo+"' AND `nomImage` = '"+nomImage+"' AND `date` = '"+dateDecouverte+"'";
         lStat = con.createStatement();
         lStat.executeUpdate(queryString, Statement.NO_GENERATED_KEYS);
-        request.getRequestDispatcher("../discovery.jsp?action=validerSupernova_confirme&msg=Le mail a correctement été envoyé et la supernova correctement validée.").forward(request, response);
+        request.getRequestDispatcher("../discovery.jsp?action=refuserSupernova_confirme&msg=Le mail a correctement été envoyé et la supernova correctement refusée.").forward(request, response);
     }
     else {
-        request.getRequestDispatcher("../discovery.jsp?action=validerSupernova_confirme&msg=Le mail n'a pas été correctement envoyé et la supernova n'a pas été correctement validée.").forward(request, response);
+        request.getRequestDispatcher("../discovery.jsp?action=refuserSupernova_confirme&msg=Le mail n'a pas été correctement envoyé et la supernova n'a pas été correctement refusée.").forward(request, response);
     }
     
 %>

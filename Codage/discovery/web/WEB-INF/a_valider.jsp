@@ -31,9 +31,19 @@
         <div role="main" class="ui-content ">
             <script type="text/javascript" src="js/a_disco.js"></script>
             <%
-                Candidate can = Candidate.findAll(con, 1);
+                int i=1;
+                String idMove = request.getParameter("idMove");
+                if(idMove!=null){
+                    i = Integer.parseInt(idMove);
+                }
+                Candidate can = Candidate.findAll(con, i);
+                if(can == null){
+                    request.getRequestDispatcher("../discovery.jsp?action=aVal_null").forward(request, response);
+                }
                 User userDisco = User.getByPseudo(con, can.getUserPseudo());
+                int totalSize = Candidate.size(con);
             %>
+            <input type="hidden" id="i" value="<%=i%>"/>
             <input type="hidden" id="cX" value="<%=can.getX()%>"/>
             <input type="hidden" id="cY" value="<%=can.getY()%>"/>
             <input type="hidden" id="nomGal" value="<%=can.getNomImage()%>"/>
@@ -51,7 +61,7 @@
             </div>
             <table class="infosTable">
                 <td class="texteCentre" id="dateImages"><%=can.getDateDisco()%></td>
-                <td class="texteCentre" id="numImages" >(1/<%=Candidate.size(con)%>)</td>
+                <td class="texteCentre" id="numImages" >(<%=i%>/<%=Candidate.size(con)%>)</td>
                 <td class="texteCentre" id="nomGalaxie"><%=can.getNomImage()%></td>
             </table>
             <table class="infosTable">
@@ -60,16 +70,36 @@
             <div align="center">
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
+                        <%
+                        if(i>1){
+                        %>
+                        <a href="discovery.jsp?action=aVal&idMove=<%=i-1%>" data-ajax="false" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
+                           data-role="button">
+                            Précédent
+                        </a>
+                        <%}
+                        else{%>
                         <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
                            class="ui-state-disabled" data-role="button">
                             Précédent
-                        </a>
+                        </a>  
+                        <%}%>
                     </div>
                     <div class="ui-block-b">
+                        <%
+                        if(i+1>totalSize){%>
                         <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
                              class="ui-state-disabled" data-role="button">
                             Suivant
                         </a>
+                        <%}
+                        else{%>
+                        <a href="discovery.jsp?action=aVal&idMove=<%=i+1%>" data-ajax="false" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
+                             data-role="button">
+                            Suivant
+                        </a>
+                        <%}
+                        %>
                     </div>
                 </div>
             </div>
@@ -206,6 +236,7 @@
                     <input type="hidden" name="userDisco" id="userDisco" value="<%=userDisco.getPseudo()%>"/>
                     <input type="hidden" name="nomImage" id="nomImage" value="<%=can.getNomImage()%>"/>
                     <input type="hidden" name="chemin" id="chemin" value="<%=can.getChemin()%>"/>
+                    <input type="hidden" name="certitude" id="certitude" value="<%=can.getCertitude()%>"/>
                     <input type="hidden" name="x" id="x" value="<%=can.getX()%>"/>
                     <input type="hidden" name="y" id="y" value="<%=can.getY()%>"/>
                     <input type="hidden" name="dateDecouverte" id="dateDecouverte" value="<%=can.getDateDecouverte()%>"/>
@@ -218,25 +249,25 @@
                     <br/><br/>
                     <strong>Objet:</strong>
                         <strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="objet" id="objet" placeholder="">
-    Votre proposition du supernova a été validée !</textarea>
+Votre proposition du supernova a été validée !</textarea>
                     <br>
                     <strong>Contenu:</strong>
                         <textarea style="FONT-FAMILY: Verdana" rows=5 name="contenu" id="contenu" placeholder="">Bonjour,
 
-    Félicitation vous êtes le premier a trouver cette supernova.
+Félicitation vous êtes le premier a trouver cette supernova.
                         </textarea>
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
-                            <button id="btnConfirmCandidat" class="ui-btn ui-corner-all">Confirmation</button>
+                            <button id="btnConfirmCandidat" class="ui-btn ui-corner-all">Valider</button>
                    </div>
                 </form>         
-                    <div class="ui-block-b">
-                        <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
-                           class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
-                            Annuler
-                        </a>
+                        <div class="ui-block-b">
+                            <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
+                               class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
+                                Annuler
+                            </a>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -249,6 +280,12 @@
             </a>
             <div class="mesPopups">
                 <%@include file="../includes/espace.jspf" %>
+            <form id="formRefuser" method="post" action="discovery.jsp?action=refuserSupernova">
+                <input type="hidden" name="userDisco" id="userDisco" value="<%=userDisco.getPseudo()%>"/>
+                <input type="hidden" name="nomImage" id="nomImage" value="<%=can.getNomImage()%>"/>
+                <input type="hidden" name="chemin" id="chemin" value="<%=can.getChemin()%>"/>
+                <input type="hidden" name="dateDecouverte" id="dateDecouverte" value="<%=can.getDateDecouverte()%>"/>
+                <input type="hidden" name="certitude" id="certitude" value="<%=can.getCertitude()%>"/>
                 <center>
                     <p><br/>Voulez-vous refuser cette supernova ? <br/><strong>Cette action est irréversible</strong></p>
                 </center>
@@ -257,23 +294,18 @@
                 <br/><br/>
                 <strong>Objet:</strong>
                 <form>
-                    <strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="textarea" placeholder="">Votre proposition du supernova a été refusée !</textarea>
-                </form>
+                    <strong><textarea style="FONT-FAMILY: Verdana" rows=1 name="objet" id="objet" placeholder="">Votre proposition du supernova a été refusée !</textarea>
+                
                 <br>
                 Contenu: 
-                <form>
-                    <textarea style="FONT-FAMILY: Verdana" rows=5 name="textarea" placeholder="">Bonjour,
-
+                    <textarea style="FONT-FAMILY: Verdana" rows=5 name="contenu" id="contenu" placeholder="">Bonjour,
 Désolé mais votre proposition de supernova n'est pas correcte.
 En effet...</textarea>
-                </form>
                 <div class="ui-grid-a">
                     <div class="ui-block-a">
-                        <a href="#" id="btnOui" data-rel="true" data-position-to="window" 
-                           class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
-                            Valider
-                        </a>
+                        <button id="btnRefuserCandidat" class="ui-btn ui-corner-all">Valider</button>
                     </div>
+            </form>      
                     <div class="ui-block-b">
                         <a href="#" id="btnNon" data-rel="back" data-position-to="window" 
                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">
