@@ -200,7 +200,6 @@ public class User {
         else 
             return null;
     }
-    
     /**
      * Indique si le nom d'une personne existe déjà ou non ?
      * Pour unicité du nom

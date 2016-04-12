@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/js/disco.js</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_valider.jsp</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/ajax_lastImages.jsp</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/disco.jsp</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/js/a_disco.js</file>
+            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_req_refuser.jsp</file>
+            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion_compte.jsp</file>
+            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion_historique.jsp</file>
+            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/src/java/com/persistence/Candidate.java</file>
         </group>
     </open-files>
 </project-private>

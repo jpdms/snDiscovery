@@ -3,6 +3,8 @@
     Created on : 28 mai 2014, 14:54:51
     Author     : jpdms
 --%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="com.persistence.Utils"%>
 <%@page import="com.persistence.User"%>
 <%@page import="com.metier.DiscoSession"%>
@@ -31,10 +33,24 @@
         <br/><br/>
         <br/>
         <%
-            user = maSession.getUser();
+            String pUser = request.getParameter("pseudo");
+            User userMod = User.getByPseudo(con, pUser);
+            con = (Connection) session.getAttribute("con");
+            if (con == null)
+                con = ConnexionMySQL.newConnexion();
+            session.setAttribute("con", con);
+            Statement statement = con.createStatement();
+            ResultSet candidate = statement.executeQuery("select * from candidate "
+                                + " where userPseudo='" + userMod.getPseudo() + "'"
+                                    + " order by `date`");
+            ResultSet canrefuser = statement.executeQuery("select * from candidate "
+                                + " where userPseudo='" + userMod.getPseudo() + "'"
+                                    + " order by `date`");
+            ResultSet decouverte = statement.executeQuery("select * from candidate "
+                                + " where userPseudo='" + userMod.getPseudo() + "'"
+                                    + " order by `date`");
         %>
-        <h1 style="color:red">Cette page n'est pas encore fonctionnelle, voici un exemple d'historique :</h1>
-        <center><h2>Historique de : user 1</h2></center>
+      <center><h2>Historique de : <%=userMod.getPseudo()%></h2></center>
       <div class="table">
       <table data-role="table" class="ui-responsive ui-shadow">
       <thead>
@@ -47,6 +63,17 @@
         </tr>
       </thead>
       <tbody>
+        <% int cloop=0;
+        while(candidate.next()){
+            cloop=cloop+1;%>
+          <tr>
+            <td><%=cloop%></td>
+            <td><%=candidate.getString("chemin")%></td>
+            <td>19/03/2014</td>
+            <td>IC3900</td>
+            <td style="color:red">Refusé</td>
+          </tr>
+        <%} %>  
         <tr>
           <td>1</td>
           <td>Référence</td>
