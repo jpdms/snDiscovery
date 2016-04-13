@@ -192,6 +192,9 @@
                 }
                 else {request.getRequestDispatcher("compte.jsp").forward(request, response);}
             }
+            else if (action.equals("reqAddReference")) {
+                request.getRequestDispatcher("WEB-INF/reqReference.jsp").forward(request, response);
+            }
             else if (action.equals("pbAdminMode")) {
                 request.getRequestDispatcher("WEB-INF/infoUser.jsp?message=pbAdminMode").forward(request, response);
             }

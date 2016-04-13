@@ -24,7 +24,7 @@
 </head>
 
 
-<div class="page" data-role="page" id="discoPage" data-theme="b">
+<div style="background-color:#061532 /*{b-page-background-color}*/;" class="page" data-role="page" id="discoPage" data-theme="b">
     <%
         com.metier.DiscoSession maSession = (com.metier.DiscoSession)session.getAttribute("maSession");
         com.persistence.User user = null;
@@ -179,27 +179,29 @@
                 class="ui-btn ui-corner-all ui-shadow">Blink</a>
             </div>
         </div>
-        
-        <div class="ui-grid-b">
-            <div class="ui-block-a"></div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+               <%
+                    if (user != null) {%>
+                         <a href="#popupCandidat" id="btnCandidat" data-rel="popup" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Disco</a>
+                    <%}
+                %>
+            </div>
             <div class="ui-block-b">
-                <%
+               <%
                     if (user != null) {
-                        out.println("<a href='#popupCandidat' id='btnCandidat' "
-                                + "data-rel='popup' data-position-to='window' "
-                                + "class='ui-btn ui-corner-all ui-shadow' "
-                                + "data-transition='pop'>Disco</a>");
+                        if(user.getGrade()>=3){ %>
+                         <a href="#popupCandidatRef" id="btnCandidatRef" data-rel="popup" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Référence</a>
+                    <%}
                     }
                 %>
             </div>
-            <div class="ui-block-c"></div>
         </div>
     
 
     <%@include file="includes/footer.jspf" %>
-    <script type="text/javascript">
-        $("#navbardisco").attr('class', "ui-btn-active");
-    </script>
     
     <!-- panel de calendar -->
     <div id="panelCalendar" data-role="panel" data-position="left"  
@@ -270,7 +272,27 @@
             </form>
         </div>
     </div>
-
+    
+    <%if(user != null){%>
+    <!-- popup candidatRef -->
+    <div id="popupCandidatRef" data-role="popup" data-theme="a" data-overlay-theme="b"
+         class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+             ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div id="divCandidat" class="ui-alt-icon">
+            <h3 id="nomCandidat">Proposition de référence</h3>
+            <img id="imgModRef" alt="erreur:image absente" src="" width="65%"/>
+            <h4>Etes-vous sur de vouloir proposer cette image comme nouvelle image de référence ?</h4>
+            <form id="formCandidatRef" method="post" action="discovery.jsp?action=reqAddReference">
+                <input type="hidden" id="userPseudo" name="userPseudo" value="<%=user.getPseudo()%>"/>
+                <input type="hidden" id="nomGalaxieRef" name="nomGalaxieRef" value=""/>
+                <input type="hidden" id="cheminRef" name="cheminRef" value=""/>
+                <a href="javascript:{}" onclick="document.getElementById('formCandidatRef').submit();" id="btnConfirmCandidatRef" 
+                        class="ui-btn ui-corner-all">Confirmation</a>
+            </form>
+        </div>
+    </div>
+    <%}%>
     <!-- popup message en mode modal-->
     <div id="popupSendMail" data-role="popup" data-theme="a" data-overlay-theme="b"
          class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window" data-dismissible="false">

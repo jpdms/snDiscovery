@@ -16,6 +16,7 @@ $(function() {
     $("#btnPcdt").on("click", imagePrecedente);
     $("#btnSvt").on("click", imageSuivante);
     $("#btnCandidat").on("click", initCandidat);
+    $("#btnCandidatRef").on("click", initCandidatRef);
     $("#mon_canvas").on("tap",  tapHandler);
     $("#mon_canvas").on("vmousedown", vMouseDownHandler);
     $("#btnInfos").on("click", afficheInfos);
@@ -27,6 +28,7 @@ $(function() {
     $("#btnPseudoPerduOK").on("click", dmdPseudoPerdu);
     $("#btnMotDePassePerduOK").on("click", dmdPseudoPerdu);
     $("#popupCandidat").on("popupafterclose", popupSendMail);
+    $("#popupCandidatRef").on("popupafterclose", popupSendMail);
     $("#popupPseudoPerdu").on("popupafterclose", popupSendPseudo);
     $("#popupMotDePassePerdu").on("popupafterclose", popupSendMotDePasse);
 });
@@ -129,6 +131,15 @@ function initCandidat() {
     // On ne peut pas valider tant que la position n'est pas pointée
     $("#btnConfirmCandidat").hide();
 }
+
+function initCandidatRef() {
+    var srcRef = document.getElementById("imgobs").src;
+    $("#imgModRef").attr('src',  srcRef);
+    var nomGalaxie = document.getElementById("nomGalaxie").innerHTML;
+    $("#nomGalaxieRef").attr('value',  nomGalaxie);
+    var chemin = document.getElementById("imgModRef").src;
+    $("#cheminRef").attr('value',  chemin);
+}   
 
 function popupZoomLeft() {
     var imgNom = imagesNoms[position-1];
