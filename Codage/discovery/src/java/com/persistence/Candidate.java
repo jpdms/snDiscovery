@@ -141,7 +141,7 @@ public class Candidate {
         String queryString = "select * from candidate "
                                 + " where nomImage='" + nomImage + "'"
                                     + " and chemin='" + chemin + "'"
-                                    + " order by `date`";
+                                    + " order by `date` asc";
         Statement lStat = con.createStatement(
                                             ResultSet.TYPE_SCROLL_INSENSITIVE, 
                                             ResultSet.CONCUR_READ_ONLY);

@@ -111,9 +111,12 @@
                    data-role="button"  data-transition="pop" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Contacter
             </a>
-            <a href="discovery.jsp?action=gestionhistorique" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-            Afficher l'historique
-            </a>
+            <form id="formHisto" method="post" action="discovery.jsp?action=gestionhistorique">
+                <input type="hidden" id="pseudo" name="pseudo" value="<%=userMod.getPseudo()%>"/>
+                <a  href="javascript:{}" onclick="document.getElementById('formHisto').submit();"class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                Afficher l'historique
+                </a>
+            </form>
         </div>
         <!-- popup bloquer --> 
         <div id="popupBloquer" data-role="popup" data-theme="a" data-overlay-theme="b"

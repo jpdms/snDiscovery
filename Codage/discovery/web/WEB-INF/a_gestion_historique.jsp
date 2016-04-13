@@ -34,24 +34,21 @@
         <br/>
         <%
             String pUser = request.getParameter("pseudo");
-            User userMod = User.getByPseudo(con, pUser);
             con = (Connection) session.getAttribute("con");
             if (con == null)
                 con = ConnexionMySQL.newConnexion();
             session.setAttribute("con", con);
             Statement statement = con.createStatement();
-            ResultSet candidate = statement.executeQuery("select * from candidate "
-                                + " where userPseudo='" + userMod.getPseudo() + "'"
-                                    + " order by `date`");
-            ResultSet canrefuser = statement.executeQuery("select * from candidate "
-                                + " where userPseudo='" + userMod.getPseudo() + "'"
-                                    + " order by `date`");
-            ResultSet decouverte = statement.executeQuery("select * from candidate "
-                                + " where userPseudo='" + userMod.getPseudo() + "'"
-                                    + " order by `date`");
+            ResultSet canrefuser = statement.executeQuery("select * from canrefuser "
+                                        + " where userPseudo='" + pUser + "'"
+                                            + " order by `date` desc");
+            canrefuser.first();
+            int loop = 0;
         %>
-      <center><h2>Historique de : <%=userMod.getPseudo()%></h2></center>
+      <center><h2>Historique de : <%=pUser%></h2></center>
       <div class="table">
+      <h2>Historique des candidates refusées : </h2>
+      <%if(canrefuser.next()){%>
       <table data-role="table" class="ui-responsive ui-shadow">
       <thead>
         <tr>
@@ -59,69 +56,108 @@
           <th data-priority="2">Type</th>
           <th data-priority="3">Date</th>
           <th data-priority="4">Image</th>
-          <th data-priority="5">Résultat</th>
         </tr>
       </thead>
       <tbody>
-        <% int cloop=0;
-        while(candidate.next()){
-            cloop=cloop+1;%>
-          <tr>
-            <td><%=cloop%></td>
-            <td><%=candidate.getString("chemin")%></td>
-            <td>19/03/2014</td>
-            <td>IC3900</td>
-            <td style="color:red">Refusé</td>
-          </tr>
-        <%} %>  
-        <tr>
-          <td>1</td>
-          <td>Référence</td>
-          <td>19/03/2014</td>
-          <td>IC3900</td>
-          <td style="color:red">Refusé</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Référence</td>
-          <td>19/03/2014</td>
-          <td>IC739</td>
-          <td style="color:green">Validé</td>
-        </tr>        <tr>
-          <td>3</td>
-          <td>Candidate</td>
-          <td>19/03/2014</td>
-          <td>IC779</td>
-          <td style="color:green">Validé</td>
-        </tr>        <tr>
-          <td>4</td>
-          <td>Référence</td>
-          <td>19/03/2014</td>
-          <td>IC831</td>
-          <td style="color:red">Refusé</td>
-        </tr>        <tr>
-          <td>5</td>
-          <td>Candidate</td>
-          <td>19/03/2014</td>
-          <td>IC832</td>
-          <td>En cours de validation</td>
-        </tr>        <tr>
-          <td>6</td>
-          <td>Candidate</td>
-          <td>19/03/2014</td>
-          <td>MCG121525</td>
-          <td style="color:red">Refusé</td>
-        </tr>        <tr>
-          <td>7</td>
-          <td>Candidate</td>
-          <td>19/03/2014</td>
-          <td>mcg22849</td>
-          <td style="color:red">Refusé</td>
-        </tr>
-
+        <%
+        while(!canrefuser.isAfterLast()){
+            if(canrefuser.getString("userPseudo").equals(pUser)){
+            loop++;
+            %>
+            
+                <tr>
+                  <td><%= loop %></td>
+                  <td style="color:red">Refusé</td>
+                  <td><%= canrefuser.getString("date") %></td>
+                  <td><%= canrefuser.getString("nomImage") %></td>
+                </tr>
+        <%}
+          canrefuser.next();  
+        }
+        loop=0;%>
       </tbody>
     </table>
-      </div>      
+      <%}
+      else{%>
+      <p>L'utilisateur n'a pas de candidates refusée.</p>
+      <%}%>
+      <h2>Historique des candidate validées : </h2>
+      <%
+        ResultSet decouverte = statement.executeQuery("select * from decouverte "
+                            + " where userPseudo='" + pUser + "'"
+                                + " order by `date` desc");
+        decouverte.first();
+        if(decouverte.next()){%>
+      <table data-role="table" class="ui-responsive ui-shadow">
+      <thead>
+        <tr>
+          <th data-priority="1"> </th>
+          <th data-priority="2">Type</th>
+          <th data-priority="3">Date</th>
+          <th data-priority="4">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% 
+        while(!decouverte.isAfterLast()){
+            if(decouverte.getString("userPseudo").equals(pUser)){
+            loop++;
+            %>
+                <tr>
+                  <td><%= loop %></td>
+                  <td style="color:green">Decouverte</td>
+                  <td><%= decouverte.getString("date") %></td>
+                  <td><%= decouverte.getString("nomImage") %></td>
+                </tr>
+        <%}
+          decouverte.next();
+        }
+        loop=0;%>
+      </tbody>
+    </table>
+    <%}
+        else{%>
+        <p>L'utilisateur n'a pas de candidates validée.</p>
+        <%}%>
+      <h2>Historique des candidates en cours : </h2>
+      <%
+        ResultSet candidate = statement.executeQuery("select * from  candidate canrefuser"
+                              + " where userPseudo='" + pUser + "'"
+                                  + " order by `date` desc");
+         candidate.first();      
+        if(candidate.next()){%>
+      <table data-role="table" class="ui-responsive ui-shadow">
+      <thead>
+        <tr>
+          <th data-priority="1"> </th>
+          <th data-priority="2">Type</th>
+          <th data-priority="3">Date</th>
+          <th data-priority="4">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% 
+        while(!candidate.isAfterLast()){
+            if(candidate.getString("userPseudo").equals(pUser)){
+            loop++;
+            %>       <tr>
+                  <td><%= loop %></td>
+                  <td>Candidate</td>
+                  <td><%= candidate.getString("date") %></td>
+                  <td><%= candidate.getString("nomImage") %></td>
+                </tr>
+        <%}
+          candidate.next();  
+        }
+        loop=0;%>
+      </tbody>
+    </table>
+    <%}
+        else{
+    %>
+    <p>L'utilisateur n'a pas de candidates en cours.</p>
+    <%}%>
+      </div> 
         <br/>
             <a href="javascript:history.go(-1)" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
         Retour
