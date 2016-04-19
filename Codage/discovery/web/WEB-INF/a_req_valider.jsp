@@ -35,12 +35,11 @@
         uMod.save(con); 
         // ajout decouverte dans BDD
         String queryString =
-         "INSERT INTO `decouverte` (`userPseudo`, `nomImage`, `chemin`, `date`, `certitude`,`x`, `y`) "
+         "INSERT INTO `decouverte` (`userPseudo`, `nomImage`, `chemin`, `date`,`x`, `y`) "
          + "VALUES ("+Utils.toString(pseudo)+","
                 + ""+Utils.toString(nomImage) +","
                 + ""+Utils.toString(chemin) +","
                 + ""+Utils.toString(dateDecouverte)+","
-                + ""+Utils.toString(certitude)+","
                 + ""+Utils.toString(x)+","
                 + ""+Utils.toString(y)+")";
         Statement lStat = con.createStatement();

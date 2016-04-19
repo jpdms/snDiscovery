@@ -78,6 +78,10 @@ http://themeroller.jquerymobile.com
                 class="ui-btn ui-corner-all ui-shadow">
                 Modifier
             </a>
+            <a href="discovery.jsp?action=aActu" id="btnEnvoyer" data-position-to="window" 
+                class="ui-btn ui-corner-all ui-shadow">
+                Annuler
+            </a>
         </form>
         </div>
         
