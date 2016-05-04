@@ -29,7 +29,6 @@
         </div>
 
         <div role="main" class="ui-content ">
-            <script type="text/javascript" src="js/a_disco.js"></script>
             <%
                 int i=1;
                 String idMove = request.getParameter("idMove");

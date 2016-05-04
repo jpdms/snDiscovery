@@ -4,6 +4,7 @@
     Author     : jpdms
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="com.metier.*"%>
@@ -16,7 +17,6 @@
     if (con == null)
         con = ConnexionMySQL.newConnexion();
     session.setAttribute("con", con);
-    
     String pseudo  = request.getParameter("userDisco");
     String objet     = request.getParameter("objet");
     String contenu     = request.getParameter("contenu");
@@ -27,6 +27,9 @@
     String x = request.getParameter("x");
     String y = request.getParameter("y");
     User uMod = User.getByPseudo(con, pseudo);
+    if(Decouverte.exist(con, pseudo, nomImage, dateDecouverte)){
+        request.getRequestDispatcher("../discovery.jsp?action=validerSupernova_confirme&msg=Vous ne pouvez pas valider deux fois la même supernova.").forward(request, response);
+    }
     // lui envoyer le mail de confirmation
     String mail = contenu;
     String to = uMod.getEmail();
@@ -35,11 +38,12 @@
         uMod.save(con); 
         // ajout decouverte dans BDD
         String queryString =
-         "INSERT INTO `decouverte` (`userPseudo`, `nomImage`, `chemin`, `date`,`x`, `y`) "
+         "INSERT INTO `decouverte` (`userPseudo`, `nomImage`, `chemin`, `date`, `certitude`, `x`, `y`) "
          + "VALUES ("+Utils.toString(pseudo)+","
                 + ""+Utils.toString(nomImage) +","
                 + ""+Utils.toString(chemin) +","
                 + ""+Utils.toString(dateDecouverte)+","
+                + ""+Utils.toString(certitude)+","
                 + ""+Utils.toString(x)+","
                 + ""+Utils.toString(y)+")";
         Statement lStat = con.createStatement();

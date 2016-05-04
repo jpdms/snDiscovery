@@ -45,8 +45,6 @@ public class CandidateReference {
     public boolean delete(Connection con) throws Exception {
         String queryString = "delete from canreference "
                 + " where userPseudo='" + userPseudo  + "'"
-                    + " and nomImage='" + nomImage + "'"
-                    + " and date='" + date + "'"
                     + " and chemin='" + chemin + "'";
         Statement lStat = con.createStatement();
         lStat.executeUpdate(queryString);
@@ -58,14 +56,14 @@ public class CandidateReference {
      * @param con
      * @param nomImage
      * @param chemin
+     * @param user
      * @param  i       le nom de la personne courante
      * @return String la liste des nom des personnes inscrites
      * @throws java.lang.Exception
      */
-    public static CandidateReference find(Connection con, String nomImage, String chemin, int i) throws Exception {
-        String queryString = "select * from candidate "
-                                + " where nomImage='" + nomImage + "'"
-                                    + " and chemin='" + chemin + "'"
+    public static CandidateReference find(Connection con, String chemin, String user, int i) throws Exception {
+        String queryString = "select * from canreference "
+                                + " where chemin='" + chemin + "' and userPseudo ='"+ user +"' "
                                     + " order by `date` asc";
         Statement lStat = con.createStatement(
                                             ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -75,7 +73,7 @@ public class CandidateReference {
             Timestamp date    = lResult.getTimestamp("date");
             String userPseudo = lResult.getString("userPseudo");
             CandidateReference candidate = 
-                    new CandidateReference(date,userPseudo,nomImage,chemin);
+                    new CandidateReference(date,userPseudo,"",chemin);
             return candidate;
         }
         else 
@@ -83,7 +81,7 @@ public class CandidateReference {
     }
     
     public static CandidateReference findAll(Connection con, int i) throws Exception {
-        String queryString = "select * from candidate "
+        String queryString = "select * from canreference "
                                     + " order by `date`";
         Statement lStat = con.createStatement(
                                             ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -92,7 +90,7 @@ public class CandidateReference {
         if ((i > 0) && (lResult.absolute(i))) {
             Timestamp date    = lResult.getTimestamp("date");
             String userPseudo = lResult.getString("userPseudo");
-            String nomImage = lResult.getString("nomImage");
+            String nomImage = lResult.getString("nomGalaxie");
             String chemin = lResult.getString("chemin");
             CandidateReference candidate = 
                     new CandidateReference(date,userPseudo,nomImage,chemin);
@@ -132,7 +130,7 @@ public class CandidateReference {
      * @throws java.lang.Exception
      */
     public static int size(Connection con) throws Exception {
-        String queryString = "select count(*) as count from candidatereference";
+        String queryString = "select count(*) as count from canreference";
         Statement lStat = con.createStatement(
                                             ResultSet.TYPE_SCROLL_INSENSITIVE, 
                                             ResultSet.CONCUR_READ_ONLY);
@@ -182,7 +180,7 @@ public class CandidateReference {
         this.userPseudo = userPseudo;
     }
 
-    public String getNomImage() {
+    public String getNomGalaxie() {
         return nomImage;
     }
 
@@ -199,9 +197,8 @@ public class CandidateReference {
     }
     
     public String getDateDisco() throws ParseException, Exception{
-        String buf[] = chemin.split("/");
-        String sdate = buf[3].toString();
-        SimpleDateFormat type = new SimpleDateFormat("yyyyMMdd");
+        String sdate = date.toString();
+        SimpleDateFormat type = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         java.util.Date date = type.parse(sdate);
         SimpleDateFormat convert = new SimpleDateFormat("dd/MM/yyyy");
         return convert.format(date).toString();

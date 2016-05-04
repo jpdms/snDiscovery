@@ -69,6 +69,26 @@
             if(action.equals("aRef"))
             {
                 request.getRequestDispatcher("WEB-INF/a_reference.jsp").forward(request, response);
+            }            
+            else if(action.equals("aRef_null"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_reference_null.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefAdd"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_val_ref.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefDel"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_del_ref.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefMsgVal"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_ref_msg.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefMsgDel"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_ref_msg_del.jsp").forward(request, response);
             }
             else if(action.equals("aVal"))
             {
