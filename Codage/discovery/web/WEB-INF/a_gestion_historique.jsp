@@ -43,6 +43,7 @@
                                         + " where userPseudo='" + pUser + "'"
                                             + " order by `date` desc");
             canrefuser.first();
+            canrefuser.previous(); 
             int loop = 0;
         %>
       <center><h2>Historique de : <%=pUser%></h2></center>
@@ -87,7 +88,9 @@
                             + " where userPseudo='" + pUser + "'"
                                 + " order by `date` desc");
         decouverte.first();
-        if(decouverte.next()){%>
+        decouverte.previous();
+        if(decouverte.next()){
+      %>
       <table data-role="table" class="ui-responsive ui-shadow">
       <thead>
         <tr>
@@ -124,7 +127,8 @@
         ResultSet candidate = statement.executeQuery("select * from  candidate canrefuser"
                               + " where userPseudo='" + pUser + "'"
                                   + " order by `date` desc");
-         candidate.first();      
+         candidate.first();
+         candidate.previous();
         if(candidate.next()){%>
       <table data-role="table" class="ui-responsive ui-shadow">
       <thead>
