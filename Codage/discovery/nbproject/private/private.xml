@@ -3,11 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_ref_msg_del.jsp</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_del_ref.jsp</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_ref_msg.jsp</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_reference.jsp</file>
-            <file>file:/C:/Users/IRISINSTALL/Documents/GitHub/snDiscovery/Codage/discovery/web/discovery.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion_historique.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_mod_actu.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_req_valider.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_reference_null.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_mod_grade.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_ref_msg.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion_recherche.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_req_refuser_confirme.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_req_mod_actu.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_valider_null.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_req_refuser.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_add_actu.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_infoUser.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_msg.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_reference.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion_compte.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_compte.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_valider.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_req_del_actu.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_ref_msg_del.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_actu.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion_contact.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_val_ref.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_blacklist.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_del_actu.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_req_valider_confirme.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_del_ref.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -12,6 +12,7 @@
     if (maSession != null) {
         com.persistence.User user = maSession.getUser();
         if (user != null) {
+            // Si pas admin
             if(!maSession.isModeExpert()){
                 request.getRequestDispatcher("discovery.jsp?action=pbAdminMode").forward(request, response);
             } 

@@ -33,12 +33,16 @@ function popupSendMail() {
 }
 
 function initcanvas(){
+    // Récupere la taille de l'image
     var cWidth = document.getElementById("imgobs").width
     var cHeight = document.getElementById("imgobs").height;
+    // Initialise la taille du canvas en fonction de la taille de l'image
     $("#CanvasObs").attr('width',  cWidth); //max width
     $("#CanvasObs").attr('height', cHeight); //max height
+    // Récupere les coordonnées du carré
     var cX = document.getElementById("cX").value;
     var cY = document.getElementById("cY").value;
+    // Traitement
     cX = cWidth*cX;
     cX = cX/256;                        
     cY = cWidth*cY;
@@ -47,12 +51,12 @@ function initcanvas(){
     t= t/256;
     var moins = cWidth * 30;
     moins = moins/256;
+    // Dessine le carré
     var c = document.getElementById("CanvasObs");
     var ctx = c.getContext("2d");
     ctx.strokeStyle="LightCyan";
     ctx.rect(cX - moins, cY - moins, t, t);
-    ctx.stroke();
-    
+    ctx.stroke();    
 }
 
 function afficheInfos() {

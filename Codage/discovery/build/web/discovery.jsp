@@ -63,7 +63,7 @@
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         }
-        // user connecté
+        // user connecté et admin
         else if(maSession.isModeExpert()){
             com.persistence.User user = maSession.getUser();
             if(action.equals("aRef"))
