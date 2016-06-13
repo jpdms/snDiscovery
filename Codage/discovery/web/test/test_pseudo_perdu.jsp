@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Test unitaire mot de passe perdu</title>
+        <title>Test unitaire pseudo perdu</title>
     </head>
     <body>
         Test de récuperation du pseudo<br/>
