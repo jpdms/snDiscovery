@@ -113,7 +113,7 @@
                         <form id="formValider" method="post" action="discovery.jsp?action=aRefAdd">
                             <input type="hidden" name="userPseudo" value="<%=can.getUserPseudo()%>"/>
                             <input type="hidden" name="chemin" value="<%=can.getChemin()%>"/>
-                            <input type="hidden" name="cheminref" value="C:/Users/IRISINSTALL/Documents/jpeg/refgal/<%=can.getNomGalaxie()%>.jpg"/>
+                            <input type="hidden" name="cheminref" value="C:/Users/blanc/Documents/jpeg/refgal/<%=can.getNomGalaxie()%>.jpg"/>
                             <a href="javascript:{}" onclick="document.getElementById('formValider').submit();"  id="btnOui" data-rel="true" data-position-to="window" 
                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Oui</a>
                         </form>

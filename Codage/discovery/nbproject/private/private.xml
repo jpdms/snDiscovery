@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_gestion.jsp</file>
-            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/reqLogin.jsp</file>
-            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/includes/user.jspf</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/src/java/com/persistence/Reference.java</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/reqReference.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_val_ref.jsp</file>
+            <file>file:/C:/Users/blanc/Documents/GitHub/snDiscovery/Codage/discovery/web/WEB-INF/a_reference.jsp</file>
         </group>
     </open-files>
 </project-private>

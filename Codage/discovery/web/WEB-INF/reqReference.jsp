@@ -18,9 +18,9 @@
     String pseudo   = request.getParameter("userPseudo");
     String nomGalaxie      = request.getParameter("nomGalaxieRef");
     String cheminObs    = request.getParameter("cheminRef");
-    String cheminRef = "C:/Users/IRISINSTALL/Documents/jpeg/refgal/"+nomGalaxie+".jpg";
+    String cheminRef = "C:/Users/blanc/Documents/jpeg/refgal/"+nomGalaxie+".jpg";
     String tChemin[] = cheminObs.split("/");
-    String chemin = "C:/Users/IRISINSTALL/Documents/jpeg/" + tChemin[4] + "/" + tChemin[5] + "/" + tChemin[6];
+    String chemin = "C:/Users/blanc/Documents/jpeg/" + tChemin[4] + "/" + tChemin[5] + "/" + tChemin[6];
     User userMod = User.getByPseudo(con, pseudo);
     if(userMod.getGrade()==5){
         request.getRequestDispatcher("changerReference.jsp?chemin="+chemin+"&cheminref="+cheminRef).forward(request, response);

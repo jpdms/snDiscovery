@@ -17,7 +17,7 @@
     String cheminref = request.getParameter("cheminref").trim();
     String chemin = request.getParameter("chemin").trim();
     String tChemin[] = chemin.split("/");
-    String rChemin = "C:/Users/IRISINSTALL/Documents/jpeg/" + tChemin[4] + "/" + tChemin[5] + "/" + tChemin[6];
+    String rChemin = "C:/Users/blanc/Documents/jpeg/" + tChemin[4] + "/" + tChemin[5] + "/" + tChemin[6];
     Reference.remplacer(rChemin, cheminref);
     String queryString = "delete from canreference "
             + " where userPseudo='" + userPseudo  + "'"
