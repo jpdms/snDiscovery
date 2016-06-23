@@ -18,7 +18,7 @@
 
 <body>
 <div class="page" data-role="page" id="infoUserPage">
-    <%@include file="../includes/div_header.jspf" %>
+    <%@include file="../includes/a_div_header.jspf" %>
         <h1>Gestion du compte : <%=request.getParameter("pseudo")%></h1>
         <%@include file="../includes/a_user.jspf" %>
         <%
@@ -77,7 +77,7 @@
                             <td><strong>Nombre de candidates : </strong></td><td>&emsp;&emsp;<%= userMod.getNbCandidates() %></td>
                         </tr>                
                         <tr>
-                            <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;0</td>
+                            <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;<%= userMod.getNbDecouverte(con) %></td>
                         </tr>
                 </table>
         </div>
@@ -111,9 +111,12 @@
                    data-role="button"  data-transition="pop" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
             Contacter
             </a>
-            <a href="discovery.jsp?action=gestionhistorique" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
-            Afficher l'historique
-            </a>
+            <form id="formHisto" method="post" action="discovery.jsp?action=gestionhistorique">
+                <input type="hidden" id="pseudo" name="pseudo" value="<%=userMod.getPseudo()%>"/>
+                <a  href="javascript:{}" onclick="document.getElementById('formHisto').submit();" class="ui-btn ui-shadow ui-corner-all ui-btn-a">
+                Afficher l'historique
+                </a>
+            </form>
         </div>
         <!-- popup bloquer --> 
         <div id="popupBloquer" data-role="popup" data-theme="a" data-overlay-theme="b"

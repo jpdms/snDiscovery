@@ -35,6 +35,10 @@
     das = ("\\\\");
     titre = titre.replace(as, das);
     contenu = contenu.replace(as, das);
+    as = ("\""); 
+    das = ("\"\"");
+    titre = titre.replace(as, das);
+    contenu = contenu.replace(as, das);
     String sContenu = new String(contenu.getBytes(), "utf8");
     String sTitre = new String(titre.getBytes(), "utf8");
     Actu actu = Actu.getById(con, id);
@@ -72,7 +76,7 @@ http://themeroller.jquerymobile.com
 
 <body>
 <div class="page" data-role="page" id="homePage">
-    <%@include file="../includes/div_header.jspf" %>
+    <%@include file="../includes/a_div_header.jspf" %>
         <h1>Actu</h1>
         <%@include file="../includes/a_user.jspf" %>
     </div>

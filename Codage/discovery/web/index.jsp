@@ -24,15 +24,17 @@
             }
         }
         %>
+        
     </div>            
     <div role="main" class="ui-content">
+        
         <br/><br/>
         <h4>Cette application de science participative (crowdsourcing science) va  
             vous permettre de découvrir des supernovae.</h4>
         <center><div class="mesImages">
-            <img style="border: 1px solid #aaa; border-radius: 8px; padding: 2px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" 
+            <img style="border-radius: 8px;  " 
                  src="images/tuto01.jpg"/>
-            <img style="border: 1px solid #aaa; border-radius: 8px; padding: 2px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" 
+            <img style="border-radius: 8px; padding: 2px;" 
                  src="images/tuto02.jpg"/>
             </div></center>
         <br/>

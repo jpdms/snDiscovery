@@ -11,6 +11,10 @@ public class User {
     private String    mailconfirme;
     private int       grade;            // son grade de 1 à 5
     private boolean   blocked;          // si on l'a interdit d'accès
+    private String    lastImg;
+    private String    lastImgGalaxie;
+    private String    lastImgDate;
+    private int       lastImgPos;
     private Timestamp registerDate;     // la date de son inscription
     private Timestamp lastVisitDate;    // la date de sa dernière visite
     private int       nbCandidates;     // le nb de dmd de candidates
@@ -68,6 +72,10 @@ public class User {
                 + " `mailconfirme` =" + Utils.toString(mailconfirme) + "," 
                 + " `grade` =" + Utils.toString(grade) + "," 
                 + " `blocked` =" + Utils.toString(blocked) + ","
+                + " `lastImg` =" + Utils.toString(lastImg) + ","
+                + " `lastImgGalaxie` =" + Utils.toString(lastImgGalaxie) + ","
+                + " `lastImgDate` =" + Utils.toString(lastImgDate) + ","
+                + " `lastImgPos` =" + Utils.toString(lastImgPos) + ","
                 + " `registerDate` =" + Utils.toString(registerDate) + "," 
                 + " `lastVisitDate` =" + Utils.toString(lastVisitDate)  + "," 
                 + " `nbCandidates` =" + Utils.toString(nbCandidates)  + "," 
@@ -112,13 +120,16 @@ public class User {
             String    lMailConfirme = lResult.getString("mailconfirme");
             int       lGrade = lResult.getInt("grade");
             boolean   lBlocked = lResult.getBoolean("blocked");
-            String    lLastImg = lResult.getString("lastImg");
+            String    llastImg = lResult.getString("lastImg");
+            String    llastImgGalaxie = lResult.getString("lastImgGalaxie");
+            String    llastImgDate = lResult.getString("lastImgDate");
+            int       llastImgPos = lResult.getInt("lastImgPos");
             Timestamp lRegisterDate = lResult.getTimestamp("registerDate");
             Timestamp lLastVisitDate = lResult.getTimestamp("lastVisitDate");
             int       lNbCandidates = lResult.getInt("nbCandidates");
             int       lNbConnexions = lResult.getInt("nbConnexions");
             User      user = new User(lPseudo,lUsername,lEmail,lPassword,lMailConfirme,lGrade,
-                      lBlocked, lRegisterDate,lLastVisitDate,lNbCandidates,
+                      lBlocked, llastImg, llastImgGalaxie, llastImgDate, llastImgPos, lRegisterDate,lLastVisitDate,lNbCandidates,
                       lNbConnexions);
             return user;
         }
@@ -189,7 +200,6 @@ public class User {
         else 
             return null;
     }
-    
     /**
      * Indique si le nom d'une personne existe déjà ou non ?
      * Pour unicité du nom
@@ -264,7 +274,7 @@ public class User {
     /**
      * Cree et initialise completement User
      */
-    private User(String pseudo, String username, String email, String password, String mailconfirme, int grade, boolean blocked, Timestamp registerDate, Timestamp lastVisitDate, int nbCandidates, int nbConnexions) {
+    private User(String pseudo, String username, String email, String password, String mailconfirme, int grade, boolean blocked, String lastImg, String lastImgGalaxie, String lastImgDate, int lastImgPos, Timestamp registerDate, Timestamp lastVisitDate, int nbCandidates, int nbConnexions) {
         this.pseudo = pseudo;
         this.username = username;
         this.email = email;
@@ -272,6 +282,10 @@ public class User {
         this.mailconfirme = mailconfirme;
         this.grade = grade;
         this.blocked = blocked;
+        this.lastImg = lastImg;
+        this.lastImgGalaxie = lastImgGalaxie;
+        this.lastImgDate = lastImgDate;
+        this.lastImgPos = lastImgPos;
         this.registerDate = (Timestamp)registerDate.clone();
         this.lastVisitDate = (Timestamp)lastVisitDate.clone();
         this.nbCandidates = nbCandidates;
@@ -348,7 +362,37 @@ public class User {
     public void setBlocked(boolean blocked) throws Exception {
         this.blocked = blocked;
     }
-    
+   
+    public String getlastImgGalaxie() {
+        return lastImgGalaxie;
+    }
+
+    public void setLastImgGalaxie(String LastImgGalaxie) throws Exception {
+        this.lastImgGalaxie = LastImgGalaxie;
+    }
+   
+    public String getlastImgDate() {
+        return lastImgDate;
+    }
+
+    public void setLastImgDate(String LastImgDate) throws Exception {
+        this.lastImgDate = LastImgDate;
+    }
+   
+    public String getlastImg() {
+        return lastImg;
+    }
+
+    public void setLastImg(String LastImg) throws Exception {
+        this.lastImg = LastImg;
+    }
+    public int getlastImgPos() {
+        return lastImgPos;
+    }
+
+    public void setLastImgPos(int LastImgPos) throws Exception {
+        this.lastImgPos = LastImgPos;
+    }
     public Timestamp getRegisterDate() {
         return (Timestamp)registerDate.clone();
     }
@@ -364,7 +408,18 @@ public class User {
     public void setNbCandidates(int nbCandidates) throws Exception {
         this.nbCandidates = nbCandidates;
     }
-
+    
+    public int getNbDecouverte(Connection con) throws SQLException {
+        String queryString = "select count(*) as count from decouverte WHERE userPseudo='"+this.pseudo+"'";
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        if (lResult.next())
+            return (lResult.getInt("count"));
+        else 
+            return 0;
+    }
     public int getNbConnexions() {
         return nbConnexions;
     }

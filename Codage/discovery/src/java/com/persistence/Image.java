@@ -2,6 +2,7 @@ package com.persistence;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 //import java.text.SimpleDateFormat;
@@ -60,10 +61,51 @@ public class Image {
             return null;
     }
     
-    public static Image getByChemin(Connection con){
-    return null;
+    public static Image getByChemin(Connection con, String telescope, String galaxie, String date) throws Exception{
+        String queryString = "select `id` from image "
+                + "where `Date`='"+date+"' and `GalaxieNom`='"+galaxie+"' and `Chemin`='"+telescope+"'";        
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        if (lResult.next()) {
+            Image image = Image.getById(con, lResult.getInt("id"));
+            return image;
+        }
+        else{
+            return null;
+        }
     }
     
+    public static Image getByCandidat(Connection con, String chemin, String nomImage) throws Exception{
+        String buf[] = chemin.split("/");
+        String telescope = buf[2];
+        String date = buf[3];
+        String galaxie = nomImage;
+        String queryString = "select `id` from image "
+                + "where `Date`='"+date+"' and `GalaxieNom`='"+galaxie+"' and `Chemin`='"+telescope+"'";        
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        if (lResult.next()) {
+            Image image = Image.getById(con, lResult.getInt("id"));
+            return image;
+        }
+        else{
+            return null;
+        }
+    }
+    
+    public static boolean existByDate(Connection con, String date) throws SQLException{
+        String queryString = "select `id` from image "
+            + "where `Date`='"+date+"'";      
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        return lResult.next();
+    }
     /**
      * retourne l'élément i trié par nom de galaxie
      * @param con

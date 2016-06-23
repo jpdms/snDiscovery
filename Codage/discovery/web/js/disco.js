@@ -16,6 +16,7 @@ $(function() {
     $("#btnPcdt").on("click", imagePrecedente);
     $("#btnSvt").on("click", imageSuivante);
     $("#btnCandidat").on("click", initCandidat);
+    $("#btnCandidatRef").on("click", initCandidatRef);
     $("#mon_canvas").on("tap",  tapHandler);
     $("#mon_canvas").on("vmousedown", vMouseDownHandler);
     $("#btnInfos").on("click", afficheInfos);
@@ -27,6 +28,7 @@ $(function() {
     $("#btnPseudoPerduOK").on("click", dmdPseudoPerdu);
     $("#btnMotDePassePerduOK").on("click", dmdPseudoPerdu);
     $("#popupCandidat").on("popupafterclose", popupSendMail);
+    $("#popupCandidatRef").on("popupafterclose", popupSendMail);
     $("#popupPseudoPerdu").on("popupafterclose", popupSendPseudo);
     $("#popupMotDePassePerdu").on("popupafterclose", popupSendMotDePasse);
 });
@@ -86,30 +88,6 @@ function dmdPseudoPerdu() {
         }
     });
 }
-
-function dmdMotDePassePerdu() {
-    var motDePassePerduPseudo = $("#motDePassePerduPseudo").val();
-    
-    sendingMail = true;
-    $.ajax({
-        url  : 'discovery.jsp?action=motDePassePerduPseudo',
-        type : 'POST',
-        data : 'motDePassePerduPseudo=' + motDePassePerduPseudo,
-        dataType : 'html',
-        success: function(data) {
-            $('.progressBar').hide();
-            $('#popupSendMotDePasse').popup( "option", "dismissible", true );
-            // résout un bug de popup sans sortir de l'app
-            $(location).attr('href',"msgDisco.jsp?msg=" + data);
-        },
-        error : function(resultat, statut, erreur) {
-            $('.progressBar').hide();
-            $('#popupTextSendMotDePasse').text("Impossible de vous envoyer votre mot de passe !");
-            $('#popupSendMotDePasse').popup( "option", "dismissible", true );
-            return false;
-        }
-    });
-}
     
 // Appui sur le bouton de confirmation d'identification d'un candidat
 // il faut d'abord vérifié que le user a pointé l'endroit repéré
@@ -154,6 +132,15 @@ function initCandidat() {
     $("#btnConfirmCandidat").hide();
 }
 
+function initCandidatRef() {
+    var srcRef = document.getElementById("imgobs").src;
+    $("#imgModRef").attr('src',  srcRef);
+    var nomGalaxie = document.getElementById("nomGalaxie").innerHTML;
+    $("#nomGalaxieRef").attr('value',  nomGalaxie);
+    var chemin = document.getElementById("imgModRef").src;
+    $("#cheminRef").attr('value',  chemin);
+}   
+
 function popupZoomLeft() {
     var imgNom = imagesNoms[position-1];
     var chemin = (imgNom.charAt(0) == 'F') ? cheminCalern : cheminChili;
@@ -194,7 +181,8 @@ function imageSuivante() {
         url  : 'discovery.jsp?action=ajax_lastImg',
         type : 'POST',
         data :    'pseudo=' + nom
-                + '&chemin=' + chemin,
+                + '&chemin=' + chemin
+                + '&pos=' + position,
         dataType : 'html',
     });
 }

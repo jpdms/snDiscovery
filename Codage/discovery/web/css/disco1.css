@@ -2,6 +2,10 @@
     Created on : 20 avr. 2014, 11:08:34
     Author     : 
 */
+img{
+    border-radius:8px;    
+}
+
 .mini{
     font-size: 14px;
 }

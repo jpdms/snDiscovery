@@ -58,7 +58,7 @@ http://themeroller.jquerymobile.com
 
 <body>
 <div class="page" data-role="page" id="homePage">
-    <%@include file="../includes/div_header.jspf" %>
+    <%@include file="../includes/a_div_header.jspf" %>
         <h1>Actu</h1>
         <%@include file="../includes/a_user.jspf" %>
     </div>
@@ -77,6 +77,10 @@ http://themeroller.jquerymobile.com
             <a href="javascript:{}" onclick="document.getElementById('formModActu').submit();" id="btnEnvoyer" data-position-to="window" 
                 class="ui-btn ui-corner-all ui-shadow">
                 Modifier
+            </a>
+            <a href="discovery.jsp?action=aActu" id="btnEnvoyer" data-position-to="window" 
+                class="ui-btn ui-corner-all ui-shadow">
+                Annuler
             </a>
         </form>
         </div>

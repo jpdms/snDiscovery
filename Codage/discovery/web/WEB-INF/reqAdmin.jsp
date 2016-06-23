@@ -11,13 +11,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+    // Instancie l'objet DiscoSession
     DiscoSession maSession = (DiscoSession)session.getAttribute("maSession");
+    // Instancie l'objet User grace au nom de l'utilisateur récuperer dans la variable session
     User user = maSession.getUser();
+    // Recupere le grade
     int grade = user.getGrade();
+    // Verifie que son grade est a 5
     if (user.getGrade()==5) {
-            // création de la session admin
+            // active la variable session ModeExpert
             maSession.setModeExpert(true);
+            // Redirige vers la page compte administrateur
             request.getRequestDispatcher("a_compte.jsp").forward(request, response);
     }
+    // Si le grade est pas a 5 on le redirige vers la page compte user
     else {request.getRequestDispatcher("../compte.jsp").forward(request, response);}
 %>

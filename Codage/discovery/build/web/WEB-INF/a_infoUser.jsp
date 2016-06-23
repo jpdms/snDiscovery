@@ -18,7 +18,7 @@
 
 <body>
 <div class="page" data-role="page" id="infoUserPage">
-    <%@include file="../includes/div_header.jspf" %>
+    <%@include file="../includes/a_div_header.jspf" %>
         <h1>Compte</h1>
         <%@include file="../includes/a_user.jspf" %>
         <%
@@ -81,7 +81,7 @@
                         <td><strong>Nombre de candidates : </strong></td><td>&emsp;&emsp;<%= user.getNbCandidates() %></td>
                     </tr>                
                     <tr>
-                        <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;0</td>
+                        <td><strong>Nombre de découvertes : </strong></td><td>&emsp;&emsp;<%= user.getNbDecouverte(con) %></td>
                     </tr>
             </table>
         </div>

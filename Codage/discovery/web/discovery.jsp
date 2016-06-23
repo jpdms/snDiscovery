@@ -63,16 +63,56 @@
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         }
-        // user connecté
+        // user connecté et admin
         else if(maSession.isModeExpert()){
             com.persistence.User user = maSession.getUser();
             if(action.equals("aRef"))
             {
                 request.getRequestDispatcher("WEB-INF/a_reference.jsp").forward(request, response);
+            }            
+            else if(action.equals("aRef_null"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_reference_null.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefAdd"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_val_ref.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefDel"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_del_ref.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefMsgVal"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_ref_msg.jsp").forward(request, response);
+            }
+            else if(action.equals("aRefMsgDel"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_ref_msg_del.jsp").forward(request, response);
             }
             else if(action.equals("aVal"))
             {
                 request.getRequestDispatcher("WEB-INF/a_valider.jsp").forward(request, response);
+            }
+            else if(action.equals("aVal_null"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_valider_null.jsp").forward(request, response);
+            }
+            else if(action.equals("validerSupernova"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_req_valider.jsp").forward(request, response);
+            }
+            else if(action.equals("validerSupernova_confirme"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_req_valider_confirme.jsp").forward(request, response);
+            }
+            else if(action.equals("refuserSupernova"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_req_refuser.jsp").forward(request, response);
+            }
+            else if(action.equals("refuserSupernova_confirme"))
+            {
+                request.getRequestDispatcher("WEB-INF/a_req_refuser_confirme.jsp").forward(request, response);
             }
             else if(action.equals("aGestion"))
             {
@@ -171,6 +211,9 @@
                     request.getRequestDispatcher("WEB-INF/a_compte.jsp").forward(request, response);
                 }
                 else {request.getRequestDispatcher("compte.jsp").forward(request, response);}
+            }
+            else if (action.equals("reqAddReference")) {
+                request.getRequestDispatcher("WEB-INF/reqReference.jsp").forward(request, response);
             }
             else if (action.equals("pbAdminMode")) {
                 request.getRequestDispatcher("WEB-INF/infoUser.jsp?message=pbAdminMode").forward(request, response);

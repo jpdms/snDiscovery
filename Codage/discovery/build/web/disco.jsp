@@ -3,6 +3,11 @@
     Created on : 05 Mai 2014, 16:54:26
     Author     : 
 --%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.nio.file.Files"%>
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.nio.file.Path"%>
 <%@page import="java.io.File"%>
 <%@page import="java.net.URI"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,9 +23,12 @@
     <%@include file="includes/head.jspf" %>
 </head>
 
-<body>
-<div class="page" data-role="page" id="discoPage" data-theme="b">
-    <%@include file="includes/user.jspf" %>
+
+<div style="background-color:#061532 /*{b-page-background-color}*/;" class="page" data-role="page" id="discoPage" data-theme="b">
+    <%
+        com.metier.DiscoSession maSession = (com.metier.DiscoSession)session.getAttribute("maSession");
+        com.persistence.User user = null;
+   %>
     <%-- le script pour s'exécuter doit être dans la page data-role --%>
     <script type="text/javascript" src="js/disco.js"></script>
     <script type="text/javascript">
@@ -63,9 +71,19 @@
             out.print("var dateCrt = " + img.getDate());
     %>
     </script>
-    
     <%@include file="includes/div_header.jspf" %>
         <h1>Découvrir</h1>
+        <center><div data-theme="b">
+        <%       
+            if (maSession != null) {
+                user = maSession.getUser();
+                out.print(" " + user.getPseudo());
+                for (int nb = 1; nb <= user.getGrade(); nb++) {
+                    out.print(" <img src='images/star.gif'>");
+                }
+            }
+        %>
+        </div></center>
         <a href="#panelCalendar" 
            class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-calendar ui-btn-left">
         </a>
@@ -74,31 +92,72 @@
         </a>
         
     </div>
-    
-    <div role="main" class="ui-content ">
         <br/><br/>
         <div class="mesImages" align="center">
+            <br/>
+            <%       
+                boolean reprise = false;
+                Image img1 = null;
+                if(user==null){
+                    img1 = Image.find(con, dateObservation, 1);
+                }
+                else{
+                    int test = user.getlastImgPos();
+                    if(test==0){
+                        img1 = Image.find(con, dateObservation, 1);
+                    }
+                    else{
+                        if(Image.existByDate(con, user.getlastImgDate())){
+                            img1 = Image.getByChemin(con, user.getlastImg(),user.getlastImgGalaxie(),user.getlastImgDate());
+                            reprise = true;
+                            %>
+                            <script>
+                                position = <%=user.getlastImgPos()%>                            
+                            </script>
             <%
-                Image img1 = Image.find(con, dateObservation, 1);
+                        }
+                        else{
+                            img1 = Image.find(con, dateObservation, 1);   
+                        }
+                    }
+                }
             %>
             <a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>
                 <img id='imgobs' alt='erreur:image absente' src='/jpeg/<%=img1.getChemin()%>/<%=img1.getDate()%>/<%=img1.getGalaxieNom()%>.jpg'/>
             </a>
-            <a href='#popupZoomLeft' id='clicZoomLeft' data-rel='popup'>
+            <a href='#popupZoomRight' id='clicZoomRight' data-rel='popup'>
                 <img id='imgref' alt='.... aucune référence ....' src='/jpeg/refgal/<%=img1.getGalaxieNom()%>.jpg'/>
             </a>
         </div>
         <table class="infosTable">
-            <td class="texteCentre" id="dateImages"><%= Utils.formatDate(img.getDate())%></td>
+            <td class="texteCentre" id="dateImages"><%= Utils.formatDate(img1.getDate())%></td>
+            <%
+            if(!reprise){
+            %>
             <td class="texteCentre" id="numImages" >(1/<%= images.size()%>)</td>
-            <td class="texteCentre" id="nomGalaxie"><%= img.getGalaxieNom()%></td>
+            <%
+            }
+            else{
+            %>
+            <td class="texteCentre" id="numImages" >(<%=user.getlastImgPos()%>/<%= images.size()%>)</td>
+            <%
+            }
+            %>
+            <td class="texteCentre" id="nomGalaxie"><%= img1.getGalaxieNom()%></td>
         </table>
         <div align="center">
             <div class="ui-grid-a">
                 <div class="ui-block-a">
+                    <%if(!reprise){%>
                     <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
                                     class="ui-state-disabled"
                                     data-role="button">Précédent</a>
+                    <%
+                    }
+                    else{%>
+                    <a href="#" id="btnPcdt" data-icon="arrow-l" data-iconpos="left" 
+                                    data-role="button">Précédent</a>
+                    <%}%>
                 </div>
                 <div class="ui-block-b">
                     <a href="#" id="btnSvt" data-icon="arrow-r" data-iconpos="right" 
@@ -120,22 +179,27 @@
                 class="ui-btn ui-corner-all ui-shadow">Blink</a>
             </div>
         </div>
-        
-        <div class="ui-grid-b">
-            <div class="ui-block-a"></div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+               <%
+                    if (user != null) {%>
+                         <a href="#popupCandidat" id="btnCandidat" data-rel="popup" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Disco</a>
+                    <%}
+                %>
+            </div>
             <div class="ui-block-b">
-                <%
+               <%
                     if (user != null) {
-                        out.println("<a href='#popupCandidat' id='btnCandidat' "
-                                + "data-rel='popup' data-position-to='window' "
-                                + "class='ui-btn ui-corner-all ui-shadow' "
-                                + "data-transition='pop'>Disco</a>");
+                        if(user.getGrade()>=3){ %>
+                         <a href="#popupCandidatRef" id="btnCandidatRef" data-rel="popup" data-position-to="window" 
+                            class="ui-btn ui-corner-all ui-shadow" data-transition="pop">Référence</a>
+                    <%}
                     }
                 %>
             </div>
-            <div class="ui-block-c"></div>
         </div>
-    </div>
+    
 
     <%@include file="includes/footer.jspf" %>
     
@@ -208,7 +272,27 @@
             </form>
         </div>
     </div>
-
+    
+    <%if(user != null){%>
+    <!-- popup candidatRef -->
+    <div id="popupCandidatRef" data-role="popup" data-theme="a" data-overlay-theme="b"
+         class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow 
+             ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <div id="divCandidat" class="ui-alt-icon">
+            <h3 id="nomCandidat">Proposition de référence</h3>
+            <img id="imgModRef" alt="erreur:image absente" src="" width="65%"/>
+            <h4>Etes-vous sur de vouloir proposer cette image comme nouvelle image de référence ?</h4>
+            <form id="formCandidatRef" method="post" action="discovery.jsp?action=reqAddReference">
+                <input type="hidden" id="userPseudo" name="userPseudo" value="<%=user.getPseudo()%>"/>
+                <input type="hidden" id="nomGalaxieRef" name="nomGalaxieRef" value=""/>
+                <input type="hidden" id="cheminRef" name="cheminRef" value=""/>
+                <a href="javascript:{}" onclick="document.getElementById('formCandidatRef').submit();" id="btnConfirmCandidatRef" 
+                        class="ui-btn ui-corner-all">Confirmation</a>
+            </form>
+        </div>
+    </div>
+    <%}%>
     <!-- popup message en mode modal-->
     <div id="popupSendMail" data-role="popup" data-theme="a" data-overlay-theme="b"
          class="ui-corner-all ui-alt-icon" data-corners="true" data-position-to="window" data-dismissible="false">
@@ -298,5 +382,5 @@
         </div>
     </div>
 </div>
-</body>
+
 </html>

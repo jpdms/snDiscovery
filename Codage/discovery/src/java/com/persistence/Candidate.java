@@ -1,6 +1,8 @@
 package com.persistence;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Candidate {
@@ -139,7 +141,7 @@ public class Candidate {
         String queryString = "select * from candidate "
                                 + " where nomImage='" + nomImage + "'"
                                     + " and chemin='" + chemin + "'"
-                                    + " order by `date`";
+                                    + " order by `date` asc";
         Statement lStat = con.createStatement(
                                             ResultSet.TYPE_SCROLL_INSENSITIVE, 
                                             ResultSet.CONCUR_READ_ONLY);
@@ -160,6 +162,30 @@ public class Candidate {
             return null;
     }
     
+    public static Candidate findAll(Connection con, int i) throws Exception {
+        String queryString = "select * from candidate "
+                                    + " order by `date`";
+        Statement lStat = con.createStatement(
+                                            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                                            ResultSet.CONCUR_READ_ONLY);
+        ResultSet lResult = lStat.executeQuery(queryString);
+        if ((i > 0) && (lResult.absolute(i))) {
+            Timestamp date    = lResult.getTimestamp("date");
+            int    certitude  = lResult.getInt("certitude");
+            int    x          = lResult.getInt("x");
+            int    y          = lResult.getInt("y");
+            double ra         = lResult.getDouble("ra");
+            double dec        = lResult.getDouble("dec");
+            String userPseudo = lResult.getString("userPseudo");
+            String nomImage = lResult.getString("nomImage");
+            String chemin = lResult.getString("chemin");
+            Candidate candidate = 
+                    new Candidate(date,certitude,x,y,ra,dec,userPseudo,nomImage,chemin);
+            return candidate;
+        }
+        else 
+            return null;
+    }
     /**
      * Indique si le nom d'une personne existe déjà ou non ?
      * Pour unicité du nom
@@ -262,7 +288,7 @@ public class Candidate {
         this.nomImage = nomImage;
         this.chemin = chemin;
     }
-    
+        
     // --------------------- les assesseurs ----------------------------
     public Timestamp getDate() {
         return date;
@@ -311,6 +337,7 @@ public class Candidate {
     public void setDec(Double dec) {
         this.dec = dec;
     }
+   
 
     public String getUserPseudo() {
         return userPseudo;
@@ -328,6 +355,28 @@ public class Candidate {
         this.nomImage = nomImage;
     }
     
+    public String getChemin(){
+        return chemin;
+    }
+    
+    public String getnomImage(){
+        return nomImage;
+    }
+    
+    public String getDateDisco() throws ParseException, Exception{
+        String buf[] = chemin.split("/");
+        String sdate = buf[3].toString();
+        SimpleDateFormat type = new SimpleDateFormat("yyyyMMdd");
+        java.util.Date date = type.parse(sdate);
+        SimpleDateFormat convert = new SimpleDateFormat("dd/MM/yyyy");
+        return convert.format(date).toString();
+        
+    }
+    
+    public String getDateDecouverte(){
+        return date.toString();
+        
+    }
     /**
      * toString() operator overload
      * @return   the result string

@@ -1,0 +1,4 @@
+<%@ page pageEncoding="UTF-8" %>
+    <div class="header" data-role="header" data-id="main-header" data-tap-toggle="false" data-theme="b"
+                                data-position="fixed" data-fullscreen="true"
+                                style="background-color: #AD192B;">

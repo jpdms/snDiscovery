@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Contact</title>
+    <title>Information</title>
     <%@include file="includes/head.jspf" %>
 </head>
 

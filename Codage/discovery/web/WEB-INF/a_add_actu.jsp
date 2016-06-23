@@ -28,6 +28,18 @@
     String contenu = request.getParameter("contenu");
     Date date = new Date();
     String sDate = new SimpleDateFormat("yyyyMMdd").format(date);
+    String as = new String ("'"); 
+    String das = new String("''"); 
+    titre = titre.replace(as, das);
+    contenu = contenu.replace(as, das);
+    as = ("\\"); 
+    das = ("\\\\");
+    titre = titre.replace(as, das);
+    contenu = contenu.replace(as, das);
+    as = ("\""); 
+    das = ("\"\"");
+    titre = titre.replace(as, das);
+    contenu = contenu.replace(as, das);
     Actu actu = Actu.create(con, sDate, titre, contenu);
 %>
 <!DOCTYPE html>
@@ -60,7 +72,7 @@ http://themeroller.jquerymobile.com
 
 <body>
 <div class="page" data-role="page" id="homePage">
-    <%@include file="../includes/div_header.jspf" %>
+    <%@include file="../includes/a_div_header.jspf" %>
         <h1>Actu</h1>
         <%@include file="../includes/a_user.jspf" %>
     </div>
